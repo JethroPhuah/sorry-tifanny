@@ -2,16 +2,18 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Segoe UI', system-ui, sans-serif;
   background: linear-gradient(135deg, #ffe6ea 0%, #fff3e0 50%, #e6f0ff 100%);
-  background-attachment: fixed;
-  overflow-y: auto;
   position: relative;
   padding: 24px 0;
 }
