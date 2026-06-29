@@ -17,7 +17,7 @@ function spawnHeart() {
   const container = document.getElementById('hearts');
   const heart = document.createElement('div');
   heart.className = 'heart';
-  heart.textContent = ['💛', '💕', '💖', '✨'][Math.floor(Math.random() * 4)];
+  heart.textContent = ['♥', '♥', '★', '✦'][Math.floor(Math.random() * 4)];
   heart.style.left = Math.random() * 100 + 'vw';
   heart.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
   heart.style.animationDuration = 4 + Math.random() * 4 + 's';

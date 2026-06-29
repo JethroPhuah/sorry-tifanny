@@ -69,6 +69,44 @@ h1 {
   display: none;
 }
 
+.stickman-scene {
+  margin-top: 16px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.stickman-scene + .stickman-scene {
+  margin-left: 12px;
+}
+
+.stickman {
+  width: 110px;
+  height: 110px;
+}
+
+.stickman-body {
+  transform-origin: 80px 105px;
+  animation: nodOff 3.5s ease-in-out infinite;
+}
+
+.stickman-eyes {
+  animation: blinkAwake 3.5s ease-in-out infinite;
+}
+
+@keyframes nodOff {
+  0%   { transform: rotate(0deg); }
+  35%  { transform: rotate(0deg); }
+  50%  { transform: rotate(14deg) translate(-4px, 4px); }
+  62%  { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes blinkAwake {
+  0%, 40% { opacity: 1; }
+  48%, 58% { opacity: 0.15; }
+  66%, 100% { opacity: 1; }
+}
+
 .emoji-burst {
   font-size: 2rem;
   margin-top: 16px;
@@ -97,7 +135,9 @@ h1 {
   position: absolute;
   bottom: -40px;
   font-size: 1.5rem;
-  opacity: 0.8;
+  opacity: 0.85;
+  color: #ffb6c9;
+  text-shadow: 0 0 6px rgba(255, 182, 201, 0.6);
   animation: rise linear forwards;
 }
 
