@@ -746,7 +746,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wx .head .st i{width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block}
 .wx .head .st.live i{background:var(--dry)} .wx .head .st.err i{background:var(--orange)}
 .wx .head button{border:1px solid var(--line-2);background:transparent;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700}
-.wx-days{display:grid;grid-template-columns:repeat(3,1fr)}
+.wx-days{display:grid;grid-template-columns:repeat(4,1fr)}
+.wx-day.spare{background:color-mix(in srgb,var(--ink-3) 7%,var(--panel))}
+.wx-day.spare .d{color:var(--ink-3)}
 .wx-day{padding:12px 14px;border-right:1px solid var(--line);display:grid;gap:4px;font-size:12.5px;color:var(--ink-2);position:relative}
 .wx-day:last-child{border-right:0}
 .wx-day .d{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--c)}
@@ -761,7 +763,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 details.wxmore{border-top:1px solid var(--line)}
 details.wxmore summary{padding:9px 16px;font-size:12.5px;font-weight:700;color:var(--ink-2);cursor:pointer;list-style:none;display:flex;justify-content:space-between}
 details.wxmore summary::after{content:"+"} details.wxmore[open] summary::after{content:"–"}
-.wx-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;font-size:12px}
+.wx-grid{display:grid;grid-template-columns:1.2fr repeat(4,1fr);font-size:11.5px;min-width:680px}
+details.wxmore .scroll{overflow-x:auto}
+.wx-grid .h.spare,.wx-grid .cell.spare{background:color-mix(in srgb,var(--ink-3) 6%,transparent)}
 .wx-grid > div{padding:8px 14px;border-top:1px solid var(--line)}
 .wx-grid .h{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:800}
 .wx-grid .place b{display:block;color:var(--ink)} .wx-grid .place span{color:var(--ink-3);font-size:11px}
@@ -844,7 +848,7 @@ details.box .body p+p{margin-top:8px}
   .pane{margin-top:42vh;border-right:0;border-top:1px solid var(--line)}
   .cover{height:200px}
   .card{grid-template-columns:30px 1fr 96px} .card .photo{width:96px;height:72px}
-  .wx-days{grid-template-columns:1fr} .wx-day{border-right:0;border-bottom:1px solid var(--line)}
+  .wx-days{grid-template-columns:1fr 1fr} .wx-day{border-bottom:1px solid var(--line)}
   .wx-grid{grid-template-columns:1fr 1fr}
   .wx-grid .h:first-child{display:none} .wx-grid .place{grid-column:1/-1}
   .map-hint{display:none}
@@ -872,7 +876,7 @@ details.box .body p+p{margin-top:8px}
         <div class="wx-days" id="wxDays"></div>
         <div id="wxSwapHost"></div>
         <div class="wx-note" id="wxNote"></div>
-        <details class="wxmore"><summary>Forecast at every stop</summary><div class="wx-grid" id="wxGrid"></div></details>
+        <details class="wxmore"><summary>Forecast at every stop</summary><div class="scroll"><div class="wx-grid" id="wxGrid"></div></div></details>
       </section>
       <div id="days"></div>
       <details class="box"><summary><i style="background:var(--ink-3)"></i>The Alpine places still on your list</summary><div class="body"><p>Kamikōchi, Mount Norikura and Hirayu Waterfall are five to six hours from Osaka and the first two ban private cars, so they cannot be day trips. They make a superb separate three-day loop with two nights in Hirayu Onsen: a shuttle day in Kamikōchi, the Norikura Skyline bus to 2,702 m, the waterfall at dusk, and home via Takayama.</p></div></details>
@@ -968,6 +972,7 @@ const TRIPS = {
       {name:'Yuhigaura Beach', saved:true, dur:130, lat:35.6639, lng:134.9654, photo:'yuhigaura', what:'Eight kilometres of pale sand facing due west, named “sunset bay”. Benches, the rope swing in the sand, and the sun going into the Sea of Japan at 18:05. Be parked by 17:20 with a jacket.', park:'Beach lots free or ¥500 outside the July–August season; aim for the Hamazume lot by the swing.', veg:'Slim here. Eat well at CLOUD8, pick up onigiri in Kyōtango, dinner back in Osaka.', q:'Yuhigaura Beach Kyotango'},
     ]},
 };
+const SPARE = {date:'2026-09-20', dow:'Sunday', short:'Sun 20', long:'Sunday, 20 September'};
 const TRIP_KEYS = Object.keys(TRIPS);
 const ORDERS = [['hirugano','nara','tango'],['hirugano','tango','nara'],['nara','hirugano','tango'],['nara','tango','hirugano'],['tango','hirugano','nara'],['tango','nara','hirugano']];
 let order = ['hirugano','nara','tango'];
@@ -1096,17 +1101,23 @@ function renderWx(data, live){
       d.style.setProperty('--k', KEY[kk]); d.innerHTML = `<div class="d">Day ${di+1} · ${DATES[di].short}</div><div class="t"><i></i>${desc}</div><div class="r"><b>${prob}%</b> rain · <b>${mm} mm</b> · ${tmin}–${tmax}°</div><div class="r">${t.region}</div>`; }
     days.appendChild(d);
   });
+  { const cells = Array.isArray(data) ? WX_POINTS.map((p,i)=>p.trip ? cellData(data[i], SPARE.date) : null).filter(Boolean) : []; const d = el('div','wx-day spare');
+    if (!cells.length) d.innerHTML = `<div class="d">${SPARE.short} · spare</div><div class="t">Forecast not loaded</div>`;
+    else { const mm = Math.max(...cells.map(c=>c.mm)), prob = Math.max(...cells.map(c=>c.prob)); const kk = cells.some(c=>c.k==='rain') ? 'rain' : cells.some(c=>c.k==='mixed') ? 'mixed' : 'dry'; const desc = cells.sort((a,b)=>b.mm-a.mm)[0].desc; const tmin = Math.min(...cells.map(c=>c.tmin)), tmax = Math.max(...cells.map(c=>c.tmax)); d.style.setProperty('--k', KEY[kk]); d.innerHTML = `<div class="d">${SPARE.short} · spare day</div><div class="t"><i></i>${desc}</div><div class="r"><b>${prob}%</b> rain · <b>${mm} mm</b> · ${tmin}–${tmax}°</div><div class="r">worst of all stops, not driving</div>`; }
+    days.appendChild(d); }
   const grid = $('#wxGrid'); grid.innerHTML = '';
-  grid.appendChild(el('div','h','Stop')); DATES.forEach((dt,i)=>grid.appendChild(el('div','h',`Day ${i+1} · ${dt.short}`)));
+  grid.appendChild(el('div','h','Stop')); DATES.forEach((dt,i)=>grid.appendChild(el('div','h',`Day ${i+1} · ${dt.short}`))); grid.appendChild(el('div','h spare',`Spare · ${SPARE.short}`));
   WX_POINTS.forEach((p,i) => { const series = Array.isArray(data) ? data[i] : null; const di = p.trip ? order.indexOf(p.trip) : -1;
     grid.appendChild(el('div','place',`<b>${p.name}</b><span>${p.sub}${di>=0?` · planned Day ${di+1}`:''}</span>`));
-    DATES.forEach((dt,ci) => { const c = cellData(series, dt.date); const cell = el('div'); if (!c){ cell.className='cell na'; cell.textContent = series ? 'not in range yet' : '—'; } else { cell.className = 'cell' + (di===ci?' planned':''); cell.style.setProperty('--k', KEY[c.k]); cell.innerHTML = `<b><i></i>${c.desc}</b><span>${c.prob}% · ${c.mm} mm · ${c.tmin}–${c.tmax} °C</span>`; } grid.appendChild(cell); }); });
+    DATES.concat([SPARE]).forEach((dt,ci) => { const c = cellData(series, dt.date); const cell = el('div'); const sp = ci===DATES.length ? ' spare' : ''; if (!c){ cell.className='cell na'+sp; cell.textContent = series ? 'not in range yet' : '—'; } else { cell.className = 'cell' + (di===ci?' planned':'') + sp; cell.style.setProperty('--k', KEY[c.k]); cell.innerHTML = `<b><i></i>${c.desc}</b><span>${c.prob}% · ${c.mm} mm · ${c.tmin}–${c.tmax} °C</span>`; } grid.appendChild(cell); }); });
   const note = $('#wxNote'), swapHost = $('#wxSwapHost'); swapHost.innerHTML = '';
   if (!Array.isArray(data)){ note.innerHTML = 'The forecast could not be loaded here. Open the page from GitHub Pages, or check <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> and <a href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=270000" target="_blank" rel="noopener">JMA</a> directly.'; return; }
   const out = daysOut(); const conf = out > 10 ? 'more than ten days out, so a trend rather than a promise' : out > 6 ? 'a week out: the pattern is usually right, the timing is not' : out > 2 ? 'within a week: reliable enough to decide swaps' : 'within two days: plan on it';
   const when = live ? `Live forecast, refreshed ${new Date().toLocaleString('en-GB',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'})} Japan time` : `Snapshot from ${SNAPSHOT.taken}; live refresh is blocked on this host`;
   const best = chooseOrder(data);
-  note.innerHTML = `<b>${out>0 ? out + ' days to go' : 'Trip in progress'}</b>, ${conf}. ${when}. Each trip sits on its driest available day, with the Nara day taking the wettest date because its rain plan loses least; Saturday holiday crowds count against the coast and Hirugano. ${best && best.join()===order.join() ? '<b>This is the driest order.</b>' : ''}`;
+  const spareCells = WX_POINTS.map((p,i)=>p.trip ? cellData(data[i], SPARE.date) : null).filter(Boolean); const plannedWorst = Math.max(...order.flatMap((k,di)=>WX_POINTS.map((p,i)=>p.trip===k ? cellData(data[i], DATES[di].date) : null).filter(Boolean).map(c=>c.mm)));
+  const spareNote = spareCells.length ? (Math.max(...spareCells.map(c=>c.mm)) < plannedWorst ? ` <b>Sunday the 20th looks drier than any planned day</b> (${Math.max(...spareCells.map(c=>c.prob))}% at worst): if your dates can slide to 18–20, take it.` : ' Sunday the 20th is shown for reference only; it is not drier than the planned days.') : '';
+  note.innerHTML = `<b>${out>0 ? out + ' days to go' : 'Trip in progress'}</b>, ${conf}. ${when}. Each trip sits on its driest available day, with the Nara day taking the wettest date because its rain plan loses least; Saturday holiday crowds count against the coast and Hirugano. ${best && best.join()===order.join() ? '<b>This is the driest order.</b>' : ''}${spareNote}`;
   if (best && best.join() !== order.join()){
     const sw = el('div','wx-swap',`<span><b>Drier order for this forecast:</b> ${best.map((k,i)=>`Day ${i+1} ${TRIPS[k].region}`).join(' · ')}.</span><button type="button">Swap the days to this order</button>`);
     sw.querySelector('button').onclick = () => { order = best; renderDays(); renderWx(lastData, lastLive); $('#days').scrollIntoView({behavior:'smooth'}); };
