@@ -1,8 +1,8 @@
 # sorry-tifanny
 
-Two small static pages, no build step.
+Two small static sites.
 
-- `index.html` — the original apology site.
-- `japan-trip/index.html` — **Japan Driving Trip September**: a three-day nature road-trip planner built from the saved Google Maps list. Two switchable plans (Northern Alps loop with two nights in Hirayu Onsen, or three Kansai day trips from Higashiyodogawa), a hand-drawn vector atlas of the route, generated landscape scenes for each day, per-stop parking and vegetarian food notes, toll and budget estimates, and cheap automatic car-rental options near Shin-Osaka.
+- `index.html` at the root: the original interactive page.
+- `japan-trip/index.html`: **Japan Driving Trip September**, three nature day trips out of Osaka for 17–19 September 2026, built from a saved Google Maps list. Generated landscape art, a vector route map, live weather for the three dates (fetched from Open-Meteo in the browser), parking, tolls, vegetarian food and rental advice. Fully self-contained apart from Google Fonts and the weather call.
 
-Open either file directly in a browser. The trip page is self-contained (the atlas is inline SVG built from 1 km Natural Earth coastline data, the landscapes are drawn on canvas); only the web fonts load from Google Fonts. If GitHub Pages is enabled for the repo it is served at `/japan-trip/`.
+Open `japan-trip/index.html` in a browser, or serve the repository with GitHub Pages and visit `/japan-trip/`.
