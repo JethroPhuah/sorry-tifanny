@@ -61,7 +61,7 @@ button{font:inherit;color:inherit}
 .hero .dates b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:600;color:#fff;line-height:1.1;margin-bottom:2px}
 
 /* glance */
-.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:-56px;position:relative;z-index:2}
+.glance{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;position:relative;z-index:2}
 .gcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow);border-top:4px solid var(--c);text-decoration:none;display:block;transition:transform .2s}
 .gcard:hover{transform:translateY(-2px)}
 .gcard .d{display:flex;justify-content:space-between;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
@@ -90,6 +90,10 @@ button{font:inherit;color:inherit}
 .cell .desc{font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px}
 .cell .desc i{width:10px;height:10px;border-radius:50%;background:var(--k);flex:none}
 .cell .row{font-size:.8rem;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 12px}
+.cell.planned{background:color-mix(in srgb,var(--k) 9%,transparent)}
+.wx-verdict .v.swap p{color:var(--ink)}
+.wx-verdict .v.swap button{margin-top:10px;border:0;background:var(--ink);color:var(--ground);border-radius:999px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer}
+.wx-verdict .v.swap button:hover{opacity:.9}
 .cell .row span{font-family:"JetBrains Mono",monospace;font-size:.76rem}
 .cell.na{color:var(--ink-3);font-size:.82rem}
 .wx-verdict{padding:16px 20px;display:grid;gap:8px;background:color-mix(in srgb,var(--panel) 70%,var(--ground))}
@@ -220,10 +224,11 @@ footer p+p{margin-top:8px}
   <canvas id="heroCanvas" aria-hidden="true"></canvas>
   <div class="veil"></div>
   <div class="inner wrap">
-    <div class="top"><span>Three day trips out of Osaka</span><span>17 – 19 September 2026</span></div>
+    <div class="top"><span>Three day trips out of Osaka · ordered by the forecast</span><span>17 – 19 September 2026</span></div>
     <div>
       <h1>Japan Driving<br>Trip <em>September</em></h1>
-      <p class="sub">Thursday to Saturday. A cedar plateau and an emerald river, a sandbar in the Sea of Japan with a sunset to finish, and a slow lap of Lake Biwa. Home to Hōshin every night, vegetarian the whole way.</p>
+      <p class="sub">Thursday to Saturday. A bench on Lake Biwa and a highland plateau in Gifu, a cedar plateau and an emerald river in Nara, and a sandbar in the Sea of Japan with a sunset to finish. Home to Hōshin every night, vegetarian the whole way, and the days shuffle themselves to dodge the rain.</p>
+      <div class="dates" id="heroDates"></div>
     </div>
   </div>
 </header>
@@ -235,7 +240,7 @@ footer p+p{margin-top:8px}
 <section class="section wrap" id="weather">
   <div class="section-head">
     <div><div class="eyebrow">Weather for your dates</div><h2>Will it rain?</h2></div>
-    <p>Forecast for each day’s key stop, fetched live from Open-Meteo every time this page opens. Beyond seven days out it is a trend, not a promise; check again on the 14th and the night before.</p>
+    <p>Every time this page opens it fetches the Open-Meteo forecast for each trip’s own stops, scores all six ways of laying the three trips over the three dates, and puts each trip on its driest day. If the forecast shifts, it offers the swap. Check again on the 14th and the night before.</p>
   </div>
   <div class="wx">
     <div class="wx-top"><span class="st" id="wxStatus"><i></i>Loading forecast…</span><button type="button" id="wxRefresh">Refresh</button></div>
@@ -248,7 +253,7 @@ footer p+p{margin-top:8px}
 <section class="section wrap" id="map">
   <div class="section-head">
     <div><div class="eyebrow">The routes</div><h2>Three loops from home</h2></div>
-    <p>Red pins are the places from your Google Maps list. Grey text marks stops added along the way.</p>
+    <p>Red pins are the places from your Google Maps list; grey text marks stops added along the way. The routes stay the same whichever date each one lands on.</p>
   </div>
   <div class="atlas-frame"><div id="mapHost"></div><div class="atlas-key" id="atlasKey"></div></div>
 </section>
@@ -259,8 +264,8 @@ footer p+p{margin-top:8px}
   <div class="alps">
     <div class="k"></div>
     <div>
-      <h3>The four Alpine places on your list</h3>
-      <p>Kamikōchi, Mount Norikura, Hirayu Waterfall and Hirugano Plateau are five to six hours’ drive from Osaka and the first two ban private cars, so they cannot be day trips. They make a superb separate three-day loop with two nights in Hirayu Onsen: Osaka → Hirugano → Hirayu, a shuttle day in Kamikōchi, then the Norikura Skyline bus and home via Takayama. Keep them for a long weekend when you can sleep away from Hōshin.</p>
+      <h3>The three Alpine places still on your list</h3>
+      <p>Kamikōchi, Mount Norikura and Hirayu Waterfall are five to six hours’ drive from Osaka and the first two ban private cars, so they cannot be day trips. They make a superb separate three-day loop with two nights in Hirayu Onsen: a shuttle day in Kamikōchi, the Norikura Skyline bus to 2,702 m, the waterfall at dusk, and home via Takayama. Keep them for a long weekend when you can sleep away from Hōshin.</p>
     </div>
   </div>
 </section>
@@ -278,7 +283,7 @@ footer p+p{margin-top:8px}
         <li><b>Times, ORIX or Toyota at Shin-Osaka</b>, twelve minutes by Metro. Times and ORIX are usually cheapest on web rates.</li>
         <li>Compare on <a href="https://www.tabirai.net/en/car/" target="_blank" rel="noopener">Tabirai Japan</a> or <a href="https://www2.tocoo.jp/en/" target="_blank" rel="noopener">ToCoo!</a>; add an <b>ETC card</b> (¥330) and the <b>NOC waiver</b> (¥550 a day).</li>
         <li>Bring passport, home licence and a <b>1949 Geneva Convention International Driving Permit</b>. Singapore and Malaysia permits are accepted. Return with a full tank.</li>
-        <li>Pick up Thursday 08:00, return Saturday by 20:00. Keep the car all three nights; coin parking near Kami-Shinjō caps at ¥800–1,200 a night (look for 夜間最大), or pre-book a space on <a href="https://www.akippa.com/" target="_blank" rel="noopener">akippa</a>.</li>
+        <li>Pick up Wednesday evening or Thursday 06:30 (check the desk’s opening hour; Toyota Higashi-Mikuni opens 08:00, so collect the night before if Thursday is the Hirugano day), return Saturday by 20:00. Keep the car all three nights; coin parking near Kami-Shinjō caps at ¥800–1,200 a night (look for 夜間最大), or pre-book a space on <a href="https://www.akippa.com/" target="_blank" rel="noopener">akippa</a>.</li>
       </ul>
     </div>
     <div>
@@ -286,14 +291,14 @@ footer p+p{margin-top:8px}
       <p>Estimate for two people, compact car with ETC. Figures marked ≈ were not confirmed on an official page; check live tolls in Google Maps with “show tolls” on.</p>
       <div class="ledger">
         <div class="r"><span>Rental, 3 days with ETC card and NOC waiver</span><span>≈¥22,000</span></div>
-        <div class="r"><span>Expressway tolls</span><span>≈¥9,500</span></div>
-        <div class="r"><span>Fuel, 830 km</span><span>≈¥6,600</span></div>
+        <div class="r"><span>Expressway tolls</span><span>≈¥19,300</span></div>
+        <div class="r"><span>Fuel, 1,150 km</span><span>≈¥9,200</span></div>
         <div class="r"><span>Parking on the road</span><span>≈¥3,500</span></div>
         <div class="r"><span>Parking near home, 3 nights</span><span>≈¥3,000</span></div>
-        <div class="r"><span>Chairlift, Ine boat, Dorogawa bath, castle</span><span>≈¥7,000</span></div>
-        <div class="r total"><span>Total, excluding meals</span><span>≈¥51,000</span></div>
+        <div class="r"><span>Chairlift, Ine boat, Dorogawa bath, Picnic Garden lift</span><span>≈¥7,500</span></div>
+        <div class="r total"><span>Total, excluding meals</span><span>≈¥64,000</span></div>
       </div>
-      <p style="margin-top:12px">Saturday 19 September is the first day of Silver Week, so expect holiday traffic leaving Osaka that morning and no ETC weekend discount. Leave by 08:00.</p>
+      <p style="margin-top:12px">Saturday 19 September is the first day of Silver Week: holiday traffic leaving Osaka that morning, no ETC weekend discount, and full car parks at the coast. The day-ordering above counts that against putting the Tango coast or Hirugano on the Saturday.</p>
     </div>
     <div>
       <h3>The food</h3>
@@ -314,14 +319,39 @@ footer p+p{margin-top:8px}
 
 <script>
 const MAPDATA = {"W": 1000, "H": 888, "BB": {"w": 133.6, "e": 138.7, "s": 33.3, "n": 37}, "land": "M628.63 509.28L632.16 515.52L629.22 518.64L628.63 509.28ZM630.39 468.24L633.53 468.24L635.10 472.80L629.61 473.52L630.39 468.24ZM624.51 658.08L617.65 655.20L624.51 653.04L629.80 656.88L633.14 654.96L633.33 658.08L637.25 654.24L639.41 657.12L636.86 660.72L624.51 658.08ZM193.92 670.80L200.20 669.60L199.41 664.32L204.71 662.64L200.78 675.36L193.92 670.80ZM261.18 610.32L253.92 619.44L253.73 635.52L263.33 648.24L265.10 655.92L244.31 664.56L234.71 672.72L221.37 674.64L221.57 670.32L215.69 666.72L220.20 658.80L207.45 662.16L210.98 658.56L206.86 649.20L213.14 640.56L217.06 642.96L221.57 640.80L234.90 612.24L243.53 606.96L252.35 592.56L261.76 588.24L275.10 573.84L279.61 581.76L261.18 610.32ZM199.41 664.08L194.31 668.64L197.25 659.52L199.41 664.08ZM21.57 624.24L25.69 630.96L19.61 635.52L16.47 633.12L21.57 624.24ZM36.67 624.96L38.04 627.12L30.39 631.20L30.00 624.24L36.67 624.96ZM9.80 655.68L3.33 657.84L4.71 651.12L6.86 654.48L10.98 652.56L9.80 655.68ZM639.80 595.44L647.25 590.88L647.84 595.44L636.47 598.08L639.80 595.44ZM326.47 614.88L319.22 620.88L319.41 616.56L313.92 617.28L321.96 610.80L324.51 612.00L320.20 616.32L326.47 614.88ZM115.10 603.36L109.02 598.80L112.16 593.04L115.10 596.16L125.29 592.80L130.20 587.28L134.12 588.96L142.94 584.64L150.39 585.36L145.88 589.20L149.41 590.16L144.71 616.08L141.18 610.08L133.53 613.44L134.12 609.36L140.59 609.60L136.47 604.80L130.98 607.68L127.65 618.24L123.92 620.40L124.12 605.52L115.10 603.36ZM115.10 603.36L110.39 609.12L106.08 607.20L109.22 601.68L115.10 603.36ZM95.49 601.20L99.02 603.12L95.10 609.60L85.49 604.56L95.49 601.20ZM71.57 606.00L80.78 611.76L73.73 612.24L71.57 606.00ZM14.51 625.92L12.94 628.08L10.00 621.84L14.90 621.60L14.51 625.92ZM359.80 565.68L359.41 570.24L354.90 569.76L355.29 567.12L352.35 569.04L353.33 566.40L359.80 565.68ZM180.98 556.56L185.49 556.80L184.71 562.08L178.04 557.52L180.98 556.56ZM329.02 552.48L331.57 556.32L324.31 557.28L323.92 553.68L329.02 552.48ZM315.10 557.52L317.65 556.08L322.55 563.76L314.51 562.56L315.10 557.52ZM137.06 550.08L133.73 550.32L132.75 546.72L137.06 544.80L146.47 549.84L137.06 550.08ZM172.55 560.88L175.69 559.68L176.47 565.44L169.61 566.16L169.22 560.88L172.55 560.88ZM1000.00 0.00L1000.00 445.45L999.22 445.20L999.61 447.84L988.43 452.40L971.76 455.76L965.49 469.68L959.02 472.80L961.37 483.36L961.57 476.40L967.25 476.40L964.51 483.12L932.55 500.64L928.24 511.68L926.27 510.48L929.02 521.04L921.96 533.04L919.41 532.56L922.75 533.28L907.25 545.52L901.37 559.44L900.98 567.12L905.49 573.84L908.63 574.56L907.25 577.20L857.45 560.40L843.53 559.92L824.51 564.96L780.00 556.80L754.12 559.44L694.51 578.40L670.20 581.04L680.59 561.12L690.00 567.84L694.51 565.44L692.16 563.04L695.69 563.52L692.16 562.56L710.59 557.76L714.90 550.56L718.04 553.20L718.04 548.16L722.55 544.56L725.69 545.28L725.69 552.96L722.35 557.28L726.86 557.28L732.16 550.56L727.84 552.48L727.25 546.48L733.73 547.20L732.35 550.32L735.88 545.52L729.41 544.08L729.61 534.96L732.75 533.04L727.25 533.04L726.08 529.68L730.20 530.88L725.10 525.36L715.88 526.80L709.02 522.48L707.84 527.28L704.31 525.36L701.57 536.16L700.00 530.88L687.65 530.16L683.73 534.00L681.57 531.12L672.94 534.00L666.08 524.16L656.67 521.52L663.53 505.68L662.94 490.32L659.61 510.00L655.69 508.56L654.90 513.36L652.55 512.40L649.80 534.72L659.80 543.84L662.35 551.52L652.94 551.28L639.02 542.88L635.29 536.40L640.59 518.64L635.10 507.84L633.92 510.24L631.76 507.84L631.57 488.16L636.67 477.84L641.76 476.88L637.65 476.16L640.98 469.92L646.08 470.16L642.94 468.48L645.10 458.88L640.59 457.68L638.43 466.32L633.92 464.64L633.33 468.00L626.86 467.76L627.45 473.04L623.14 470.88L627.06 477.12L615.69 472.08L599.41 480.00L602.94 479.52L600.20 481.68L603.53 483.12L600.59 486.48L598.24 481.68L594.90 492.24L601.37 495.12L597.06 495.84L593.33 511.68L574.71 541.20L573.53 556.32L579.80 558.96L577.06 560.88L577.25 570.72L573.92 572.64L594.12 576.48L601.57 586.08L622.55 597.84L629.41 598.08L630.39 603.60L633.92 598.56L636.47 605.52L642.55 606.24L640.00 609.36L644.12 612.00L642.35 617.04L646.47 611.04L651.96 613.44L649.61 629.76L644.71 625.68L643.14 628.80L640.98 626.64L642.55 630.96L638.82 632.64L636.67 630.48L633.92 633.36L629.80 631.68L632.55 635.28L636.67 631.20L637.65 634.56L640.00 632.40L640.59 637.68L648.82 632.40L642.75 639.84L647.06 653.76L641.18 654.48L640.98 657.12L638.24 652.56L633.92 655.20L634.12 649.92L640.39 650.64L632.75 647.76L636.86 644.64L628.43 646.08L629.02 641.28L625.88 645.84L629.80 648.24L627.25 650.40L623.14 649.92L623.14 644.40L620.00 644.16L618.04 648.24L620.39 649.92L612.16 647.04L605.29 651.84L606.67 643.44L609.61 643.92L610.20 640.56L611.18 642.72L613.14 637.68L609.22 639.36L609.41 636.24L606.27 636.48L604.51 642.24L606.08 637.20L600.39 636.96L602.55 642.24L595.49 645.84L603.33 644.16L598.04 649.68L600.00 650.64L589.22 658.08L585.49 658.32L583.92 655.20L586.27 654.72L582.55 654.00L587.45 652.56L586.47 649.20L580.39 654.00L578.24 652.08L578.04 660.00L576.67 653.28L573.73 657.84L574.71 654.48L569.80 653.04L572.35 662.40L568.82 657.84L566.86 659.52L569.61 661.68L565.69 662.40L570.20 665.04L564.90 667.20L561.57 664.56L561.96 658.32L556.86 660.72L559.80 661.68L559.22 667.20L548.82 671.28L547.06 667.44L541.96 674.64L539.02 673.20L539.80 669.12L533.73 672.96L537.06 672.96L536.27 676.56L530.20 676.80L527.25 682.32L525.10 681.36L526.27 691.68L532.55 692.40L529.02 699.12L527.45 696.72L522.94 700.32L524.31 695.52L519.61 697.44L523.14 689.04L515.29 696.00L517.06 699.12L510.00 701.76L520.20 705.12L518.63 710.88L525.69 714.48L518.04 716.64L524.12 718.80L520.98 720.48L523.92 726.72L517.25 727.44L520.00 723.60L512.16 720.00L512.75 724.08L508.24 726.96L510.39 728.88L514.12 726.24L515.88 732.96L513.14 732.72L512.35 736.56L510.00 733.20L506.27 734.64L509.61 739.20L505.88 740.88L500.00 736.56L499.80 744.72L496.86 744.24L496.27 747.60L493.92 744.24L489.22 749.04L474.12 784.80L465.10 798.48L467.84 802.80L458.24 805.68L461.57 808.32L461.57 810.72L460.59 808.80L460.00 811.92L458.04 811.68L456.08 814.80L457.65 817.68L459.61 815.04L459.80 818.16L463.14 817.20L462.75 820.32L455.69 821.52L449.02 826.80L455.69 825.84L446.67 833.04L431.18 840.24L427.65 848.64L430.78 849.36L430.98 853.20L425.49 852.72L424.12 856.08L421.57 852.00L426.67 849.36L424.71 844.32L413.53 845.28L411.96 841.44L404.51 842.40L398.04 837.84L390.39 838.32L390.59 840.48L386.27 835.92L374.51 833.76L370.20 827.76L361.96 828.24L350.98 817.68L351.18 805.68L339.22 799.20L341.96 796.56L340.39 793.20L348.63 796.08L352.94 786.72L343.73 786.00L344.51 782.16L338.63 781.92L336.08 775.44L320.59 772.32L320.59 768.24L310.98 763.20L302.16 747.60L296.67 745.68L285.88 748.80L286.08 742.80L290.78 741.60L287.25 737.52L297.65 729.60L290.00 730.56L291.37 727.68L287.84 725.52L303.53 718.80L301.37 715.92L308.24 713.28L301.18 704.40L289.80 702.24L295.29 700.32L293.14 697.92L297.25 691.20L303.14 693.36L299.22 687.12L307.84 688.08L315.88 684.24L310.59 684.48L312.75 682.32L309.80 675.12L309.80 679.44L307.06 675.12L301.96 674.88L300.39 668.88L303.92 673.20L302.94 665.52L296.08 665.52L294.12 663.36L300.59 664.80L293.53 658.08L286.67 656.88L288.24 648.24L294.71 643.20L301.96 643.68L317.25 637.20L343.92 611.76L346.27 604.56L348.24 606.24L346.47 595.92L348.63 592.32L349.80 595.44L354.90 586.80L353.33 576.00L357.06 583.20L358.04 578.40L363.14 584.40L362.75 579.84L365.88 580.32L362.55 579.12L364.90 577.20L358.04 577.68L357.65 574.80L362.16 574.56L357.45 571.44L360.98 569.76L362.16 572.40L363.33 569.04L356.86 561.60L355.69 563.52L356.47 554.88L354.12 552.48L348.24 557.52L353.14 552.24L347.25 556.56L340.59 545.52L319.22 552.00L321.18 553.68L317.06 553.44L318.63 551.76L314.71 553.92L317.25 554.40L314.12 557.04L311.76 555.60L310.39 564.24L283.53 570.00L278.24 565.68L272.35 564.96L270.98 566.40L268.04 565.20L269.22 565.44L260.39 558.72L257.06 558.48L244.51 546.96L244.12 548.40L244.12 546.48L239.61 544.56L243.92 546.48L242.55 550.32L240.59 550.56L241.57 552.48L237.06 547.68L239.41 545.04L234.71 544.80L224.51 535.44L212.94 533.28L206.47 536.88L209.80 532.80L205.88 534.96L207.06 530.88L205.10 535.92L201.76 536.64L204.71 532.08L200.59 531.84L200.78 535.44L197.06 533.04L190.20 538.08L181.76 532.08L171.37 538.80L169.61 525.84L169.41 536.64L166.86 539.04L167.65 535.68L163.33 536.16L163.53 540.72L158.63 545.76L151.76 544.56L148.82 537.84L149.80 542.16L141.57 546.72L135.69 542.88L126.27 548.40L114.90 541.68L113.53 544.08L118.63 545.52L116.67 547.92L120.39 548.16L117.06 550.08L124.71 548.40L126.47 552.48L120.20 555.36L122.16 556.56L119.61 560.16L115.69 559.92L115.88 563.52L111.96 563.28L112.55 568.56L115.10 568.56L111.76 572.64L104.71 571.92L105.49 576.00L101.96 578.64L90.20 579.60L90.78 573.84L87.84 576.48L86.86 573.84L77.65 572.64L67.84 576.24L70.39 579.84L84.12 576.24L87.65 581.76L84.71 587.76L78.63 589.20L79.02 597.12L74.31 592.08L70.39 594.48L71.57 601.20L66.27 604.56L65.69 611.76L45.10 605.76L40.78 610.08L43.53 616.80L36.67 615.36L27.45 594.00L26.47 600.24L23.33 600.96L26.86 602.16L27.45 607.20L20.39 602.88L20.59 593.52L15.49 594.00L17.84 597.12L13.73 598.32L13.53 590.16L9.61 599.04L0.00 601.39L0.00 606.15L0.39 606.48L0.00 606.61L0.00 353.95L30.59 360.00L63.73 357.60L77.84 354.24L80.00 350.88L85.10 355.68L114.51 349.92L116.86 352.08L116.08 348.72L131.18 345.84L136.08 338.64L144.71 337.44L145.10 334.08L148.82 336.00L151.18 332.40L163.33 331.20L164.51 327.36L167.06 329.04L184.31 319.20L188.04 323.76L195.88 321.84L200.20 326.64L208.63 319.92L208.43 324.48L213.33 320.40L216.67 323.28L218.82 319.92L225.29 321.60L228.43 318.00L230.20 321.84L235.10 318.96L242.94 322.56L243.33 325.92L245.49 321.60L250.78 321.36L255.29 324.96L252.55 329.28L256.86 328.08L252.75 333.12L256.67 334.80L260.59 328.08L255.10 324.24L267.06 321.36L271.76 313.68L279.80 314.40L291.18 306.00L290.59 302.88L315.10 296.64L318.43 293.04L334.71 312.24L333.92 320.88L330.78 317.76L326.86 319.92L311.37 345.84L312.55 340.32L304.71 346.80L310.78 345.60L314.12 351.12L314.51 345.60L324.31 336.00L323.73 342.96L328.43 345.60L321.96 345.60L321.76 350.64L331.18 356.16L335.49 357.12L337.84 353.76L339.61 356.16L336.67 371.76L342.55 366.00L342.55 361.20L348.82 362.16L347.45 365.52L350.20 366.00L353.33 361.20L351.76 355.92L349.02 359.52L341.96 359.04L341.37 348.00L358.24 344.16L359.61 338.16L365.10 335.04L363.14 343.68L370.00 346.08L366.47 352.80L373.33 354.48L372.35 347.04L375.69 347.76L375.88 361.44L387.25 361.68L404.12 348.48L405.69 354.00L398.24 354.72L400.39 358.32L397.45 362.64L388.43 362.40L401.57 365.28L404.51 361.44L411.96 361.20L415.49 363.84L424.51 351.84L419.41 351.36L415.29 355.20L415.10 350.16L409.61 348.96L414.71 343.20L421.57 343.92L422.94 349.68L425.49 349.44L424.71 346.32L430.98 354.00L438.04 351.36L431.57 342.96L439.02 344.88L442.35 336.00L437.65 335.28L439.02 330.96L434.31 325.92L440.39 327.60L444.71 334.08L452.35 330.00L453.53 333.84L456.86 333.36L460.78 327.84L466.27 329.28L467.84 325.92L463.33 322.32L465.88 312.48L464.90 309.12L461.96 311.28L461.57 306.72L473.92 296.64L479.22 310.80L475.69 316.80L479.61 322.08L484.71 321.36L483.33 316.80L487.45 315.84L490.20 293.28L484.51 282.24L469.22 266.88L470.00 255.60L462.94 242.40L472.75 231.84L476.08 216.96L488.63 203.52L492.75 190.80L491.76 198.24L496.08 193.92L494.71 180.00L503.14 179.76L512.55 174.24L529.22 155.52L538.24 152.40L551.76 139.92L589.61 90.72L610.39 55.44L620.39 27.36L620.78 19.68L617.45 16.80L621.57 0.96L620.25 0.00L676.86 0.00L677.84 7.68L663.92 29.28L664.71 34.80L680.20 49.68L688.82 52.56L684.90 55.20L693.33 59.28L690.59 52.80L702.35 58.32L710.98 56.16L710.39 59.76L711.57 55.92L731.76 57.12L743.14 46.80L748.63 30.72L747.06 24.48L752.16 16.56L801.90 0.00ZM0.00 710.82L5.49 707.28L9.61 673.68L0.00 664.99L0.00 659.16L4.12 663.36L14.31 660.72L14.51 666.72L26.86 656.88L25.69 653.04L33.73 651.36L32.94 646.80L34.90 650.64L39.02 648.24L37.06 646.08L44.51 643.20L42.94 635.28L47.25 633.36L44.90 637.92L49.80 633.36L50.59 636.96L44.90 640.80L49.41 643.20L53.92 641.04L56.86 634.08L58.82 636.00L57.84 628.08L62.94 630.72L64.71 626.40L66.86 630.24L70.39 629.52L70.00 632.40L73.73 630.48L82.35 636.48L88.63 633.12L90.20 636.48L92.35 632.40L95.69 638.16L96.67 627.60L102.16 636.00L101.76 624.72L105.10 624.00L110.59 628.32L110.59 641.52L115.69 640.56L114.31 635.28L119.61 636.96L119.80 631.44L124.31 639.12L127.45 635.52L130.59 639.36L126.67 646.32L129.02 651.60L138.63 653.28L145.69 659.52L152.55 657.12L163.53 670.08L177.65 665.76L190.98 667.20L189.61 663.84L194.12 662.88L192.35 671.52L200.78 676.56L204.31 676.80L199.02 685.68L196.47 684.96L201.18 687.12L196.67 694.56L195.10 692.64L195.69 695.76L197.65 695.28L194.71 704.64L196.67 707.76L191.76 706.08L195.10 710.64L190.20 710.16L195.29 711.60L193.92 717.36L197.25 721.92L200.39 722.64L201.18 717.84L203.92 718.32L216.86 737.76L210.78 748.80L203.33 750.48L201.37 754.32L205.29 751.92L203.92 757.44L219.61 757.20L211.76 760.80L225.49 759.84L204.12 772.56L200.00 771.12L196.47 776.64L192.55 774.72L189.61 784.08L186.86 781.92L179.80 791.76L165.10 800.64L157.25 801.60L150.00 808.32L154.51 811.20L149.80 818.64L143.53 820.08L149.80 820.80L139.61 821.52L138.24 825.12L141.18 826.80L135.69 829.92L119.41 864.96L115.47 888.00L99.88 888.00L98.43 881.28L85.69 870.96L84.51 861.12L69.41 853.20L65.29 842.88L32.75 836.16L29.22 831.36L23.73 830.40L0.00 835.36ZM431.76 846.48L443.73 846.72L437.45 852.24L430.98 848.88L431.76 846.48Z", "lakes": "M647.06 208.56L653.73 211.68L659.61 220.80L650.20 215.52L647.06 208.56ZM877.65 223.92L884.90 223.92L880.39 232.56L871.76 232.56L877.65 223.92ZM499.02 360.96L507.25 360.96L510.00 369.36L507.25 378.00L515.69 378.00L515.69 382.56L507.25 382.56L507.25 388.08L519.02 386.64L526.08 395.28L520.00 399.60L519.41 412.32L507.25 423.36L498.63 423.84L490.00 433.20L481.37 434.88L481.37 442.56L485.69 446.88L472.75 443.76L464.12 450.24L461.96 446.88L458.63 464.16L451.57 472.80L455.49 472.80L455.49 479.28L446.86 477.84L441.96 472.80L446.86 468.96L446.86 464.16L455.49 464.16L455.49 460.56L446.86 460.56L446.86 455.52L455.49 452.88L458.24 438.24L453.73 438.24L455.49 432.96L464.12 423.36L464.12 418.32L472.75 415.92L472.75 409.68L481.37 406.08L485.49 399.60L477.25 386.64L479.61 382.32L475.88 372.00L481.37 374.16L495.88 360.96L498.63 373.20L502.75 369.36L499.02 360.96ZM771.57 533.28L774.31 531.60L774.31 540.00L776.67 533.28L774.31 526.80L794.12 533.28L786.67 533.28L786.67 541.92L791.57 541.92L791.57 536.88L793.14 541.92L782.94 547.68L782.94 550.80L789.22 550.80L782.94 557.28L774.31 557.28L778.63 546.24L768.24 547.92L771.57 533.28ZM336.67 568.08L350.59 568.08L350.59 576.72L336.67 576.72L336.67 568.08Z"};
+const SNAPSHOT = {"taken": "6 September 2026, 15:40 Japan time", "data": [{"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [55, 65, 63, 82, 51, 51, 51, 51, 95, 95, 95, 51, 95, 51, 2, 51], "temperature_2m_max": [27.5, 26.8, 28.3, 27.2, 28.8, 27.6, 30.2, 28.6, 31.2, 26.7, 27.9, 29.6, 26.5, 27.6, 28.0, 29.5], "temperature_2m_min": [22.4, 22.1, 23.5, 21.8, 20.2, 21.8, 21.3, 23.6, 24.0, 24.1, 23.1, 22.0, 21.1, 20.1, 18.9, 19.2], "precipitation_sum": [3.1, 14.3, 7.1, 40.6, 0.2, 0.7, 1.2, 5.0, 2.2, 13.8, 12.6, 1.2, 11.0, 2.2, 0.0, 0.6], "precipitation_probability_max": [97, 90, 88, 86, 43, 37, 44, 48, 60, 72, 63, 67, 52, 47, 25, 32], "precipitation_hours": [7.0, 6.0, 9.0, 12.0, 2.0, 7.0, 6.0, 20.0, 18.0, 16.0, 18.0, 6.0, 14.0, 10.0, 0.0, 2.0], "wind_speed_10m_max": [11.1, 7.4, 7.2, 21.8, 10.5, 9.1, 8.8, 6.9, 8.8, 8.5, 6.6, 8.6, 7.4, 11.7, 9.4, 12.4]}}, {"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [63, 63, 61, 96, 51, 61, 3, 95, 51, 96, 95, 53, 96, 53, 3, 51], "temperature_2m_max": [27.6, 26.7, 27.6, 26.9, 26.0, 26.6, 27.3, 26.4, 29.5, 26.9, 26.1, 26.2, 26.1, 24.8, 26.0, 25.9], "temperature_2m_min": [23.6, 23.4, 23.8, 22.8, 21.5, 23.2, 23.0, 24.1, 24.7, 24.6, 23.9, 21.9, 20.8, 21.3, 20.3, 20.9], "precipitation_sum": [5.0, 30.2, 4.7, 44.93, 0.2, 10.6, 0.0, 11.4, 3.0, 15.8, 19.0, 3.0, 20.8, 5.0, 0.0, 0.8], "precipitation_probability_max": [98, 98, 90, 90, 51, 41, 35, 65, 73, 77, 59, 69, 57, 47, 24, 30], "precipitation_hours": [7.0, 11.0, 10.0, 14.0, 2.0, 10.0, 0.0, 18.0, 12.0, 14.0, 24.0, 10.0, 14.0, 16.0, 0.0, 5.0], "wind_speed_10m_max": [14.5, 17.0, 10.6, 43.5, 28.2, 16.0, 8.1, 10.7, 14.9, 12.1, 6.6, 21.6, 6.8, 22.3, 11.1, 11.4]}}, {"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [53, 63, 63, 95, 51, 53, 3, 53, 51, 95, 53, 51, 95, 95, 51, 51], "temperature_2m_max": [24.0, 21.1, 25.1, 22.9, 19.6, 23.3, 24.8, 23.0, 24.9, 22.9, 21.1, 25.5, 21.1, 22.2, 23.1, 22.0], "temperature_2m_min": [17.5, 18.1, 19.3, 15.8, 15.2, 17.4, 17.7, 17.8, 19.6, 19.1, 18.1, 16.6, 16.8, 13.4, 12.2, 13.3], "precipitation_sum": [1.1, 18.5, 20.7, 144.3, 2.9, 5.2, 0.0, 7.0, 5.6, 9.8, 11.0, 2.6, 40.0, 13.4, 1.2, 0.6], "precipitation_probability_max": [99, 100, 98, 99, 76, 67, 69, 82, 79, 90, 82, 76, 76, 67, 37, 38], "precipitation_hours": [4.0, 14.0, 11.0, 23.0, 17.0, 13.0, 0.0, 20.0, 22.0, 14.0, 24.0, 16.0, 20.0, 22.0, 6.0, 3.0], "wind_speed_10m_max": [9.7, 8.0, 5.8, 25.2, 18.9, 8.0, 11.2, 7.8, 10.9, 4.4, 6.9, 8.5, 8.8, 13.8, 13.9, 11.2]}}, {"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [65, 65, 63, 63, 53, 95, 95, 55, 95, 55, 95, 51, 53, 51, 51, 53], "temperature_2m_max": [14.2, 17.3, 18.9, 19.6, 20.9, 18.7, 17.9, 18.1, 20.3, 18.7, 17.3, 20.9, 18.1, 17.0, 16.9, 19.2], "temperature_2m_min": [11.7, 13.4, 16.9, 12.0, 10.0, 14.7, 15.0, 14.5, 15.1, 14.7, 14.2, 13.6, 13.5, 11.5, 10.9, 11.5], "precipitation_sum": [119.6, 59.3, 23.5, 36.18, 3.9, 41.0, 13.0, 10.2, 2.4, 12.2, 19.0, 0.6, 6.6, 4.8, 1.8, 3.1], "precipitation_probability_max": [100, 98, 100, 93, 75, 80, 86, 80, 89, 99, 98, 85, 84, 80, 69, 53], "precipitation_hours": [23.0, 19.0, 24.0, 19.0, 11.0, 24.0, 22.0, 18.0, 12.0, 14.0, 22.0, 6.0, 12.0, 18.0, 12.0, 11.0], "wind_speed_10m_max": [16.6, 9.4, 8.4, 18.7, 9.7, 5.5, 4.5, 5.6, 5.9, 9.2, 6.9, 6.3, 10.0, 7.5, 6.0, 7.9]}}, {"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [63, 65, 61, 63, 51, 81, 55, 95, 53, 95, 95, 51, 53, 53, 3, 51], "temperature_2m_max": [19.0, 20.6, 24.2, 25.5, 22.7, 23.2, 22.8, 22.9, 27.1, 23.6, 20.5, 23.2, 23.8, 20.3, 21.3, 23.5], "temperature_2m_min": [17.2, 17.8, 19.7, 16.1, 14.4, 17.5, 19.0, 18.3, 18.1, 17.9, 17.8, 17.1, 16.3, 15.0, 14.3, 14.5], "precipitation_sum": [23.1, 35.5, 6.9, 14.83, 0.5, 18.3, 8.1, 9.6, 6.0, 7.4, 17.8, 0.6, 6.2, 5.8, 0.0, 0.2], "precipitation_probability_max": [100, 92, 98, 92, 57, 63, 77, 76, 86, 94, 91, 78, 84, 71, 51, 41], "precipitation_hours": [15.0, 16.0, 14.0, 18.0, 5.0, 18.0, 21.0, 12.0, 12.0, 14.0, 22.0, 6.0, 14.0, 22.0, 0.0, 2.0], "wind_speed_10m_max": [18.3, 14.0, 6.7, 15.7, 11.4, 10.2, 3.8, 4.6, 5.6, 4.8, 3.9, 10.1, 5.5, 7.0, 8.3, 11.6]}}, {"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [53, 61, 61, 81, 51, 51, 3, 95, 51, 96, 95, 51, 95, 51, 3, 51], "temperature_2m_max": [27.0, 28.0, 28.1, 25.6, 25.2, 25.9, 27.3, 27.6, 31.2, 27.0, 27.0, 27.0, 24.9, 24.6, 24.9, 28.9], "temperature_2m_min": [24.3, 24.0, 25.3, 21.2, 20.2, 20.4, 18.7, 21.0, 23.3, 22.7, 21.9, 21.3, 21.3, 19.7, 18.6, 17.7], "precipitation_sum": [0.7, 3.1, 8.7, 63.07, 0.9, 0.9, 0.0, 6.6, 1.4, 27.6, 11.2, 1.8, 27.6, 1.8, 0.0, 0.8], "precipitation_probability_max": [80, 88, 80, 96, 59, 41, 39, 59, 69, 80, 67, 69, 61, 44, 37, 29], "precipitation_hours": [3.0, 8.0, 15.0, 20.0, 3.0, 6.0, 0.0, 12.0, 8.0, 18.0, 16.0, 12.0, 12.0, 12.0, 0.0, 5.0], "wind_speed_10m_max": [14.1, 9.1, 10.0, 20.2, 15.1, 14.4, 11.3, 4.1, 13.4, 9.7, 9.4, 12.3, 6.5, 14.1, 16.3, 9.7]}}, {"daily": {"time": ["2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21"], "weather_code": [51, 53, 55, 80, 3, 51, 3, 96, 95, 96, 96, 51, 95, 51, 3, 51], "temperature_2m_max": [27.0, 28.0, 28.3, 25.7, 25.3, 26.0, 27.6, 28.3, 28.8, 27.9, 26.7, 26.3, 25.2, 24.6, 24.7, 27.3], "temperature_2m_min": [25.1, 25.9, 26.0, 22.1, 19.7, 19.7, 18.4, 20.5, 23.6, 22.9, 22.7, 22.1, 21.6, 21.5, 20.9, 20.4], "precipitation_sum": [0.4, 1.0, 3.6, 59.23, 0.0, 0.3, 0.0, 12.0, 2.6, 33.4, 36.0, 2.4, 25.2, 2.4, 0.0, 0.9], "precipitation_probability_max": [75, 87, 84, 97, 49, 57, 73, 76, 84, 90, 82, 84, 67, 61, 55, 29], "precipitation_hours": [2.0, 4.0, 8.0, 19.0, 0.0, 3.0, 0.0, 12.0, 14.0, 18.0, 24.0, 10.0, 12.0, 12.0, 0.0, 3.0], "wind_speed_10m_max": [18.1, 13.9, 16.0, 29.6, 19.0, 13.9, 10.8, 9.4, 13.9, 12.9, 10.9, 13.6, 7.4, 16.0, 16.7, 15.2]}}]};
 const HOME = {name:'Hōshin · home', lat:34.7462, lng:135.5396};
-const DAYS = [
-  {
-    n:1, date:'2026-09-17', dow:'Thursday', label:'Thu 17', c:'#2f6b4f', scene:'nara', region:'Nara mountains',
+const DATES = [
+  {date:'2026-09-17', dow:'Thursday', short:'Thu 17', holiday:false},
+  {date:'2026-09-18', dow:'Friday', short:'Fri 18', holiday:false},
+  {date:'2026-09-19', dow:'Saturday', short:'Sat 19', holiday:true},
+];
+// The three trips. Order across the dates is decided by the forecast (see chooseOrder).
+const TRIPS = {
+  hirugano: {
+    c:'#3a7ca5', scene:'biwa', region:'Lake Biwa and Hirugano', sens:1.0, holidayPenalty:18,
+    title:'That Bench at sunrise, then up to Hirugano Plateau', sub:'East along Lake Biwa to a famous bench, then the Tōkai-Hokuriku Expressway into the Gifu highlands: dairy pasture, a flower slope and a castle town of canals on the way home.',
+    km:520, drive:'7 h 15', start:'07:00',
+    signs:[{rt:'E1',t:'Meishin → Hikone IC'},{rt:'E41',t:'Tōkai-Hokuriku Expwy'},{rt:'156',t:'Route 156 · Hirugano',local:true}],
+    rain:'<b>Rain plan.</b> Hirugano in cloud is a wet field, so if the plateau forecast is above 60% on the morning, cut the day at Lake Biwa: That Bench, then Hikone Castle and Zen Vegan Cafe (all-vegan, by the moat), the Metasequoia avenue at Makino and Shirahige Shrine’s covered deck on the west shore. That loop is 200 km, home by 18:00, and handles rain well. The two saved places you would lose, Hirugano and nothing else, can be picked up on the Alps trip.',
+    wx:[{name:'That Bench · Hikone', sub:'morning', lat:35.242, lng:136.178}, {name:'Hirugano Plateau', sub:'midday · 900 m', lat:36.006, lng:136.907}],
+    items:[
+      {kind:'drive', min:105, label:'Suita IC → Meishin → Hikone IC → lakeshore road', km:120, toll:'≈¥3,000'},
+      {kind:'stop', name:'That Bench', saved:true, dur:30, lat:35.2416, lng:136.1782, what:'A single bench under a chinaberry tree on the Hikone lakeshore, made famous by an NHK documentary. Lake Biwa fills the frame and the Hira range lines the far shore. It is in a farming hamlet, so be quick and quiet.', park:'About ten roadside spaces beside the bench at Ishidera-chō 1331; arrive early, they fill by mid-morning.', q:'あのベンチ 彦根市石寺町'},
+      {kind:'drive', min:120, label:'Hikone IC → Meishin → Ichinomiya JCT → Tōkai-Hokuriku Expwy → Hirugano Kōgen Smart IC (ETC card only)', km:135, toll:'≈¥3,600'},
+      {kind:'stop', name:'Hirugano Plateau', saved:true, dur:150, lat:36.0062, lng:136.9075, what:'A 900 m highland of dairy pasture at the source of the Nagara River. Hirugano Picnic Garden runs a lift to a flower slope with swings and hammocks facing Mount Dainichi; its 6,000 kochia bushes are still green in mid-September and turn crimson from the end of the month. Bokka-no-Sato next door is the farm park: Jersey cows, alpacas, cheese and the plateau’s famous soft-serve.', park:'Free at both Picnic Garden and Bokka-no-Sato. The smart interchange only reads ETC cards; without one exit at Takasu IC and add 17 minutes.', veg:'Bokka-no-Sato’s restaurant does cheese, vegetable and pizza dishes; Picnic Garden’s café makes a vegetable curry on request; the expressway service area two minutes away sells tofu doughnuts and Hirugano milk.', q:'Hirugano Picnic Garden'},
+      {kind:'drive', min:30, label:'Route 156 down the Nagara valley to Gujō Hachiman', km:25},
+      {kind:'stop', name:'Gujō Hachiman', dur:60, lat:35.7480, lng:136.9620, what:'A small castle town threaded with canals so clean that people still rinse vegetables in them. Sōgi-sui spring, the Yanaka water lane, and a mountaintop castle you can see from the car park. An hour is enough.', park:'City lot by the Jōkamachi Plaza, ¥300 an hour.', veg:'Gujō is famous for food-replica workshops rather than food; the Family Mart by the interchange is the safe stop before the long drive.', q:'Gujo Hachiman Jokamachi Plaza'},
+      {kind:'drive', min:180, label:'Gujō Hachiman IC → Tōkai-Hokuriku → Ichinomiya JCT → Meishin → Suita IC → Hōshin', km:230, toll:'≈¥5,500'},
+    ]
+  },
+  nara: {
+    c:'#2f6b4f', scene:'nara', region:'Nara mountains', sens:1.15, holidayPenalty:5,
     title:'Ōdaigahara at dawn, Mitarai Valley, a hot spring in Dorogawa', sub:'South into the Kii mountains. Boardwalks above the clouds in the morning, an emerald river in the afternoon, a soak before the drive home.',
-    km:290, drive:'6 h 45', start:'06:30', wxStop:'Ōdaigahara', wxIdx:1,
+    km:290, drive:'6 h 45', start:'06:30',
     signs:[{rt:'E91',t:'Minami-Hanna Road'},{rt:'169',t:'Route 169 · Yoshino river',local:true},{rt:'40',t:'Ōdaigahara Driveway',local:true},{rt:'309',t:'Route 309 to Tenkawa',local:true}],
-    rain:'<b>Rain plan.</b> The Driveway closes in heavy rain and the plateau is in cloud most wet days. Skip Ōdaigahara, leave at 08:30, and make it a Tenkawa day: Mitarai Valley is a short waterfall walk that works in drizzle, Dorogawa’s lantern street and the ¥800 bath are better in rain than sun, and the Ryūsen-ji temple garden is ten minutes from the bath. If the whole day looks washed out, swap it with Saturday’s lake loop.',
+    rain:'<b>Rain plan.</b> The Driveway closes in heavy rain and the plateau sits in cloud most wet days. Skip Ōdaigahara, leave at 08:30, and make it a Tenkawa day: Mitarai Valley is a short waterfall walk that works in drizzle, Dorogawa’s lantern street and the ¥800 bath are better in rain than sun, and the Ryūsen-ji temple garden is ten minutes from the bath. Of the three trips this is the one that loses least to a wet day, which is why the page puts it on the wettest date.',
+    wx:[{name:'Ōdaigahara', sub:'morning · 1,600 m', lat:34.180, lng:136.097}, {name:'Tenkawa · Dorogawa', sub:'afternoon', lat:34.254, lng:135.860}],
     items:[
       {kind:'drive', min:165, label:'Kinki Expwy → Minami-Hanna Road → Route 169 through Kawakami → Ōdaigahara Driveway', km:140, toll:'≈¥1,000'},
       {kind:'stop', name:'Ōdaigahara', saved:true, dur:150, lat:34.1804, lng:136.0973, what:'A 1,600 m plateau of moss, silver dead cedars and sika deer. The boardwalk to Hidegatake summit takes 40 minutes; carry on to Masakigahara’s ghost forest and back for a 2½ hour morning.', park:'Free at the visitor centre. Buy breakfast and a picnic at the Family Mart in Kawakami on Route 169, the last shop for 60 km.', veg:'Nothing sold on the plateau beyond drinks. Picnic.', q:'Odaigahara Visitor Center'},
@@ -332,12 +362,13 @@ const DAYS = [
       {kind:'drive', min:135, label:'Route 309 → Gojō → Minami-Hanna Road → Kinki Expwy → Hōshin', km:90, toll:'≈¥1,000'},
     ]
   },
-  {
-    n:2, date:'2026-09-18', dow:'Friday', label:'Fri 18', c:'#d97a3a', scene:'tango', region:'Tango coast',
+  tango: {
+    c:'#d97a3a', scene:'tango', region:'Tango coast', sens:1.1, holidayPenalty:25,
     title:'Imafuku Falls, Amanohashidate, Ine, sunset at Yuhigaura', sub:'North over the mountains to Kyoto by the Sea. A waterfall, the bridge-to-heaven sandbar, boathouses on a bay, and the sun dropping into the Sea of Japan.',
-    km:340, drive:'7 h', start:'07:30', wxStop:'Yuhigaura Beach', wxIdx:3,
+    km:340, drive:'7 h', start:'07:30',
     signs:[{rt:'E1',t:'Meishin → Ōyamazaki'},{rt:'E9',t:'Kyoto-Jūkan Expwy'},{rt:'178',t:'Route 178 coast road',local:true}],
-    rain:'<b>Rain plan.</b> The View Land chairlift and the Ine bay boat both run in rain, and Amanohashidate under low cloud is its own kind of picture; keep the morning as it is. Drop the Yuhigaura sunset and instead drive 55 minutes west to Kinosaki Onsen, where the point is walking between seven public baths in a yukata and an umbrella: ¥1,500 for a day pass, parking ¥800 at the town lot. Home via the Kita-Kinki Toyooka Expressway, 2 h 45.',
+    rain:'<b>Rain plan.</b> The View Land chairlift and the Ine bay boat both run in rain, and Amanohashidate under low cloud is its own kind of picture; keep the morning. Drop the Yuhigaura sunset and drive 55 minutes west to Kinosaki Onsen instead, where the point is walking between seven public baths in a yukata under an umbrella: ¥1,500 day pass, parking ¥800 at the town lot. Home via the Kita-Kinki Toyooka Expressway, 2 h 45.',
+    wx:[{name:'Amanohashidate', sub:'late morning', lat:35.560, lng:135.190}, {name:'Yuhigaura Beach', sub:'sunset 18:05', lat:35.664, lng:134.965}],
     items:[
       {kind:'drive', min:150, label:'Meishin → Ōyamazaki JCT → Kyoto-Jūkan Expwy → Miyazu-Amanohashidate IC → Route 176', km:150, toll:'≈¥2,600'},
       {kind:'stop', name:'Imafuku Falls', saved:true, dur:45, lat:35.5065, lng:135.2001, what:'A seven-tier fall with a 78 m total drop in cedar forest behind Miyazu. Five minutes from the lot to the lower tiers, ten more up steps to the top viewpoint.', park:'Small free lot at the trailhead, about 10 cars.', q:'Imafuku Falls Miyazu'},
@@ -348,43 +379,15 @@ const DAYS = [
       {kind:'drive', min:35, label:'Route 178 around the bay to Ine', km:22},
       {kind:'stop', name:'Ine funaya boathouses', dur:75, lat:35.6750, lng:135.2870, what:'Two hundred and thirty wooden boathouses standing in the water around a horseshoe bay, boats parked under the living rooms. The 25-minute sightseeing boat (¥1,200) is the way to see them.', park:'Funaya-no-Sato Park lot, free, with the viewpoint above the bay.', q:'Ine Funaya'},
       {kind:'drive', min:60, label:'Route 178 west along the Tango coast → Yuhigaura', km:38},
-      {kind:'stop', name:'Yuhigaura Beach', saved:true, dur:130, lat:35.6639, lng:134.9654, what:'Eight kilometres of pale sand facing due west, named “sunset bay”. Benches, the rope swing in the sand, and the sun going straight into the Sea of Japan at 18:05 on the 18th. Be parked by 17:20 with a jacket.', park:'Beach lots are free or ¥500 outside the July–August season; aim for the Hamazume lot by the swing.', veg:'Slim here. Eat well at CLOUD8, pick up onigiri in Kyōtango, dinner back in Osaka.', q:'Yuhigaura Beach Kyotango'},
+      {kind:'stop', name:'Yuhigaura Beach', saved:true, dur:130, lat:35.6639, lng:134.9654, what:'Eight kilometres of pale sand facing due west, named “sunset bay”. Benches, the rope swing in the sand, and the sun going straight into the Sea of Japan at 18:05. Be parked by 17:20 with a jacket.', park:'Beach lots are free or ¥500 outside the July–August season; aim for the Hamazume lot by the swing.', veg:'Slim here. Eat well at CLOUD8, pick up onigiri in Kyōtango, dinner back in Osaka.', q:'Yuhigaura Beach Kyotango'},
       {kind:'drive', min:170, label:'Route 312 → Kyoto-Jūkan Expwy → Meishin → Hōshin', km:165, toll:'≈¥2,600'},
     ]
-  },
-  {
-    n:3, date:'2026-09-19', dow:'Saturday', label:'Sat 19', c:'#3a7ca5', scene:'biwa', region:'Lake Biwa',
-    title:'That Bench, Hikone, the Metasequoia avenue, Shirahige Shrine', sub:'A gentle clockwise lap of Japan’s largest lake, with two of Shiga’s most photographed trees and a torii standing in the water.',
-    km:200, drive:'5 h', start:'08:00', wxStop:'That Bench', wxIdx:5,
-    signs:[{rt:'E1',t:'Meishin → Hikone IC'},{rt:'8',t:'Route 8 round the north shore',local:true},{rt:'161',t:'Route 161 · Kosei Road',local:true}],
-    rain:'<b>Rain plan.</b> This is already the rain-proof day: Hikone Castle and its museum, lunch indoors, the redwood avenue is moodier wet than dry, and Shirahige has a covered deck. If it pours, add the Ōmi-Hachiman canal boat (covered boats, ¥2,200, 35 minutes) on the way south instead of Ōmi-Maiko beach.',
-    items:[
-      {kind:'drive', min:105, label:'Suita IC → Meishin → Hikone IC → lakeshore road', km:120, toll:'≈¥3,000'},
-      {kind:'stop', name:'That Bench', saved:true, dur:30, lat:35.2416, lng:136.1782, what:'A single bench under a chinaberry tree on the Hikone lakeshore, made famous by an NHK documentary. Lake Biwa fills the frame and the Hira range lines the far shore. It is in a farming hamlet, so be quick and quiet.', park:'About ten roadside spaces beside the bench at Ishidera-chō 1331; full by mid-morning on a holiday, so this is the first stop.', q:'あのベンチ 彦根市石寺町'},
-      {kind:'drive', min:20, label:'Along the lake into Hikone castle town', km:10},
-      {kind:'stop', name:'Hikone Castle and Zen Vegan Cafe', dur:110, lat:35.2766, lng:136.2520, what:'One of twelve original castle keeps in Japan, small and perfect on its hill, with the Genkyū-en garden below (¥800 for both). Lunch at Zen Vegan Cafe, an all-vegan café in a samurai house by the moat.', veg:'Zen Vegan Cafe is fully vegan; it is a small family place, so check its opening days on HappyCow the night before.', park:'Kyōbashi-guchi lot by the moat, ¥400 for two hours.', q:'Zen Vegan Cafe Hikone'},
-      {kind:'drive', min:60, label:'Route 8 north through Nagahama → Route 303 → Makino', km:45},
-      {kind:'stop', name:'Metasequoia Namiki', dur:45, lat:35.4590, lng:136.0460, what:'Five hundred dawn redwoods along 2.4 km of dead-straight road. In September the tunnel is deep green; walk the footpath on the west side rather than crawling along in the car.', park:'Free at Makino Pic-Land, 155 cars, at the southern end. Do not stop on the avenue.', veg:'Pic-Land sells local chestnut and blueberry soft-serve.', q:'Metasequoia Namiki Makino'},
-      {kind:'drive', min:25, label:'Route 161 south along the west shore', km:18},
-      {kind:'stop', name:'Shirahige Shrine', dur:40, lat:35.3385, lng:136.0175, what:'A vermilion torii standing 60 m out in the lake, with a 2,000-year-old shrine across the road. Shoot from the raised deck on the shrine side; the road between has trucks and no crossing.', park:'Shrine lot, free, 30 cars. The shoulder gets ticketed.', q:'Shirahige Shrine Takashima'},
-      {kind:'drive', min:30, label:'Route 161 → Ōmi-Maiko', km:20},
-      {kind:'stop', name:'Ōmi-Maiko beach', dur:60, lat:35.2560, lng:135.9560, what:'A free pine-backed beach with the clearest water on the lake. Feet in the water, a last lakeside hour, then home.', park:'Free outside the swimming season.', q:'Omi-Maiko Beach'},
-      {kind:'drive', min:90, label:'Kosei Road → Meishin (Kyoto-Higashi IC) → Suita → Hōshin', km:75, toll:'≈¥1,900'},
-      {kind:'stop', name:'Dinner near home', dur:0, lat:34.7318, lng:135.4980, what:'Saturday 19 September is a holiday, so Merrymomo is closed. Paprika Shokudō Vegan in Shinsaibashi is open late, or CoCo Ichibanya on Shin-Midōsuji does the vegetarian curry until 23:00.', q:'Paprika Shokudo Vegan Osaka', noPin:true},
-    ]
   }
-];
-// weather points: index 0 home, then in the order used by wxIdx
-const WX_POINTS = [
-  {name:'Osaka · Hōshin', sub:'home, every day', lat:34.746, lng:135.540},
-  {name:'Ōdaigahara', sub:'Thu 17 · 1,600 m plateau', lat:34.180, lng:136.097, day:0},
-  {name:'Tenkawa · Dorogawa', sub:'Thu 17 · afternoon', lat:34.254, lng:135.860, day:0},
-  {name:'Yuhigaura Beach', sub:'Fri 18 · sunset 18:05', lat:35.664, lng:134.965, day:1},
-  {name:'Amanohashidate', sub:'Fri 18 · late morning', lat:35.560, lng:135.190, day:1},
-  {name:'That Bench · Hikone', sub:'Sat 19 · morning', lat:35.242, lng:136.178, day:2},
-  {name:'Makino · Shirahige', sub:'Sat 19 · afternoon', lat:35.459, lng:136.046, day:2},
-];
-const TRIP_DATES = ['2026-09-17','2026-09-18','2026-09-19'];
+};
+const TRIP_KEYS = Object.keys(TRIPS);
+const WX_POINTS = [{name:'Osaka · Hōshin', sub:'home, every day', lat:34.746, lng:135.540}].concat(...TRIP_KEYS.map(k => TRIPS[k].wx.map(p => ({...p, trip:k}))));
+const ORDERS = [['hirugano','nara','tango'],['hirugano','tango','nara'],['nara','hirugano','tango'],['nara','tango','hirugano'],['tango','hirugano','nara'],['tango','nara','hirugano']];
+let order = ['hirugano','nara','tango']; // forecast-led default at build time; replaced by the live recommendation
 
 /* helpers */
 const $ = s => document.querySelector(s);
@@ -393,6 +396,8 @@ const fmt = m => { const h = Math.floor(m/60), mm = m%60; return h ? `${h} h${mm
 const clock = (start, add) => { const [h,m] = start.split(':').map(Number); const t = h*60+m+add; return `${String(Math.floor(t/60)%24).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`; };
 const G = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
 const ROMAN = ['I','II','III'];
+const total = trip => trip.items.reduce((a,i)=>a+(i.min||i.dur||0),0);
+const tolls = trip => trip.items.filter(i=>i.toll).reduce((a,i)=>a+parseInt(i.toll.replace(/\D/g,''),10),0);
 function rng(seed){ let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function hex(c){ c = c.replace('#',''); return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)]; }
 function mix(c1, c2, t){ const a = hex(c1), b = hex(c2); return `rgb(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)})`; }
@@ -436,143 +441,133 @@ function paintScene(canvas, key){
 }
 const painted = [];
 function scene(canvas, key){ painted.push([canvas,key]); paintScene(canvas,key); }
-let rsT; addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(()=>painted.forEach(([c,k])=>paintScene(c,k)), 120); });
+let rsT; addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(()=>painted.forEach(([c,k])=>{ if (c.isConnected) paintScene(c,k); }), 120); });
 
-/* glance cards */
-DAYS.forEach((d,i) => {
-  const total = d.items.reduce((a,x)=>a+(x.min||x.dur||0),0);
-  const a = el('a','gcard'); a.href = '#day-'+d.n; a.style.setProperty('--c', d.c);
-  a.innerHTML = `<div class="d"><span>Day ${ROMAN[i]} · ${d.label}</span><span>${d.region}</span></div><h3>${d.title}</h3><p>${d.sub}</p><div class="n"><span><b>${d.km} km</b></span><span><b>${d.drive}</b> driving</span><span>leave <b>${d.start}</b></span><span>home <b>${clock(d.start,total)}</b></span></div>`;
-  $('#glance').appendChild(a);
-});
-
-/* atlas */
+/* atlas (independent of date order) */
 const NS = 'http://www.w3.org/2000/svg';
 const svgEl = (t, attrs={}) => { const e = document.createElementNS(NS, t); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
 const {W:MW, H:MH, BB} = MAPDATA;
 const proj = (lat,lng) => [ (lng-BB.w)/(BB.e-BB.w)*MW, (BB.n-lat)/(BB.n-BB.s)*MH ];
 function smooth(pts){ let d=`M${pts[0][0]} ${pts[0][1]}`; for (let i=0;i<pts.length-1;i++){ const p0=pts[Math.max(0,i-1)], p1=pts[i], p2=pts[i+1], p3=pts[Math.min(pts.length-1,i+2)]; const c1=[p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6], c2=[p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6]; d+=`C${c1[0]} ${c1[1]} ${c2[0]} ${c2[1]} ${p2[0]} ${p2[1]}`; } return d; }
-const LABEL_POS = {'Imafuku Falls':[8,13,'start'],'Amanohashidate':[8,-5,'start'],'Mitarai Valley':[-8,4,'end'],'Ōdaigahara':[8,11,'start'],'That Bench':[8,11,'start'],'Hōshin · home':[-8,4,'end'],'Yuhigaura Beach':[-8,4,'end'],'Dorogawa Onsen':[-8,-4,'end'],'Hikone':[8,-4,'start'],'Metasequoia Namiki':[8,4,'start'],'Shirahige Shrine':[-8,4,'end'],'Ōmi-Maiko':[-8,4,'end'],'Ine':[8,4,'start'],'Lunch':[8,4,'start']};
+const LABEL_POS = {'Imafuku Falls':[8,13,'start'],'Amanohashidate':[8,-5,'start'],'Mitarai Valley':[-8,4,'end'],'Ōdaigahara':[8,11,'start'],'That Bench':[8,11,'start'],'Hōshin · home':[-8,4,'end'],'Yuhigaura Beach':[-8,4,'end'],'Dorogawa Onsen':[-8,-4,'end'],'Ine':[8,4,'start'],'Lunch':[8,4,'start'],'Hirugano Plateau':[8,-4,'start'],'Gujō Hachiman':[8,10,'start']};
+const SHORT = {'Ine funaya boathouses':'Ine','Lunch at vegan cafe CLOUD8':'Lunch'};
 function buildMap(){
-  const pts = [proj(HOME.lat,HOME.lng)]; DAYS.forEach(d=>d.items.forEach(it=>{ if(it.kind==='stop'&&it.lat&&!it.noPin) pts.push(proj(it.lat,it.lng)); }));
+  const pts = [proj(HOME.lat,HOME.lng)]; TRIP_KEYS.forEach(k=>TRIPS[k].items.forEach(it=>{ if(it.kind==='stop'&&it.lat) pts.push(proj(it.lat,it.lng)); }));
   let minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9; pts.forEach(([x,y])=>{minx=Math.min(minx,x);maxx=Math.max(maxx,x);miny=Math.min(miny,y);maxy=Math.max(maxy,y);});
-  let w=(maxx-minx)*1.3, h=w*.56; if ((maxy-miny)*1.25>h){ h=(maxy-miny)*1.25; w=h/.56; } const cx=(minx+maxx)/2+w*.04, cy=(miny+maxy)/2;
+  let w=(maxx-minx)*1.25, h=w*.56; if ((maxy-miny)*1.22>h){ h=(maxy-miny)*1.22; w=h/.56; } const cx=(minx+maxx)/2, cy=(miny+maxy)/2;
   const svg = svgEl('svg', {viewBox:[cx-w/2, cy-h/2, w, h].join(' '), role:'img', 'aria-label':'Map of the three day trips from Osaka'});
   svg.appendChild(svgEl('rect', {class:'m-sea', x:-2000, y:-2000, width:5000, height:5000}));
   const grid = svgEl('g'); for (let lon=Math.ceil(BB.w); lon<=BB.e; lon++){ const [x] = proj(BB.s,lon); grid.appendChild(svgEl('line',{class:'m-grid',x1:x,y1:0,x2:x,y2:MH})); } for (let lat=Math.ceil(BB.s); lat<=BB.n; lat++){ const [,y] = proj(lat,BB.w); grid.appendChild(svgEl('line',{class:'m-grid',x1:0,y1:y,x2:MW,y2:y})); } svg.appendChild(grid);
   svg.appendChild(svgEl('path', {class:'m-land', d: MAPDATA.land})); svg.appendChild(svgEl('path', {class:'m-lake', d: MAPDATA.lakes}));
-  [['Sea of Japan', 35.95, 134.55, 'sea'], ['Ise Bay', 34.72, 136.78, ''], ['Lake Biwa', 35.43, 136.17, ''], ['Kii Peninsula', 33.95, 135.75, ''], ['Tango Peninsula', 35.79, 135.08, '']].forEach(([t,lat,lng,cls]) => { const [x,y] = proj(lat,lng); const e = svgEl('text',{class:'m-lbl '+cls, x, y, 'text-anchor':'middle'}); e.textContent = t; svg.appendChild(e); });
-  [['Ōsaka',34.69,135.50,'end'],['Kyōto',35.01,135.76,'start'],['Nara',34.68,135.83,'start'],['Nagoya',35.17,136.90,'start'],['Wakayama',34.23,135.17,'end'],['Fukui',36.06,136.22,'end']].forEach(([t,lat,lng,anc]) => { const [x,y] = proj(lat,lng); svg.appendChild(svgEl('circle',{class:'m-city',cx:x,cy:y,r:2.2})); const e = svgEl('text',{class:'m-citylbl', x: x + (anc==='start'?6:-6), y: y+3.5, 'text-anchor':anc}); e.textContent = t; svg.appendChild(e); });
+  [['Sea of Japan', 35.95, 134.55, 'sea'], ['Ise Bay', 34.72, 136.78, ''], ['Lake Biwa', 35.42, 136.16, ''], ['Kii Peninsula', 33.95, 135.75, ''], ['Tango Peninsula', 35.79, 135.08, ''], ['Hida Highlands', 35.95, 137.25, '']].forEach(([t,lat,lng,cls]) => { const [x,y] = proj(lat,lng); const e = svgEl('text',{class:'m-lbl '+cls, x, y, 'text-anchor':'middle'}); e.textContent = t; svg.appendChild(e); });
+  [['Ōsaka',34.69,135.50,'end'],['Kyōto',35.01,135.76,'start'],['Nara',34.68,135.83,'start'],['Nagoya',35.17,136.90,'start'],['Wakayama',34.23,135.17,'end'],['Fukui',36.06,136.22,'end'],['Gifu',35.42,136.76,'start']].forEach(([t,lat,lng,anc]) => { const [x,y] = proj(lat,lng); svg.appendChild(svgEl('circle',{class:'m-city',cx:x,cy:y,r:2.2})); const e = svgEl('text',{class:'m-citylbl', x: x + (anc==='start'?6:-6), y: y+3.5, 'text-anchor':anc}); e.textContent = t; svg.appendChild(e); });
   const [sx0,sy] = proj(34.36, 133.9), [sx1] = proj(34.36, 133.9 + 50/(111.32*Math.cos(35*Math.PI/180)));
   svg.appendChild(svgEl('line',{class:'m-scale',x1:sx0,y1:sy,x2:sx1,y2:sy})); svg.appendChild(svgEl('line',{class:'m-scale',x1:sx0,y1:sy-4,x2:sx0,y2:sy+4})); svg.appendChild(svgEl('line',{class:'m-scale',x1:sx1,y1:sy-4,x2:sx1,y2:sy+4}));
   const sl = svgEl('text',{class:'m-scalelbl',x:(sx0+sx1)/2,y:sy-7,'text-anchor':'middle'}); sl.textContent='50 km'; svg.appendChild(sl);
   const gR = svgEl('g'), gP = svgEl('g'); svg.appendChild(gR); svg.appendChild(gP);
   const [hx,hy] = proj(HOME.lat,HOME.lng);
-  DAYS.forEach(d => { const p=[[hx,hy]]; d.items.forEach(it=>{ if(it.kind==='stop'&&it.lat&&!it.noPin) p.push(proj(it.lat,it.lng)); }); p.push([hx,hy]); const dd=smooth(p); gR.appendChild(svgEl('path',{class:'m-route-halo',d:dd})); const r=svgEl('path',{class:'m-route',d:dd}); r.style.setProperty('--c',d.c); gR.appendChild(r); });
+  TRIP_KEYS.forEach(k => { const d = TRIPS[k]; const p=[[hx,hy]]; d.items.forEach(it=>{ if(it.kind==='stop'&&it.lat) p.push(proj(it.lat,it.lng)); }); p.push([hx,hy]); const dd=smooth(p); gR.appendChild(svgEl('path',{class:'m-route-halo',d:dd})); const r=svgEl('path',{class:'m-route',d:dd}); r.style.setProperty('--c',d.c); gR.appendChild(r); });
   const pin = (x,y,cls,label,minor,color) => { const c = svgEl('circle',{class:'m-pin '+cls, cx:x, cy:y, r: cls==='star'?5.2: cls==='home'?4.5:3.8}); if (color) c.style.setProperty('--c', color); gP.appendChild(c); if (label){ const [dx,dy,anc] = LABEL_POS[label] || [8,3.5,'start']; const t = svgEl('text',{class:'m-pinlbl'+(minor?' minor':''), x:x+dx, y:y+dy, 'text-anchor':anc}); t.textContent = label; gP.appendChild(t); } };
   pin(hx,hy,'home','Hōshin · home');
-  const SHORT = {'Hikone Castle and Zen Vegan Cafe':'Hikone','Ine funaya boathouses':'Ine','Lunch at vegan cafe CLOUD8':'Lunch','Ōmi-Maiko beach':'Ōmi-Maiko'};
-  DAYS.forEach(d => d.items.forEach(it => { if (it.kind==='stop'&&it.lat&&!it.noPin){ const [x,y]=proj(it.lat,it.lng); pin(x,y, it.saved?'star':'', SHORT[it.name]||it.name, !it.saved, d.c); } }));
+  TRIP_KEYS.forEach(k => TRIPS[k].items.forEach(it => { if (it.kind==='stop'&&it.lat){ const [x,y]=proj(it.lat,it.lng); pin(x,y, it.saved?'star':'', SHORT[it.name]||it.name, !it.saved, TRIPS[k].c); } }));
   $('#mapHost').appendChild(svg);
-  $('#atlasKey').innerHTML = DAYS.map((d,i)=>`<span><i style="--c:${d.c}"></i>Day ${ROMAN[i]} · ${d.label}</span>`).join('') + '<span><i class="star"></i>from your list</span><span><i class="home"></i>home</span>';
 }
+function renderKey(){ $('#atlasKey').innerHTML = order.map((k,i)=>`<span><i style="--c:${TRIPS[k].c}"></i>${DATES[i].short} · ${TRIPS[k].region}</span>`).join('') + '<span><i class="star"></i>from your list</span><span><i class="home"></i>home</span>'; }
 
-/* chapters */
+/* glance + chapters, rendered from the current order */
 const ICONS = {
   park:'<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>',
   veg:'<svg viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg>',
 };
-DAYS.forEach((day, di) => {
-  const total = day.items.reduce((a,i)=>a+(i.min||i.dur||0),0);
-  const ch = el('article','chapter'); ch.style.setProperty('--c', day.c); ch.id = 'day-'+day.n;
-  ch.innerHTML = `<div class="band"><canvas aria-hidden="true"></canvas><div class="veil"></div><div class="bt"><div class="roman">Day ${ROMAN[di]} · ${day.dow} ${day.label.split(' ')[1]} September · ${day.region}</div><h3>${day.title}</h3><p>${day.sub}</p></div></div>
-    <div class="specs"><div>Distance<b>${day.km} km</b></div><div>Driving<b>${day.drive}</b></div><div>Leave home<b>${day.start}</b></div><div>Back home<b>${clock(day.start,total)}</b></div><div>Tolls<b>≈¥${day.items.filter(i=>i.toll).reduce((a,i)=>a+parseInt(i.toll.replace(/\D/g,''),10),0).toLocaleString()}</b></div></div>
-    <div class="signs">${day.signs.map(s=>`<span class="sign ${s.local?'local':''}"><span class="rt">${s.rt}</span>${s.t}</span>`).join('')}</div>
-    <div class="route"><ol class="rail"></ol></div>
-    <div class="rain"><div class="eyebrow">If it rains</div><p>${day.rain}</p></div>`;
-  const rail = ch.querySelector('.rail'); let t = 0;
-  day.items.forEach(it => {
-    const mins = it.min || it.dur || 0;
-    if (it.kind==='drive'){
-      rail.appendChild(el('li','leg',`<span class="t">${fmt(mins)}</span><span class="k"></span><span class="l"><span>${it.label}${it.km?` · ${it.km} km`:''}</span>${it.toll?`<span class="toll">${it.toll}</span>`:''}</span>`));
-    } else {
-      const li = el('li','node'+(it.saved?' saved':''));
-      li.innerHTML = `<time>${clock(day.start,t)}${mins?`<small>${fmt(mins)}</small>`:''}</time><span class="k"></span>
-        <div><h4>${it.name}${it.saved?'<span class="tag s">★ from your list</span>':'<span class="tag a">added</span>'}</h4>
-          <p class="what">${it.what}</p>
-          <div class="facts">${it.park?`<div class="fact park">${ICONS.park}<div><b>Parking.</b> ${it.park}</div></div>`:''}${it.veg?`<div class="fact veg">${ICONS.veg}<div><b>Vegetarian.</b> ${it.veg}</div></div>`:''}</div>
-          <div class="links"><a href="${G(it.q||it.name)}" target="_blank" rel="noopener">Navigate in Google Maps ↗</a></div>
-        </div>`;
-      rail.appendChild(li);
-    }
-    t += mins;
-  });
-  $('#days').appendChild(ch);
-  scene(ch.querySelector('canvas'), day.scene);
-});
+function renderDays(){
+  const gl = $('#glance'); gl.innerHTML = '';
+  order.forEach((k,i) => { const d = TRIPS[k], dt = DATES[i];
+    const a = el('a','gcard'); a.href = '#day-'+(i+1); a.style.setProperty('--c', d.c);
+    a.innerHTML = `<div class="d"><span>Day ${ROMAN[i]} · ${dt.short}</span><span>${d.region}</span></div><h3>${d.title}</h3><p>${d.sub}</p><div class="n"><span><b>${d.km} km</b></span><span><b>${d.drive}</b> driving</span><span>leave <b>${d.start}</b></span><span>home <b>${clock(d.start,total(d))}</b></span></div>`;
+    gl.appendChild(a); });
+  const host = $('#days'); host.innerHTML = '';
+  order.forEach((k, di) => { const day = TRIPS[k], dt = DATES[di];
+    const ch = el('article','chapter'); ch.style.setProperty('--c', day.c); ch.id = 'day-'+(di+1);
+    ch.innerHTML = `<div class="band"><canvas aria-hidden="true"></canvas><div class="veil"></div><div class="bt"><div class="roman">Day ${ROMAN[di]} · ${dt.dow} ${dt.short.split(' ')[1]} September · ${day.region}</div><h3>${day.title}</h3><p>${day.sub}</p></div></div>
+      <div class="specs"><div>Distance<b>${day.km} km</b></div><div>Driving<b>${day.drive}</b></div><div>Leave home<b>${day.start}</b></div><div>Back home<b>${clock(day.start,total(day))}</b></div><div>Tolls<b>≈¥${tolls(day).toLocaleString()}</b></div></div>
+      <div class="signs">${day.signs.map(s=>`<span class="sign ${s.local?'local':''}"><span class="rt">${s.rt}</span>${s.t}</span>`).join('')}</div>
+      <div class="route"><ol class="rail"></ol></div>
+      <div class="rain"><div class="eyebrow">If it rains</div><p>${day.rain}</p></div>`;
+    const rail = ch.querySelector('.rail'); let t = 0;
+    day.items.forEach(it => { const mins = it.min || it.dur || 0;
+      if (it.kind==='drive'){ rail.appendChild(el('li','leg',`<span class="t">${fmt(mins)}</span><span class="k"></span><span class="l"><span>${it.label}${it.km?` · ${it.km} km`:''}</span>${it.toll?`<span class="toll">${it.toll}</span>`:''}</span>`)); }
+      else { const li = el('li','node'+(it.saved?' saved':''));
+        li.innerHTML = `<time>${clock(day.start,t)}${mins?`<small>${fmt(mins)}</small>`:''}</time><span class="k"></span>
+          <div><h4>${it.name}${it.saved?'<span class="tag s">★ from your list</span>':'<span class="tag a">added</span>'}</h4><p class="what">${it.what}</p>
+            <div class="facts">${it.park?`<div class="fact park">${ICONS.park}<div><b>Parking.</b> ${it.park}</div></div>`:''}${it.veg?`<div class="fact veg">${ICONS.veg}<div><b>Vegetarian.</b> ${it.veg}</div></div>`:''}</div>
+            <div class="links"><a href="${G(it.q||it.name)}" target="_blank" rel="noopener">Navigate in Google Maps ↗</a></div></div>`;
+        rail.appendChild(li); }
+      t += mins; });
+    host.appendChild(ch); scene(ch.querySelector('canvas'), day.scene); });
+  $('#heroDates').innerHTML = order.map((k,i)=>`<div><b>${DATES[i].short}</b>${TRIPS[k].region}</div>`).join('') + '<div><b>1,150 km</b>three days</div>';
+  renderKey();
+}
 
 /* weather */
 const WMO = c => c===0?['Clear','dry']:c<=2?['Mostly sunny','dry']:c===3?['Overcast','dry']:c<=49?['Fog','dry']:c<=57?['Drizzle','mixed']:c<=67?['Rain','rain']:c<=77?['Snow','rain']:c<=82?['Showers','mixed']:c<=86?['Snow showers','rain']:['Thunderstorms','rain'];
 const KEY = {dry:'var(--dry)', mixed:'var(--mixed)', rain:'var(--rain)'};
-function wxUrl(){ const lat = WX_POINTS.map(p=>p.lat).join(','), lng = WX_POINTS.map(p=>p.lng).join(','); return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max&timezone=Asia%2FTokyo&forecast_days=16`; }
-function daysOut(){ const now = new Date(); const trip = new Date('2026-09-17T00:00:00+09:00'); return Math.ceil((trip-now)/86400000); }
-function renderWx(data){
+function wxUrl(){ const lat = WX_POINTS.map(p=>p.lat).join(','), lng = WX_POINTS.map(p=>p.lng).join(','); return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,precipitation_hours,wind_speed_10m_max&timezone=Asia%2FTokyo&forecast_days=16`; }
+function daysOut(){ return Math.ceil((new Date('2026-09-17T00:00:00+09:00') - new Date())/86400000); }
+function cellData(series, date){ const i = series ? series.daily.time.indexOf(date) : -1; if (i<0) return null; const d = series.daily; const [desc, kind] = WMO(d.weather_code[i]); const prob = d.precipitation_probability_max[i] ?? 0, mm = d.precipitation_sum[i] ?? 0;
+  const k = mm>=10 || (prob>=70 && mm>=3) ? 'rain' : mm>=1 || prob>=40 ? 'mixed' : kind; return {desc, k, prob, mm, hrs: d.precipitation_hours ? d.precipitation_hours[i] : null, tmin: Math.round(d.temperature_2m_min[i]), tmax: Math.round(d.temperature_2m_max[i]), wind: Math.round(d.wind_speed_10m_max[i])}; }
+// wetness score for one trip on one date: rain amount dominates, probability second, holiday crowds third
+function tripScore(data, trip, di){ const pts = WX_POINTS.map((p,i)=>({p, s:data[i]})).filter(x=>x.p.trip===trip); let s = 0, n = 0; pts.forEach(({s:series}) => { const c = cellData(series, DATES[di].date); if (c){ s += Math.min(c.mm, 40) * 2 + c.prob * 0.35; n++; } }); if (!n) return null; return (s/n) * TRIPS[trip].sens + (DATES[di].holiday ? TRIPS[trip].holidayPenalty : 0); }
+function chooseOrder(data){ let best = null; ORDERS.forEach(o => { let tot = 0, ok = true; o.forEach((k,di) => { const s = tripScore(data, k, di); if (s==null) ok = false; else tot += s; }); if (ok && (!best || tot < best.tot)) best = {o, tot}; }); return best ? best.o : null; }
+let lastData = null;
+function renderWx(data, live){
+  lastData = data;
   const grid = $('#wxGrid'); grid.innerHTML = '';
   grid.appendChild(el('div','h','Stop'));
-  DAYS.forEach(d => grid.appendChild(el('div','h',`Day ${ROMAN[d.n-1]}<b>${d.dow} ${d.label.split(' ')[1]} Sept</b>`)));
-  const perDay = [[],[],[]];
+  DATES.forEach((dt,i) => grid.appendChild(el('div','h',`Day ${ROMAN[i]}<b>${dt.dow} ${dt.short.split(' ')[1]} Sept</b>`)));
   WX_POINTS.forEach((p, i) => {
-    const series = Array.isArray(data) ? data[i] : null;
-    const pc = el('div','place',`<b>${p.name}</b><span>${p.sub}</span>${p.day!=null?`<br><span class="day" style="--c:${DAYS[p.day].c}">Day ${ROMAN[p.day]}</span>`:''}`);
-    grid.appendChild(pc);
-    TRIP_DATES.forEach((date, di) => {
-      const cell = el('div'); cell.setAttribute('data-day', `Day ${ROMAN[di]} · ${DAYS[di].label}`);
-      const idx = series ? series.daily.time.indexOf(date) : -1;
-      if (idx < 0){ cell.className = 'cell na'; cell.textContent = series ? 'Not in range yet' : '—'; }
-      else {
-        const code = series.daily.weather_code[idx], [desc, kind] = WMO(code); const prob = series.daily.precipitation_probability_max[idx], mm = series.daily.precipitation_sum[idx];
-        const tmax = Math.round(series.daily.temperature_2m_max[idx]), tmin = Math.round(series.daily.temperature_2m_min[idx]), wind = Math.round(series.daily.wind_speed_10m_max[idx]);
-        const k = prob>=60 || mm>=10 ? 'rain' : prob>=35 || mm>=2 ? 'mixed' : kind;
-        cell.className = 'cell'; cell.style.setProperty('--k', KEY[k]);
-        cell.innerHTML = `<div class="desc"><i></i>${desc}</div><div class="row"><span>${tmin}–${tmax} °C</span><span>rain ${prob ?? '–'}%</span><span>${mm} mm</span>${wind>=35?`<span>wind ${wind} km/h</span>`:''}</div>`;
-        if (p.day!=null) perDay[p.day].push({k, prob, mm, name:p.name});
-      }
-      grid.appendChild(cell);
-    });
+    const series = Array.isArray(data) ? data[i] : null; const di = p.trip ? order.indexOf(p.trip) : -1;
+    grid.appendChild(el('div','place',`<b>${p.name}</b><span>${p.sub}</span>${di>=0?`<br><span class="day" style="--c:${TRIPS[p.trip].c}">Planned Day ${ROMAN[di]} · ${DATES[di].short}</span>`:''}`));
+    DATES.forEach((dt, ci) => { const cell = el('div'); cell.setAttribute('data-day', `Day ${ROMAN[ci]} · ${dt.short}`); const c = cellData(series, dt.date);
+      if (!c){ cell.className='cell na'; cell.textContent = series ? 'Not in range yet' : '—'; }
+      else { cell.className = 'cell' + (di===ci ? ' planned' : ''); cell.style.setProperty('--k', KEY[c.k]); cell.innerHTML = `<div class="desc"><i></i>${c.desc}</div><div class="row"><span>${c.tmin}–${c.tmax} °C</span><span>rain ${c.prob}%</span><span>${c.mm} mm</span>${c.hrs!=null?`<span>${c.hrs} h wet</span>`:''}${c.wind>=35?`<span>wind ${c.wind} km/h</span>`:''}</div>`; }
+      grid.appendChild(cell); });
   });
   const v = $('#wxVerdict'); v.innerHTML = '';
+  if (!Array.isArray(data)){ v.innerHTML = `<p>The forecast could not be loaded here. Open the page from the repository or GitHub Pages, or check <a href="https://open-meteo.com/en/docs#latitude=34.746&longitude=135.54" target="_blank" rel="noopener">Open-Meteo</a> and <a href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=270000" target="_blank" rel="noopener">JMA</a> directly for 17–19 September.</p>`; return; }
   const out = daysOut();
-  if (!Array.isArray(data)){ v.innerHTML = `<p>The forecast could not be loaded here. Open this page from the repository or on GitHub Pages, or check <a href="https://open-meteo.com/en/docs#latitude=34.746&longitude=135.54" target="_blank" rel="noopener">Open-Meteo</a>, <a href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=270000" target="_blank" rel="noopener">JMA</a> or Windy directly for 17–19 September.</p>`; return; }
-  const conf = out > 10 ? 'More than ten days out: treat this as a trend only.' : out > 6 ? 'A week out: the pattern is usually right, the timing is not.' : out > 2 ? 'Within a week: reliable enough to decide swaps.' : 'Within two days: plan on it.';
-  v.appendChild(el('p', null, `<b>${out > 0 ? out + ' days to go.' : 'Trip in progress.'}</b> ${conf} Forecast refreshed ${new Date().toLocaleString('en-GB',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'})} Japan time.`));
-  perDay.forEach((cells, di) => {
-    if (!cells.length) return;
-    const worst = cells.reduce((a,c)=>Math.max(a, c.prob||0), 0), wet = cells.filter(c=>c.k==='rain').length, k = wet ? 'rain' : cells.some(c=>c.k==='mixed') ? 'mixed' : 'dry';
-    const d = DAYS[di];
-    let text;
-    if (k==='dry') text = `<b>Day ${ROMAN[di]} · ${d.label}, ${d.region}: go as planned.</b> Rain chance tops out around ${worst}%.`;
-    else if (k==='mixed') text = `<b>Day ${ROMAN[di]} · ${d.label}, ${d.region}: showers possible (${worst}%).</b> Keep the plan, pack the shell, and use the rain plan for any stop that is wet when you arrive.`;
-    else text = di===2 ? `<b>Day ${ROMAN[di]} · ${d.label}, Lake Biwa: wet (${worst}%), but this is the rain-proof day.</b> Follow its rain plan; castle, café and covered decks.` : `<b>Day ${ROMAN[di]} · ${d.label}, ${d.region}: wet (${worst}%).</b> ${di===0 ? 'Use the Tenkawa rain plan, or swap this day with Saturday’s lake loop if Saturday looks dry.' : 'Use the Kinosaki rain plan; the sunset will not happen. If Saturday looks dry, swap the two days.'}`;
-    const row = el('div','v'); row.style.setProperty('--k', KEY[k]); row.innerHTML = `<i></i><p>${text}</p>`; v.appendChild(row);
-  });
+  const conf = out > 10 ? 'More than ten days out: a trend, not a promise.' : out > 6 ? 'A week out: the pattern is usually right, the timing is not.' : out > 2 ? 'Within a week: reliable enough to decide swaps.' : 'Within two days: plan on it.';
+  const when = live ? `refreshed ${new Date().toLocaleString('en-GB',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'})} Japan time` : `snapshot from ${SNAPSHOT.taken}; live refresh is blocked on this host`;
+  v.appendChild(el('p', null, `<b>${out > 0 ? out + ' days to go.' : 'Trip in progress.'}</b> ${conf} Forecast ${when}.`));
+  order.forEach((k, di) => { const trip = TRIPS[k]; const cells = WX_POINTS.map((p,i)=>p.trip===k ? cellData(data[i], DATES[di].date) : null).filter(Boolean); if (!cells.length) return;
+    const mm = Math.max(...cells.map(c=>c.mm)), prob = Math.max(...cells.map(c=>c.prob)); const kk = cells.some(c=>c.k==='rain') ? 'rain' : cells.some(c=>c.k==='mixed') ? 'mixed' : 'dry';
+    const text = kk==='dry' ? `<b>Day ${ROMAN[di]} · ${DATES[di].short}, ${trip.region}: dry.</b> Rain chance tops out at ${prob}%.`
+      : kk==='mixed' ? `<b>Day ${ROMAN[di]} · ${DATES[di].short}, ${trip.region}: drizzle possible</b> (${prob}%, up to ${mm} mm). Go, pack the shell, and use the rain plan for any stop that is wet when you arrive.`
+      : `<b>Day ${ROMAN[di]} · ${DATES[di].short}, ${trip.region}: wet</b> (${prob}%, ${mm} mm). Follow its rain plan below.`;
+    const row = el('div','v'); row.style.setProperty('--k', KEY[kk]); row.innerHTML = `<i></i><p>${text}</p>`; v.appendChild(row); });
+  const best = chooseOrder(data);
+  if (best && best.join() !== order.join()){
+    const row = el('div','v swap'); row.style.setProperty('--k','var(--sunset)');
+    row.innerHTML = `<i></i><div><p><b>Drier order for this forecast:</b> ${best.map((k,i)=>`${DATES[i].short} ${TRIPS[k].region}`).join(' · ')}. Every trip lands on its driest available day, with the Nara day taking the wettest date because its rain plan loses least. Saturday crowds are counted too.</p><button type="button" id="applyOrder">Swap the days to this order</button></div>`;
+    v.appendChild(row); $('#applyOrder').onclick = () => { order = best; renderDays(); renderWx(lastData, live); $('#glance').scrollIntoView({behavior:'smooth', block:'start'}); };
+  } else if (best){ v.appendChild(el('p',null,'<b>This is already the driest order</b> for the current forecast.')); }
 }
 async function loadWx(){
   const st = $('#wxStatus'); st.className = 'st'; st.innerHTML = '<i></i>Loading forecast…';
-  try {
-    const res = await fetch(wxUrl(), {cache:'no-store'}); if (!res.ok) throw new Error(res.status);
-    const data = await res.json(); renderWx(data);
-    st.className = 'st live'; st.innerHTML = '<i></i>Live · Open-Meteo, 16-day model blend';
-  } catch (e) {
-    renderWx(null); st.className = 'st err'; st.innerHTML = '<i></i>Forecast unavailable on this host';
-  }
+  try { const res = await fetch(wxUrl(), {cache:'no-store'}); if (!res.ok) throw new Error(res.status); const data = await res.json(); const arr = Array.isArray(data) ? data : [data];
+    const best = chooseOrder(arr); if (best && !userLocked) order = best; renderDays(); renderWx(arr, true); st.className = 'st live'; st.innerHTML = '<i></i>Live · Open-Meteo 16-day model blend'; }
+  catch (e) { renderWx(SNAPSHOT.data, false); st.className = 'st err'; st.innerHTML = `<i></i>Live forecast blocked here · showing snapshot from ${SNAPSHOT.taken}`; }
 }
+let userLocked = false;
 $('#wxRefresh').onclick = loadWx;
 
 /* boot */
 scene($('#heroCanvas'), 'hero');
 buildMap();
-renderWx(null); loadWx();
+renderDays();
+renderWx(SNAPSHOT.data, false);
+loadWx();
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches){ const hc = $('#heroCanvas'); addEventListener('scroll', () => { hc.style.transform = `translateY(${Math.min(window.scrollY, 800)*.25}px)`; }, {passive:true}); }
+
 </script>
 </body>
 </html>
