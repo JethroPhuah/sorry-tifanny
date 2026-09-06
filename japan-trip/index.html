@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan Driving Trip September</title>
+<meta name="description" content="Three-day nature road trip from Osaka: routes, maps, parking, vegetarian food and cheap car rental for the saved Google Maps list.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Leaflet 1.9.4 CSS, inlined (BSD-2, (c) Vladimir Agafonkin) */
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url(images/layers.png);
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url(images/layers-2x.png);
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(images/marker-icon.png);
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+</style>
+<style>
+:root{
+  --bg:#eef0eb;            /* morning mist */
+  --bg-2:#e3e7e0;
+  --paper:#f8f9f6;
+  --ink:#1b211d;
+  --ink-2:#45514a;
+  --ink-3:#7c877f;
+  --line:#cfd6cf;
+  --cedar:#1f4d3a;         /* expressway-sign green */
+  --cedar-2:#2b6a50;
+  --lake:#2f7f8c;
+  --kokia:#c2452d;         /* saved-place red */
+  --kokia-soft:#f3d9d2;
+  --sun:#d9a441;
+  --sign:#1f5e3d;          /* Japanese expressway sign */
+  --sign-text:#ffffff;
+  --shadow:0 12px 32px rgba(27,33,29,.10);
+  --radius:14px;
+  --map-bg:#dfe6df;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111614; --bg-2:#181e1b; --paper:#1c2320; --ink:#e6e9e4; --ink-2:#b6bfb8; --ink-3:#7f8a82;
+    --line:#2c352f; --cedar:#7fc4a3; --cedar-2:#5aa886; --lake:#6cc0cc; --kokia:#ef7b62; --kokia-soft:#3a221d;
+    --sun:#e6b85a; --sign:#245a3f; --sign-text:#f2f6f2; --shadow:0 12px 32px rgba(0,0,0,.45); --map-bg:#1a211e;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111614; --bg-2:#181e1b; --paper:#1c2320; --ink:#e6e9e4; --ink-2:#b6bfb8; --ink-3:#7f8a82;
+  --line:#2c352f; --cedar:#7fc4a3; --cedar-2:#5aa886; --lake:#6cc0cc; --kokia:#ef7b62; --kokia-soft:#3a221d;
+  --sun:#e6b85a; --sign:#245a3f; --sign-text:#f2f6f2; --shadow:0 12px 32px rgba(0,0,0,.45); --map-bg:#1a211e;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",Georgia,serif;font-weight:700;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.005em}
+p{margin:0}
+a{color:var(--cedar);text-decoration-color:color-mix(in srgb,var(--cedar) 40%,transparent)}
+a:hover{text-decoration-color:var(--cedar)}
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+:focus-visible{outline:2px solid var(--lake);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 28px;border-bottom:1px solid var(--line);background:
+  radial-gradient(1200px 400px at 10% -10%, color-mix(in srgb,var(--lake) 14%,transparent), transparent 60%),
+  radial-gradient(900px 380px at 100% 0%, color-mix(in srgb,var(--cedar) 12%,transparent), transparent 60%)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
+.hero h1{font-size:clamp(2.2rem,5vw,4rem);margin-top:10px}
+.hero h1 .jp{display:block;font-size:.42em;font-weight:500;color:var(--ink-2);margin-top:10px;letter-spacing:.06em}
+.hero .lede{max-width:62ch;color:var(--ink-2);margin-top:18px;font-size:1.05rem}
+.base-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
+.base-card .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--line);font-size:.93rem}
+.base-card .row:first-of-type{border-top:0;padding-top:4px}
+.base-card .row span:last-child{text-align:right;color:var(--ink-2)}
+.base-card .k{color:var(--ink-3)}
+
+/* saved chips */
+.saved{margin-top:26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 8px;border-radius:999px;background:var(--paper);border:1px solid var(--line);font-size:.85rem;font-weight:500}
+.chip .dot{width:9px;height:9px;border-radius:50%;background:var(--c,var(--cedar))}
+.chip .star{color:var(--kokia);font-size:.8rem}
+
+/* ---------- clusters ---------- */
+.section{padding:44px 0}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:18px}
+.section-head h2{font-size:clamp(1.5rem,2.6vw,2.1rem)}
+.section-head .sub{color:var(--ink-2);max-width:60ch}
+.clusters{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cluster{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;position:relative;overflow:hidden}
+.cluster::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c)}
+.cluster h3{font-size:1.1rem;margin-bottom:6px}
+.cluster .dist{font-size:.85rem;color:var(--ink-2)}
+.cluster ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:4px;font-size:.9rem}
+.cluster li::before{content:"★ ";color:var(--kokia);font-size:.8em}
+.cluster .verdict{margin-top:12px;font-size:.85rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:10px}
+.callout{margin-top:18px;background:color-mix(in srgb,var(--sun) 16%,var(--paper));border:1px solid color-mix(in srgb,var(--sun) 45%,var(--line));border-radius:var(--radius);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.callout .mark{width:34px;height:34px;border-radius:50%;background:var(--sun);color:#1b211d;display:grid;place-items:center;font-weight:700;font-family:"Zen Old Mincho",serif}
+.callout p{color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+
+/* ---------- plan switch ---------- */
+.plan-bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.plan-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+.seg{display:inline-flex;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:4px}
+.seg button{border:0;background:transparent;color:var(--ink-2);font:inherit;font-weight:600;padding:9px 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.seg button .n{font-family:"Zen Old Mincho",serif;font-weight:700;color:var(--ink-3)}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.seg button[aria-pressed="true"] .n{color:var(--kokia)}
+.plan-bar .hint{font-size:.85rem;color:var(--ink-2)}
+
+/* ---------- plan header + stats ---------- */
+.plan-head{padding:36px 0 8px}
+.plan-head h2{font-size:clamp(1.7rem,3vw,2.5rem)}
+.plan-head .tag{color:var(--ink-2);margin-top:8px;max-width:70ch}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat .v{font-size:1.5rem;font-weight:600;margin-top:2px}
+.stat .v small{font-size:.7em;color:var(--ink-3);font-weight:500;margin-left:3px}
+.stat .d{font-size:.78rem;color:var(--ink-3);margin-top:2px}
+
+/* ---------- layout: days + map ---------- */
+.trip{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:28px;align-items:start;padding:20px 0 50px}
+.map-col{position:sticky;top:74px}
+#map{height:min(72vh,720px);border-radius:var(--radius);border:1px solid var(--line);background:var(--map-bg);box-shadow:var(--shadow)}
+.map-note{font-size:.78rem;color:var(--ink-3);margin-top:8px;display:flex;justify-content:space-between;gap:10px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:.8rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:14px;height:4px;border-radius:2px;background:var(--c)}
+.legend .pin{width:10px;height:10px;border-radius:50%;background:var(--kokia);border:2px solid #fff;box-shadow:0 0 0 1px var(--kokia)}
+.legend .pin.pin-x{background:var(--cedar);box-shadow:0 0 0 1px var(--cedar)}
+.tiles-blocked{display:none;position:absolute;inset:auto 10px 10px 10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.8rem;color:var(--ink-2);z-index:600}
+.map-wrap{position:relative}
+
+/* day */
+.day{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:22px;box-shadow:var(--shadow)}
+.day-head{padding:20px 22px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;border-left:6px solid var(--c)}
+.day-num{font-family:"Zen Old Mincho",serif;font-weight:700;font-size:2.4rem;line-height:1;color:var(--c)}
+.day-num small{display:block;font-family:"Instrument Sans",sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:4px}
+.day-title h3{font-size:1.25rem}
+.day-title p{color:var(--ink-2);font-size:.92rem;margin-top:4px}
+.day-meta{text-align:right;font-size:.82rem;color:var(--ink-2);display:grid;gap:2px}
+.day-meta b{color:var(--ink);font-weight:600}
+
+/* road signs */
+.signs{display:flex;flex-wrap:wrap;gap:8px;padding:14px 22px 0}
+.sign{display:inline-flex;align-items:center;gap:8px;background:var(--sign);color:var(--sign-text);border-radius:8px;padding:5px 10px 5px 8px;font-size:.78rem;font-weight:600;letter-spacing:.01em;border:2px solid color-mix(in srgb,#fff 30%,var(--sign))}
+.sign .rt{background:#fff;color:#1f5e3d;border-radius:4px;padding:0 6px;font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:600}
+.sign.local{background:#3b5fa8;border-color:color-mix(in srgb,#fff 30%,#3b5fa8)}
+.sign.local .rt{color:#3b5fa8}
+.sign.bus{background:#8a5a1e;border-color:color-mix(in srgb,#fff 30%,#8a5a1e)}
+.sign.bus .rt{color:#8a5a1e}
+
+/* ribbon timeline */
+.ribbon-wrap{padding:16px 22px 4px}
+.ribbon{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--bg-2)}
+.ribbon .seg-d{background:repeating-linear-gradient(135deg,var(--bg-2) 0 6px,color-mix(in srgb,var(--ink-3) 22%,var(--bg-2)) 6px 8px);display:grid;place-items:center;font-size:.68rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;border-right:1px solid var(--line);font-family:"JetBrains Mono",monospace}
+.ribbon .seg-b{background:repeating-linear-gradient(135deg,#d9c4a6 0 6px,#c7ad86 6px 8px);display:grid;place-items:center;font-size:.68rem;color:#3a2a12;white-space:nowrap;overflow:hidden;border-right:1px solid var(--line);font-family:"JetBrains Mono",monospace}
+.ribbon .seg-s{background:var(--c);display:grid;place-items:center;font-size:.7rem;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;padding:0 6px;border-right:1px solid rgba(255,255,255,.35);cursor:pointer;text-overflow:ellipsis}
+.ribbon .seg-s:hover{filter:brightness(1.08)}
+.ribbon-scale{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ink-3);margin-top:6px;font-family:"JetBrains Mono",monospace}
+
+/* stops */
+.stops{padding:10px 22px 22px;display:grid;gap:0}
+.leg{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;color:var(--ink-3);font-size:.8rem;padding:6px 0}
+.leg .t{font-family:"JetBrains Mono",monospace;text-align:right}
+.leg .l{display:flex;align-items:center;gap:10px}
+.leg .l::before{content:"";width:2px;height:22px;background:repeating-linear-gradient(to bottom,var(--line) 0 4px,transparent 4px 7px);margin-left:6px}
+.leg .toll{margin-left:auto;color:var(--ink-2);font-family:"JetBrains Mono",monospace}
+.stop{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.stop:first-child{border-top:0}
+.stop .time{font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--ink-2);text-align:right;padding-top:3px}
+.stop .time small{display:block;font-size:.72rem;color:var(--ink-3)}
+.stop .body h4{font-size:1.08rem;font-family:"Instrument Sans",sans-serif;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stop .body h4 .jp{color:var(--ink-3);font-weight:400;font-size:.9rem;font-family:"Zen Old Mincho",serif}
+.tag-saved{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--kokia);background:var(--kokia-soft);border-radius:4px;padding:2px 6px}
+.tag-extra{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--cedar);background:color-mix(in srgb,var(--cedar) 14%,var(--paper));border-radius:4px;padding:2px 6px}
+.tag-opt{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-2);background:var(--bg-2);border-radius:4px;padding:2px 6px}
+.stop .what{color:var(--ink-2);margin-top:5px;font-size:.95rem;max-width:68ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px;margin-top:10px}
+.fact{font-size:.86rem;display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start;color:var(--ink-2)}
+.fact svg{width:16px;height:16px;margin-top:3px;fill:none;stroke:var(--ink-3);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fact b{color:var(--ink);font-weight:600}
+.fact.veg svg{stroke:var(--cedar-2)}
+.fact.park svg{stroke:var(--lake)}
+.fact.tip svg{stroke:var(--sun)}
+.stop .links{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);border-radius:8px;padding:5px 10px;font-size:.8rem;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--ink-3)}
+.btn.map{background:transparent}
+
+/* ---------- info sections ---------- */
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.card h3{font-size:1.2rem;margin-bottom:10px}
+.card p,.card li{color:var(--ink-2);font-size:.95rem}
+.card ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px}
+.card li b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{text-align:left;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+td b{color:var(--ink);font-weight:600}
+tr:last-child td{border-bottom:0}
+.table-wrap{overflow-x:auto}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.pill.good{background:color-mix(in srgb,var(--cedar) 16%,var(--paper));color:var(--cedar)}
+.pill.mid{background:color-mix(in srgb,var(--sun) 24%,var(--paper));color:#7a5a12}
+.pill.near{background:color-mix(in srgb,var(--lake) 16%,var(--paper));color:var(--lake)}
+.budget{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.budget .card{padding:16px 18px}
+.budget .rowb{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px dashed var(--line);font-size:.9rem}
+.budget .rowb:first-of-type{border-top:0}
+.budget .rowb.total{border-top:1px solid var(--ink-3);font-weight:600;color:var(--ink)}
+.phrase{background:var(--bg-2);border-radius:10px;padding:12px 14px;margin-top:12px;font-family:"Zen Old Mincho",serif;font-size:1.05rem;line-height:1.7}
+.phrase small{display:block;font-family:"Instrument Sans",sans-serif;color:var(--ink-3);font-size:.8rem;margin-top:4px}
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.extra{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.extra h4{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:1rem;display:flex;justify-content:space-between;gap:8px}
+.extra p{font-size:.88rem;color:var(--ink-2);margin-top:6px}
+.extra .where{font-size:.74rem;color:var(--ink-3);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--ink-3);font-size:.85rem}
+footer ul{columns:2;gap:30px;padding-left:18px;margin:10px 0 0}
+footer li{margin-bottom:4px}
+.hidden{display:none!important}
+
+/* leaflet overrides */
+.leaflet-container{font-family:"Instrument Sans",sans-serif;background:var(--map-bg)}
+.leaflet-popup-content-wrapper{border-radius:10px;background:var(--paper);color:var(--ink);box-shadow:var(--shadow)}
+.leaflet-popup-tip{background:var(--paper)}
+.leaflet-popup-content{margin:12px 14px;font-size:.88rem;line-height:1.45}
+.leaflet-popup-content b{display:block;font-size:1rem;margin-bottom:2px}
+.leaflet-popup-content .pp{color:var(--ink-2)}
+.leaflet-popup-content a{font-weight:600}
+.pin-saved{width:18px;height:18px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--kokia);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.pin-extra{width:12px;height:12px;border-radius:50%;background:var(--cedar);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.pin-home{width:16px;height:16px;border-radius:3px;background:var(--lake);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.pin-lbl{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.72rem;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.leaflet-control-attribution{background:color-mix(in srgb,var(--paper) 85%,transparent)!important;color:var(--ink-3)!important;font-size:.65rem!important}
+.leaflet-control-attribution a{color:var(--ink-2)!important}
+.leaflet-bar a{background:var(--paper)!important;color:var(--ink)!important;border-color:var(--line)!important}
+
+@media (max-width:1060px){
+  .trip{grid-template-columns:1fr}
+  .map-col{position:relative;top:0;order:-1}
+  #map{height:56vh}
+  .clusters{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .extras{grid-template-columns:repeat(2,1fr)}
+  .two{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .wrap{width:min(1240px,100% - 28px)}
+  .hero{padding:36px 0 22px}
+  .hero-grid{grid-template-columns:1fr;gap:22px}
+  .clusters{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .extras{grid-template-columns:1fr}
+  .day-head{grid-template-columns:auto 1fr}
+  .day-meta{grid-column:1/-1;text-align:left;display:flex;gap:14px;flex-wrap:wrap}
+  .stop,.leg{grid-template-columns:52px 1fr;gap:12px}
+  .stops,.signs,.ribbon-wrap,.day-head{padding-left:14px;padding-right:14px}
+  .plan-bar .hint{display:none}
+  .seg button{padding:8px 12px;font-size:.9rem}
+  .budget{grid-template-columns:1fr}
+  footer ul{columns:1}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Saved list · 10 places · 3 days · September 2026</div>
+      <h1>Japan Driving Trip September
+        <span class="jp">大阪発 · 山と海のドライブ旅</span>
+      </h1>
+      <p class="lede">Your ten saved places sit in three different regions, roughly 600 km apart. This page turns them into two honest three-day plans: an Alps loop that sleeps in a hot-spring village, or three nature day trips that return to Hōshin every night. Both come with parking, vegetarian food, tolls and a cheap automatic rental.</p>
+      <div class="saved">
+        <div class="eyebrow">From your Google Maps list</div>
+        <div class="chips" id="savedChips"></div>
+      </div>
+    </div>
+    <aside class="base-card">
+      <div class="eyebrow">Home base</div>
+      <div class="row"><span class="k">Address</span><span>5-chōme-1-1 Hōshin, Higashiyodogawa, Osaka 533-0014</span></div>
+      <div class="row"><span class="k">Nearest station</span><span>Kami-Shinjō (Hankyu Kyoto Line), 4 min walk</span></div>
+      <div class="row"><span class="k">Nearest rental desks</span><span>Higashi-Mikuni · Shin-Osaka, 8–12 min</span></div>
+      <div class="row"><span class="k">Expressway on-ramp</span><span>Suita IC (Meishin) · Moriguchi (Kinki Expwy), 15 min</span></div>
+      <div class="row"><span class="k">Drives on the</span><span>Left, like Singapore and Malaysia</span></div>
+    </aside>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Where your ten places actually are</h2>
+      <p class="sub">Grouped by driving cluster from Hōshin. Each cluster is a day on its own; the Alps cluster needs two nights.</p>
+    </div>
+    <div class="clusters" id="clusters"></div>
+    <div class="callout">
+      <div class="mark">!</div>
+      <div>
+        <p><strong>Silver Week falls on 19–23 September 2026.</strong> Respect for the Aged Day (Mon 21), a bridge holiday (Tue 22) and the Autumnal Equinox (Wed 23) make a five-day national holiday. Rental prices roughly double, Kamikōchi shuttles queue for an hour, and Yuhigaura parking fills by 4 pm. If your dates are flexible, drive on 8–11 or 14–17 September instead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="plan-bar">
+  <div class="wrap">
+    <div class="seg" role="tablist" aria-label="Choose a plan">
+      <button role="tab" id="tab-alps" aria-pressed="true" data-plan="alps"><span class="n">A</span> Northern Alps loop</button>
+      <button role="tab" id="tab-kansai" aria-pressed="false" data-plan="kansai"><span class="n">B</span> Kansai day trips</button>
+    </div>
+    <div class="hint">Click any stop to fly the map there · ★ red pins are your saved places</div>
+  </div>
+</div>
+
+<section class="wrap plan-head" id="planHead"></section>
+
+<section class="wrap trip">
+  <div class="days" id="days"></div>
+  <div class="map-col">
+    <div class="map-wrap">
+      <div id="map" role="img" aria-label="Map of the driving route"></div>
+      <div class="tiles-blocked" id="tilesBlocked">Map tiles are blocked on this host, so you are seeing the route on a blank ground. Open the page from the repository (GitHub Pages or locally) for the full OpenStreetMap basemap.</div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="map-note"><span>Pins are placed for orientation. Use the “Navigate” buttons for turn-by-turn.</span><span class="mono" id="mapCount"></span></div>
+  </div>
+</section>
+
+<section class="section" id="rental">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The car: cheap, automatic, close to home</h2>
+      <p class="sub">Every rental car in Japan is automatic unless you specifically ask for manual. The savings are in the class you pick and the desk you book through.</p>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Pick-up desks within 12 minutes of Hōshin</h3>
+        <div class="table-wrap">
+        <table>
+          <thead><tr><th>Desk</th><th>Where</th><th>From home</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><b>Toyota Rent a Car Higashi-Mikuni</b></td><td>3-10-21 Higashimikuni, Yodogawa-ku (inside Toyota Mobility Shin-Osaka)</td><td><span class="pill near">2 km · 8 min taxi</span></td><td>Closest desk to the flat. Newer Yaris and Aqua fleet; easy return at night.</td></tr>
+            <tr><td><b>Times Car Rental Shin-Osaka</b></td><td>Shin-Osaka Prime Tower 1F, 6-1-1 Nishinakajima, Yodogawa-ku</td><td><span class="pill near">Metro Shin-Osaka · 12 min</span></td><td>Usually the cheapest of the majors on web-only rates; ETC card rental about ¥330.</td></tr>
+            <tr><td><b>ORIX Rent a Car Shin-Osaka</b></td><td>Near Shin-Osaka station, Nishinakajima</td><td><span class="pill near">12 min</span></td><td>Comparison sites listed it as the cheapest desk at Shin-Osaka recently. Frequent “early-bird 30 days” discounts.</td></tr>
+            <tr><td><b>Toyota Rent a Car Shin-Osaka</b></td><td>5-14-10 Nishinakajima, right outside Midōsuji Line Shin-Osaka exit</td><td><span class="pill near">12 min</span></td><td>Backup if Higashi-Mikuni has no compact left.</td></tr>
+            <tr><td><b>NICONICO Rent a Car</b></td><td>Budget chain, several Osaka desks; check the nearest on their site</td><td><span class="pill mid">Varies</span></td><td>From about ¥4,600 a day. Older cars, fewer English staff, but the lowest sticker price.</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="margin-top:12px">Book through <a href="https://www.tabirai.net/en/car/" target="_blank" rel="noopener">Tabirai Japan</a> or <a href="https://www2.tocoo.jp/en/" target="_blank" rel="noopener">ToCoo!</a>. Both compare the desks above in English, include basic insurance, and let you add an ETC card at checkout. Search with pick-up “Shin-Osaka” and filter “Compact”.</p>
+      </div>
+      <div style="display:grid;gap:14px">
+        <div class="card">
+          <h3>Which class to book</h3>
+          <div class="table-wrap">
+          <table>
+            <thead><tr><th>Class</th><th>Typical car</th><th>Sept weekday</th><th>Verdict</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kei (K)</b></td><td>Daihatsu Tanto, Suzuki Wagon R · 660 cc</td><td class="mono">¥4,500–6,500 / day</td><td>Fine for Plan B. Struggles on the climb to Hirayu with two people and bags.</td></tr>
+              <tr><td><b>Compact (S)</b> <span class="pill good">Pick this</span></td><td>Toyota Yaris, Aqua, Honda Fit, Nissan Note</td><td class="mono">¥6,000–8,500 / day</td><td>Hybrid, 25 km/L, happy on mountain roads. Best value for either plan.</td></tr>
+              <tr><td><b>Standard (A)</b></td><td>Corolla, Prius</td><td class="mono">¥8,500–11,000 / day</td><td>Unnecessary for two.</td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Bring to the counter</h3>
+          <ul>
+            <li><b>Passport</b>, home driving licence, and a <b>1949 Geneva Convention International Driving Permit</b>. Singapore (AA Singapore, same-day) and Malaysia (JPJ) permits are accepted.</li>
+            <li>If your licence is from Germany, France, Switzerland, Belgium, Monaco, Taiwan, Slovenia or Estonia you need a <b>JAF Japanese translation</b> instead of an IDP.</li>
+            <li>Ask for an <b>ETC card</b> (about ¥330 for the rental). It saves 30 percent on many tolls and is the only way through the Hirugano Kōgen smart interchange.</li>
+            <li>Add the <b>NOC waiver</b> (about ¥550 a day). Without it a scratch costs ¥20,000–50,000 on top of insurance.</li>
+            <li>Return with a <b>full tank</b> (say “mantan”), and keep the receipt.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:24px">
+      <div class="card">
+        <h3>Parking at home and on the road</h3>
+        <ul>
+          <li><b>Overnight near Hōshin.</b> Coin parking around Kami-Shinjō and Awaji stations caps at roughly ¥800–1,200 per night (look for 夜間最大 “night maximum” on the sign). The <a href="https://www.akippa.com/" target="_blank" rel="noopener">akippa</a> app pre-books private spaces from about ¥500 a day, and Times Parking has several lots within 300 m of the address. Ask whether the building has a visitor bay first.</li>
+          <li><b>Plan B keeps the car three days</b> and parks at home each night. Returning to the desk nightly costs more in time than the parking does.</li>
+          <li><b>Mountain lots are cheap or free.</b> Ōdaigahara, Kōyasan-style temple lots, Hirayu Falls, Honokidaira and Makino Pic-Land are free. Akandana (Kamikōchi) is ¥600 a day. Only beach and ropeway lots charge ¥1,000–2,000.</li>
+          <li><b>Park facing out</b> in tight lots, and never on the shoulder at Shirahige Shrine or That Bench; both get patrolled.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Tolls, fuel and the total</h3>
+        <p>Estimates for a compact car with an ETC card. Confirm live prices in Google Maps (toggle “Show tolls”) or the NAVITIME toll calculator.</p>
+        <div class="budget" id="budget"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="veg">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Eating vegetarian in the mountains</h2>
+      <p class="sub">Rural Japan hides fish in dashi stock. The stops above name a checked vegetarian place for every lunch; this is the safety net for everything else.</p>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Show this at any counter</h3>
+        <div class="phrase">私はベジタリアンです。肉・魚・魚のだし・かつおぶしは食べられません。卵と乳製品は大丈夫です。<small>“I am vegetarian. I cannot eat meat, fish, fish stock or bonito flakes. Egg and dairy are fine.” Delete the last sentence if you are vegan.</small></div>
+        <div class="phrase">これは肉や魚のだしが入っていますか？<small>“Does this contain meat or fish stock?” Answer to hope for: 入っていません (haitte imasen, “it does not”).</small></div>
+        <h3 style="margin-top:18px">Chains that always work</h3>
+        <ul>
+          <li><b>CoCo Ichibanya</b> curry houses list a “Vegetarian Curry” made without animal ingredients; there is one at almost every expressway exit town and they open until 23:00.</li>
+          <li><b>Mos Burger</b> Green Burger is plant-based; ask for it without the sauce if you are strict.</li>
+          <li><b>Convenience stores</b>: ume, kombu and natto-maki onigiri, inari-zushi, edamame, tofu, fruit cups, salted rice crackers. Egg sandwiches are vegetarian; tuna and “sea chicken” are not.</li>
+          <li><b>Michi-no-eki</b> roadside stations sell local tofu, pickles, mountain vegetables (sansai) and fresh fruit. Good picnic material for Kamikōchi and Ōdaigahara.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Near home, for dinner after a drive</h3>
+        <ul>
+          <li><b>Imakoko Kitchen Merrymomo</b>, 6-8-8 Nishinakajima. Macrobiotic set meals, open 7:30–21:00, closed Sundays and holidays. Ten minutes from Shin-Osaka; the closest proper vegetarian dinner to the flat.</li>
+          <li><b>Vegecafe+α</b>, 6-9-20 Nishinakajima. Vegetable plates and cake, 10:00–17:00, Wednesday to Sunday. Good for a pre-drive brunch, not dinner.</li>
+          <li><b>Paprika Shokudō Vegan</b>, Shinsaibashi. Soy karaage, pasta, big salads; open late.</li>
+          <li><b>Green Earth</b>, Honmachi. Osaka’s oldest vegetarian restaurant, cheap curry and sandwiches.</li>
+        </ul>
+        <h3 style="margin-top:18px">Book ahead for temple food</h3>
+        <p>Both plans stay within reach of shōjin ryōri, the Buddhist vegetarian cuisine: Kōyasan (Wakayama) and Enryaku-ji on Mount Hiei (Shiga) serve it at lunch. A ryokan in Hirayu will cook a meat-free dinner if you write “ベジタリアン料理希望” in the booking notes at least three days ahead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="extras">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Worth adding</h2>
+      <p class="sub">Nature stops within thirty minutes of your route that were not on the list. Each is folded into the plans above where the timing works.</p>
+    </div>
+    <div class="extras" id="extraCards"></div>
+  </div>
+</section>
+
+<section class="section" id="september">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>September specifics</h2>
+    </div>
+    <div class="clusters">
+      <div class="cluster" style="--c:var(--sun)"><h3>Light</h3><p class="dist">Sunset 18:15 on 1 Sept, 17:50 by 30 Sept. Yuhigaura and That Bench are sunset stops; be parked forty minutes before.</p></div>
+      <div class="cluster" style="--c:var(--lake)"><h3>Weather</h3><p class="dist">Typhoon season. Check the JMA forecast two days out; if a typhoon is tracking toward Kansai, swap the Alps or coast day for Ōdaigahara’s shorter walk. Ōdaigahara is one of the wettest places in Japan, so go in the morning.</p></div>
+      <div class="cluster" style="--c:var(--cedar)"><h3>Temperature</h3><p class="dist">Osaka lowlands still 30 °C. Kamikōchi mornings 8–12 °C, Norikura summit 5 °C with wind. Pack a fleece, a rain shell and closed shoes even for the day trips.</p></div>
+      <div class="cluster" style="--c:var(--kokia)"><h3>Seasonal colour</h3><p class="dist">Hirugano’s 6,000 kochia bushes turn red from late September. Norikura’s alpine leaves start turning in the last week. Metasequoia is still green; it turns copper in November.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="eyebrow">Sources checked while planning</div>
+    <ul>
+      <li>Kamikōchi car access, Akandana ¥600 parking and ¥2,800 return shuttle: Nōhi Bus and the Kamikōchi official site (2026 season 17 Apr–15 Nov).</li>
+      <li>Norikura Skyline 2026 season 15 May–31 Oct; Honokidaira free parking; ¥3,400 return bus: Nōhi Bus and Visit Gifu.</li>
+      <li>Hirugano Picnic Garden kochia and Bokka-no-Sato free parking: TABITABI Gujō.</li>
+      <li>That Bench location and roadside spaces: Hikone local guides (biwako-outdoor.com, 4travel).</li>
+      <li>Ōdaigahara trails and free visitor-centre parking: Official Nara Travel Guide.</li>
+      <li>Tenkawa village parking lots and Dorogawa fees: Tenkawa village tourism office.</li>
+      <li>Amanohashidate, Kasamatsu and Yuhigaura parking: Amanohashidate Tourist Information, Visit Kyotango, Kyoto tourism.</li>
+      <li>Shirahige Shrine 30-car lot and Makino Pic-Land free parking: Biwako Hotel and JeePe guides.</li>
+      <li>Vegetarian places: HappyCow, Vegewel, Tabelog, Tripadvisor reviews for Cafe Mustache, vegan cafe CLOUD8, Zen Vegan Cafe, Merrymomo, Vegecafe+α.</li>
+      <li>Rental desks and prices: Toyota Rent a Car, Times Car Rental, ORIX, NICONICO, Kayak and Tabirai listings, Japan National Tourism Organization driving guide.</li>
+    </ul>
+    <p style="margin-top:14px">Drive times assume dry roads and no holiday traffic; add 20 percent on weekends. Prices are September 2026 estimates and are marked ≈ where they were not confirmed on an official page.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ---------------- data ---------------- */
+const HOME = {name:'Home · Hōshin 5-chōme', lat:34.7462, lng:135.5396};
+
+// The ten saved places, grouped into driving clusters
+const SAVED = [
+  {name:'Tenkawa (Mitarai Valley · Dorogawa)', cl:'nara'},
+  {name:'Ōdaigahara Visitor Center', cl:'nara'},
+  {name:'Amanohashidate', cl:'tango'},
+  {name:'Imafuku Falls', cl:'tango'},
+  {name:'Yuhigaura Beach', cl:'tango'},
+  {name:'That Bench', cl:'biwa'},
+  {name:'Hirugano Plateau', cl:'alps'},
+  {name:'Hirayu Waterfall', cl:'alps'},
+  {name:'Kamikōchi', cl:'alps'},
+  {name:'Mount Norikura', cl:'alps'},
+];
+const CLUSTERS = {
+  nara:{name:'Nara mountains', c:'#2b6a50', dist:'100–150 km · 2–3 h each way', places:['Tenkawa · Mitarai Valley','Ōdaigahara'], verdict:'One long day trip. Mostly toll-free roads.'},
+  tango:{name:'Tango coast (Kyoto by the Sea)', c:'#2f7f8c', dist:'150–180 km · 2–3 h each way', places:['Imafuku Falls','Amanohashidate','Yuhigaura Beach'], verdict:'One day trip ending with the sunset.'},
+  biwa:{name:'Lake Biwa', c:'#6b8f3c', dist:'110 km · 1 h 45 each way', places:['That Bench'], verdict:'Half a day; on the way to the Alps, or its own lake loop.'},
+  alps:{name:'Northern Alps · Okuhida', c:'#c2452d', dist:'320–360 km · 5–6 h each way', places:['Hirugano Plateau','Hirayu Waterfall','Kamikōchi','Mount Norikura'], verdict:'Not a day trip. Needs two nights in Hirayu Onsen.'},
+};
+
+const G = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+const DIR = (a,b) => 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(a) + '&destination=' + encodeURIComponent(b) + '&travelmode=driving';
+
+// segment helpers
+const drive = (min, label, opts={}) => ({kind:'drive', min, label, ...opts});
+const bus   = (min, label, opts={}) => ({kind:'bus', min, label, ...opts});
+const stop  = (o) => ({kind:'stop', ...o});
+
+const PLANS = {
+  alps: {
+    title:'Plan A · Northern Alps loop',
+    tagline:'Three days, two nights in Hirayu Onsen. Covers five of your ten saved places, including all four in the Alps, and adds Lake Biwa on the way out and Takayama’s old town on the way home. The best plan for the list you actually saved; it costs two hotel nights.',
+    covers:5, km:1010, drive:'16 h 40', tolls:'≈¥18,500', lodging:'2 nights',
+    budget:[['Compact rental, 3 days incl. ETC card + NOC waiver','≈¥22,000'],['Expressway tolls (ETC)','≈¥18,500'],['Fuel, ≈1,010 km at 22 km/L, ¥175/L','≈¥8,000'],['Akandana + Kamikōchi shuttle, 2 people','¥6,200'],['Norikura shuttle, 2 people','¥6,800'],['Overnight parking near home (before/after)','¥0–2,000'],['Two nights Hirayu ryokan with dinner and breakfast, 2 people','≈¥50,000–70,000'],['Total for two, excluding lunches','≈¥112,000–133,000']],
+    days:[
+      {
+        n:1, c:'#2f7f8c', title:'Osaka → That Bench → Hirugano Plateau → Hirayu Onsen', sub:'Out along Lake Biwa, into the Gifu highlands, up the Hida valley to the hot springs.', km:350, driveTime:'5 h 40', start:'08:00',
+        signs:[{rt:'E1',t:'Meishin Expwy'},{rt:'E41',t:'Tōkai-Hokuriku Expwy'},{rt:'E41',t:'Chūbu-Jūkan (toll-free Takayama–Kiyomi)'},{rt:'158',t:'Route 158 to Hirayu',local:true}],
+        items:[
+          stop({name:'Pick up the car', jp:'レンタカー受取', dur:30, lat:34.7414, lng:135.5152, kind2:'logistics', what:'Toyota Rent a Car Higashi-Mikuni is 8 minutes by taxi from Hōshin; Times or ORIX at Shin-Osaka are 12 minutes by Metro. Photograph every panel before leaving the lot, load the ETC card, set the navi to English.', park:'Leave from the desk directly onto Shin-Midōsuji, then Suita IC.', q:'Toyota Rent a Car Higashi-Mikuni Osaka'}),
+          drive(105,'Suita IC → Meishin → Hikone IC → Sazanami Kaidō lakeshore road', {km:120, toll:'≈¥3,000'}),
+          stop({name:'That Bench', jp:'あのベンチ', saved:true, dur:30, lat:35.2416, lng:136.1782, what:'A single bench under a big chinaberry tree on the Hikone lakeshore, made famous by an NHK documentary. Lake Biwa fills the frame, Takeshima island floats in the middle, and on a clear morning the Hira range lines the far shore. Photograph, sit, leave quietly; it is in a residential hamlet.', park:'No official lot. Roughly ten roadside spaces beside the bench (Ishidera-chō 1331) provided by neighbours; full by mid-morning on weekends. Do not block farm tracks.', tip:'Morning light comes from behind you here, so this is the right time of day.', q:'あのベンチ 彦根市石寺町'}),
+          drive(15,'Lakeshore road → Hikone castle town', {km:9}),
+          stop({name:'Early lunch: Zen Vegan Cafe', short:'Lunch', jp:'是好日', extra:true, dur:60, lat:35.2766, lng:136.2520, what:'All-vegan café in a restored samurai residence next to Hikone Castle. Sandwich lunch plates, organic-cacao chocolates, local green tea, garden view. Small, so arrive when it opens or call ahead; if it is closed, Hikone castle-road shops sell inari and vegetable tempura for a picnic.', veg:'Fully vegan menu.', park:'Kyōbashi-guchi city lot beside the castle moat, ¥400 for the first two hours.', tip:'Buy tomorrow’s Kamikōchi picnic here or at the Family Mart by Hikone IC: there is no reliable vegetarian food inside the valley.', q:'Zen Vegan Cafe Hikone'}),
+          drive(120,'Hikone IC → Meishin → Ichinomiya JCT → Tōkai-Hokuriku Expwy → Hirugano Kōgen Smart IC (ETC only)', {km:135, toll:'≈¥3,600'}),
+          stop({name:'Hirugano Plateau', jp:'ひるがの高原', saved:true, dur:90, lat:36.0062, lng:136.9075, what:'A 900 m highland of dairy pasture at the source of the Nagara River. Hirugano Picnic Garden runs a lift to a flower slope where 6,000 kochia bushes turn crimson from late September, with a swing and hammocks facing Mount Dainichi. Bokka-no-Sato next door is the farm-park version with alpacas and Jersey cows.', park:'Free at Picnic Garden (about 400 cars) and Bokka-no-Sato (2,000 cars).', veg:'Plateau soft-serve and Hirugano milk are the specialties; Picnic Garden’s café does a vegetable curry on request. The expressway service area two minutes away sells tofu doughnuts.', tip:'The smart interchange only reads ETC cards. Without one, exit at Takasu IC and add 17 minutes.', q:'Hirugano Picnic Garden'}),
+          drive(100,'Tōkai-Hokuriku Expwy → Hida-Kiyomi IC → Chūbu-Jūkan Expwy (toll-free) → Takayama → Route 158 over Hirayu Pass', {km:95, toll:'≈¥1,300'}),
+          stop({name:'Hirayu Onsen · check in', short:'Hirayu', jp:'平湯温泉', extra:true, dur:0, lat:36.1812, lng:137.5528, what:'A 1,250 m hot-spring village of twenty inns at the foot of Norikura, and the shuttle hub for both Kamikōchi and the Norikura Skyline. Sleep here two nights so the car barely moves tomorrow.', veg:'Cafe Mustache by the bus terminal serves a vegan vegetable curry and is the reliable dinner if your inn cannot cook meat-free. Otherwise request ベジタリアン料理 when booking; Hirayu-no-Mori’s restaurant needs three days’ notice.', park:'Every inn has free parking. Hirayu-no-Mori day bath ¥700, open until 21:00.', q:'Hirayu Onsen'}),
+        ]
+      },
+      {
+        n:2, c:'#2b6a50', title:'Kamikōchi on foot, Hirayu Falls at dusk', sub:'The car sits in a lot all day. Shuttle up to the valley, walk between the ponds, soak afterwards.', km:12, driveTime:'0 h 20', start:'07:15',
+        signs:[{rt:'158',t:'Route 158 · 5 min to Akandana',local:true},{rt:'BUS',t:'Nōhi shuttle · Akandana → Kamikōchi 35 min',bus:true}],
+        items:[
+          drive(5,'Inn → Akandana parking lot', {km:2}),
+          stop({name:'Akandana parking', jp:'あかんだな駐車場', dur:15, lat:36.1872, lng:137.5646, kind2:'logistics', what:'Private cars cannot enter Kamikōchi. Park here, buy a return shuttle ticket at the kiosk, and board directly from the lot.', park:'¥600 per day, 850 spaces. Fills by 08:00 on weekends in autumn.', tip:'Return shuttle ¥2,800 per adult. Buses every 30 minutes from 04:50 in peak weeks; last bus down about 17:00, check the board.', q:'Akandana Parking Lot Hirayu'}),
+          bus(35,'Shuttle bus through the Abō and Kama tunnels to Kamikōchi Bus Terminal', {fare:'¥2,800 return'}),
+          stop({name:'Kamikōchi', jp:'上高地', saved:true, dur:380, lat:36.2488, lng:137.6381, what:'A 1,500 m glacial valley inside Chūbu-Sangaku National Park, the Azusa River running gin-clear beneath the 3,000 m Hotaka range. Get off one stop early at Taishō Pond for the reflection of Mount Yake, walk 1 hour through Tashiro marsh to Kappa Bridge, then do the 3-hour loop to Myōjin Pond and back on the far bank. Larch and birch, monkeys, and no cars.', veg:'Bring your picnic. Valley restaurants serve soba, curry and rice bowls made with fish stock or meat; the only safe buys are onigiri and fruit at the bus-terminal shop, and coffee and cake at Kamonji-goya. Water is drinkable from the taps.', park:'Car stays at Akandana.', tip:'Weather turns after 13:00. Start at Taishō Pond, not the terminal, so the long walk is done by lunch.', q:'Kamikochi Kappa Bridge'}),
+          bus(35,'Shuttle back to Akandana', {}),
+          drive(5,'Akandana → Hirayu Ōtaki waterfall park', {km:3}),
+          stop({name:'Hirayu Waterfall', jp:'平湯大滝', saved:true, dur:45, lat:36.1770, lng:137.5596, what:'A 64 m curtain fall, six metres wide, dropping straight off a lava shelf into a cedar gorge. Ten-minute paved walk from the upper lot to the viewing square; the roar and the spray carry to the car park.', park:'Free. Upper lot 20 cars at the viewing square, lower lot 50 cars at Hirayu Ōtaki Park.', tip:'Late-afternoon light hits the fall face. Bring the fleece; it is 5 °C cooler in the gorge.', q:'Hirayu Great Falls'}),
+          drive(5,'Back to the village', {km:2}),
+          stop({name:'Hirayu-no-Mori onsen · dinner', short:'Onsen', jp:'ひらゆの森', extra:true, dur:0, lat:36.1818, lng:137.5520, what:'Sixteen outdoor baths under cedar trees, milky sulphur water, ¥700. Then dinner at Cafe Mustache or your inn.', veg:'Cafe Mustache vegan curry; inn dinner by prior request.', park:'Free lot at the bath house.', q:'Hirayu no Mori'}),
+        ]
+      },
+      {
+        n:3, c:'#c2452d', title:'Norikura summit, Takayama lunch, home to Osaka', sub:'Shuttle to 2,702 m before the clouds build, walk to a 3,026 m summit, then the long roll back down to Kansai.', km:345, driveTime:'5 h 50', start:'06:45',
+        signs:[{rt:'BUS',t:'Norikura Skyline shuttle · Honokidaira → Tatamidaira 45 min',bus:true},{rt:'158',t:'Route 158 to Takayama',local:true},{rt:'E41',t:'Chūbu-Jūkan → Tōkai-Hokuriku'},{rt:'E1',t:'Meishin → Suita IC'}],
+        items:[
+          drive(10,'Hirayu → Honokidaira parking (Route 158 south)', {km:6}),
+          stop({name:'Honokidaira parking', jp:'ほおのき平駐車場', dur:15, lat:36.1590, lng:137.5430, kind2:'logistics', what:'The Norikura Skyline has been closed to private cars since 2003. Park at the ski-field lot and take the Nōhi shuttle up the highest bus road in Japan.', park:'Free, 1,500 spaces.', tip:'Return fare ¥3,400 per adult. First bus 06:55 in September; buses hourly. The Skyline runs 15 May–31 Oct 2026.', q:'Honokidaira Parking Norikura'}),
+          bus(45,'Skyline shuttle climbing 1,400 m through the treeline', {fare:'¥3,400 return'}),
+          stop({name:'Mount Norikura · Tatamidaira', short:'Norikura', jp:'乗鞍岳 畳平', saved:true, dur:210, lat:36.1163, lng:137.5360, what:'The bus drops you at 2,702 m, above the trees, beside a crater lake. Easy option: Mount Mao, 15 minutes up, for the Hotaka and Yari skyline. Full option: Kengamine, the 3,026 m summit, 1 h 30 up a stony path and 1 h down, with the whole Northern Alps and, on a clear day, Fuji. Alpine flowers are finishing, the first leaf colour is starting.', park:'Car stays at Honokidaira.', veg:'The Tatamidaira rest house sells coffee and pastries; bring the rest.', tip:'If the summit is in cloud, the Shin-Hotaka Ropeway (30 min from Hirayu) is the fallback: a double-deck cable car to 2,156 m.', q:'Norikura Tatamidaira'}),
+          bus(45,'Shuttle back down to Honokidaira', {}),
+          drive(50,'Route 158 down the valley to Takayama old town', {km:35}),
+          stop({name:'Takayama · Sanmachi and lunch', short:'Takayama', jp:'高山 三町', extra:true, dur:80, lat:36.1430, lng:137.2600, what:'Edo-period merchant streets of dark cedar shopfronts, sake breweries and the Miyagawa river. Forty minutes of walking, then lunch.', veg:'Heianraku (Chinese, dedicated vegetarian menu with gyōza and mapo tofu) or EvilTex (soy-patty burgers) near the station. Both list vegan items in English.', park:'Municipal Kajibashi or Tenmanchō lots, ¥300 per 30 minutes; the Sanmachi lots fill at noon.', q:'Takayama Sanmachi Suji'}),
+          drive(300,'Takayama IC → Chūbu-Jūkan → Tōkai-Hokuriku → Ichinomiya JCT → Meishin → Suita IC → Shin-Osaka', {km:300, toll:'≈¥7,500'}),
+          stop({name:'Return the car', jp:'返車', dur:20, lat:34.7414, lng:135.5152, kind2:'logistics', what:'Fill up at the ENEOS on Shin-Midōsuji before the desk. Most Shin-Osaka desks close at 20:00; book a 20:00 return and phone if you are running late.', park:'Home by 20:30. Merrymomo is closed by then; CoCo Ichibanya on Shin-Midōsuji does the vegetarian curry until 23:00.', q:'Toyota Rent a Car Higashi-Mikuni Osaka'}),
+        ]
+      }
+    ]
+  },
+  kansai: {
+    title:'Plan B · Kansai nature day trips',
+    tagline:'Three loops out of Hōshin, home every night, no hotel. Covers six of your ten saved places (everything except the Alps) and adds Ine’s boathouses, the Metasequoia avenue and Shirahige Shrine. Cheaper and calmer; the Alps become a separate future trip.',
+    covers:6, km:830, drive:'14 h 30', tolls:'≈¥9,500', lodging:'none',
+    budget:[['Compact rental, 3 days incl. ETC card + NOC waiver','≈¥22,000'],['Expressway tolls (ETC)','≈¥9,500'],['Fuel, ≈830 km at 22 km/L, ¥175/L','≈¥6,600'],['Parking (Mitarai, Amanohashidate, Ine, Yuhigaura, Hikone)','≈¥3,500'],['Overnight parking near home, 3 nights','≈¥2,400–3,600'],['Amanohashidate chairlift, Ine boat, Dorogawa bath, 2 people','≈¥6,000'],['Total for two, excluding meals','≈¥50,000–52,000']],
+    days:[
+      {
+        n:1, c:'#2b6a50', title:'Ōdaigahara at dawn, Mitarai Valley, Dorogawa hot spring', sub:'South into the Kii mountains. Highland boardwalks in the morning, an emerald river in the afternoon, a soak before the drive home.', km:290, driveTime:'6 h 45', start:'06:30',
+        signs:[{rt:'E91',t:'Minami-Hanna Road'},{rt:'169',t:'Route 169 · Yoshino river',local:true},{rt:'40',t:'Ōdaigahara Driveway · 28 km',local:true},{rt:'309',t:'Route 309 to Tenkawa',local:true}],
+        items:[
+          drive(165,'Kinki Expwy → Minami-Hanna Road → Katsuragi IC → Route 169 through Kawakami → Ōdaigahara Driveway', {km:140, toll:'≈¥1,000'}),
+          stop({name:'Ōdaigahara', jp:'大台ヶ原', saved:true, dur:150, lat:34.1804, lng:136.0973, what:'A 1,600 m plateau of moss, silver dead-standing cedars and sika deer, one of the rainiest places in Japan and the reason the forest looks the way it does. From the visitor centre the boardwalk to Hidegatake summit (1,695 m) takes 40 minutes; continue to Masakigahara’s ghost forest and Daijagura, a rock spur hanging over a 1,000 m drop, for the classic 8.8 km, 3.5 hour loop. This plan budgets the shorter Hidegatake and Masakigahara return.', park:'Free at the visitor centre, several hundred cars, toilets, no shop beyond drinks.', veg:'Nothing up here. Buy breakfast and picnic at the Family Mart in Kawakami village on Route 169, the last one for 60 km.', tip:'Clouds roll in after noon almost daily; arrive by 09:30. The Driveway is open April to late November and closes in typhoon warnings.', q:'Odaigahara Visitor Center'}),
+          drive(90,'Driveway down → Route 169 → Route 309 over Gyōja-gaeri tunnel → Tenkawa', {km:55}),
+          stop({name:'Mitarai Valley', jp:'みたらい渓谷', saved:true, dur:90, lat:34.2255, lng:135.9065, what:'The Tenkawa river squeezed between granite boulders into pools the colour of bottle glass. A 30-minute riverside path from the parking area crosses two suspension bridges to Mitarai Falls; the full trail to Dorogawa is 1 hour 30 one way.', park:'Small paid lot at the Mitarai rest area, about 20 cars, ¥1,000; a free lot 10 minutes downstream at Kawai fills first. Village lots are listed on Tenkawa’s official parking page.', tip:'Swim spots in the lower pools; water is 15 °C even in September.', q:'Mitarai Valley Tenkawa'}),
+          drive(15,'Route 309 → Dorogawa Onsen', {km:7}),
+          stop({name:'Dorogawa Onsen', jp:'洞川温泉', extra:true, dur:105, lat:34.2540, lng:135.8600, what:'A one-street pilgrim village at the foot of Mount Ōmine, lantern-lit wooden inns, the smell of cedar. The public Dorogawa Onsen Centre bath is ¥800. Fill bottles at Goro-goro spring, one of Japan’s hundred famous waters.', veg:'Goma-dōfu (sesame tofu) and yudōfu made with Goro-goro water are the local dishes and are vegetarian; kudzu-kiri and kudzu-mochi sweets too. The 1917 riverside eatery by the bridge does a tofu set; say “dashi wa konbu desu ka?” to check the stock is kelp. Kakinoha-zushi contains fish, skip it.', park:'Onsen centre lot free for 90 minutes for bathers, then ¥300 per hour; village lot ¥500.', q:'Dorogawa Onsen'}),
+          drive(135,'Route 309 → Gojō → Route 24 → Minami-Hanna Road → Kinki Expwy → Hōshin', {km:90, toll:'≈¥1,000'}),
+        ]
+      },
+      {
+        n:2, c:'#2f7f8c', title:'Imafuku Falls, Amanohashidate, Ine, sunset at Yuhigaura', sub:'North over the mountains to Kyoto by the Sea. A waterfall, the “bridge to heaven” sandbar, boathouses on a bay, and the Sea of Japan swallowing the sun.', km:340, driveTime:'7 h', start:'07:30',
+        signs:[{rt:'E1',t:'Meishin → Ōyamazaki'},{rt:'E9',t:'Kyoto-Jūkan Expwy'},{rt:'178',t:'Route 178 coast road',local:true}],
+        items:[
+          drive(150,'Meishin → Ōyamazaki JCT → Kyoto-Jūkan Expwy (Kameoka section toll-free) → Miyazu-Amanohashidate IC → Route 176 south', {km:150, toll:'≈¥2,600'}),
+          stop({name:'Imafuku Falls', jp:'今福の滝', saved:true, dur:45, lat:35.5065, lng:135.2001, what:'A seven-tier fall in the hills behind Miyazu with a 78 m total drop, hidden in cedar forest below a small shrine. Five minutes on a well-kept path from the lot to the lower tiers; the upper viewing point is another ten minutes of steps.', park:'Small free lot at the trailhead, about 10 cars.', tip:'The falls are strongest the day after rain. Leech spray in September.', q:'Imafuku Falls Miyazu'}),
+          drive(15,'Route 176 north to Amanohashidate station side', {km:8}),
+          stop({name:'Amanohashidate', jp:'天橋立', saved:true, dur:75, lat:35.5590, lng:135.1905, what:'A 3.6 km pine-covered sandbar closing off Miyazu Bay, ranked among Japan’s three great views for a thousand years. View Land’s chairlift (¥850 return) climbs to the southern viewpoint; bend over and look between your legs (mata-nozoki) and the bar becomes a dragon rising to the sky. Then walk or rent a bicycle (¥400 for two hours) along the bar itself, under 8,000 pines, with beaches on both sides.', park:'Paid lots around Chion-ji temple and the station, ¥500–700 a day. The northern Kasamatsu side uses Motoise Kono Shrine’s lot.', tip:'Cycle north across the bar and take the ¥800 sightseeing boat back if legs are tired.', q:'Amanohashidate View Land'}),
+          drive(10,'Into Miyazu town', {km:4}),
+          stop({name:'Lunch: vegan cafe CLOUD8', short:'Lunch', jp:'ヴィーガンカフェ', extra:true, dur:60, lat:35.5330, lng:135.1950, what:'Organic vegetables and sprouted brown rice, omakase lunch course ¥1,800, a stylish converted house in Miyazu. Small kitchen, so book a day ahead through Lavie Taste or by phone; if it is a closed day, 310 Amanohashidate near the sandbar will make a vegetable plate on request.', veg:'Fully vegan.', park:'Two spaces at the café; otherwise the coin lot at Miyazu station, ¥100 per hour.', q:'vegan cafe CLOUD8 Miyazu'}),
+          drive(35,'Route 178 around the bay to Ine', {km:22}),
+          stop({name:'Ine funaya boathouses', short:'Ine', jp:'伊根の舟屋', extra:true, dur:75, lat:35.6750, lng:135.2870, opt:true, what:'Two hundred and thirty wooden boathouses stand with their feet in the water around a horseshoe bay, boats parked under the living rooms. The 25-minute sightseeing boat (¥1,200) is the way to see them; gulls follow the boat for shrimp crackers. Skip if the day is running late; Yuhigaura’s sunset is the fixed appointment.', park:'Funaya-no-Sato Park lot, free, with the viewpoint above the bay; the boat pier lot is ¥400.', q:'Ine Funaya'}),
+          drive(60,'Route 178 west along the Tango coast → Yuhigaura', {km:38}),
+          stop({name:'Yuhigaura Beach', jp:'夕日ヶ浦', saved:true, dur:130, lat:35.6639, lng:134.9654, what:'Eight kilometres of pale sand facing due west, named “sunset bay” for the way the sun drops straight into the Sea of Japan. The Yuhi-no-Michi promenade has benches, a famous rope swing set in the sand, and hot-spring inns behind the dunes. Sunset is 18:05 in mid-September; the colour lasts twenty minutes after.', park:'The beach lots charge ¥2,000 a day in the July–August swimming season; from September they are free or ¥500. The Hamazume lot by the swing is the one to aim for.', veg:'Slim. Have the big lunch at CLOUD8, pick up onigiri in Kyōtango town, and eat properly back in Osaka.', tip:'Be parked by 17:20 with a jacket; the sea wind is cold once the sun is gone.', q:'Yuhigaura Beach Kyotango'}),
+          drive(170,'Route 312 → Kyoto-Jūkan Expwy → Meishin → Hōshin', {km:165, toll:'≈¥2,600'}),
+        ]
+      },
+      {
+        n:3, c:'#6b8f3c', title:'Lake Biwa loop: That Bench, Hikone, Metasequoia avenue, Shirahige Shrine', sub:'A gentle clockwise lap of Japan’s largest lake, with two of Shiga’s most photographed trees and a torii standing in the water.', km:200, driveTime:'5 h', start:'08:00',
+        signs:[{rt:'E1',t:'Meishin → Hikone IC'},{rt:'8',t:'Route 8 round the north shore',local:true},{rt:'161',t:'Route 161 · Kosei Road',local:true}],
+        items:[
+          drive(105,'Suita IC → Meishin → Hikone IC → lakeshore', {km:120, toll:'≈¥3,000'}),
+          stop({name:'That Bench', jp:'あのベンチ', saved:true, dur:30, lat:35.2416, lng:136.1782, what:'A single bench under a chinaberry tree on the Hikone lakeshore, the lake and Takeshima island in front of it, the Hira mountains behind. Made famous by an NHK documentary, still in a farming hamlet, so be quick and quiet.', park:'About ten roadside spaces beside the bench at Ishidera-chō 1331, offered by neighbours. Full by mid-morning on weekends.', q:'あのベンチ 彦根市石寺町'}),
+          drive(20,'Along the lake into Hikone castle town', {km:10}),
+          stop({name:'Hikone Castle and Zen Vegan Cafe', short:'Hikone', jp:'彦根城 · 是好日', extra:true, dur:110, lat:35.2766, lng:136.2520, what:'One of only twelve original castle keeps in Japan, small and perfect on its hill, with the Genkyū-en garden below (¥800 for both). Lunch afterwards at Zen Vegan Cafe, an all-vegan café in a samurai house by the moat: sandwich plates, organic chocolate, local tea.', veg:'Zen Vegan Cafe is fully vegan; check its opening days on HappyCow the night before, it is a small family operation.', park:'Kyōbashi-guchi lot by the moat, ¥400 for two hours.', q:'Zen Vegan Cafe Hikone'}),
+          drive(60,'Route 8 north through Nagahama → Route 303 → Makino', {km:45}),
+          stop({name:'Metasequoia Namiki', jp:'メタセコイア並木', extra:true, dur:45, lat:35.4590, lng:136.0460, what:'Five hundred dawn redwoods planted in the 1980s along 2.4 km of dead-straight road near Makino. In September the tunnel is a deep green cathedral; it turns copper in late November. Walk the footpath on the west side rather than driving it slowly; the road is a real farm road with tractors.', park:'Free at Makino Pic-Land, 155 cars, at the southern end. Do not stop on the avenue itself.', veg:'Pic-Land sells Makino chestnut and blueberry soft-serve and local fruit.', q:'Metasequoia Namiki Makino'}),
+          drive(25,'Route 161 south along the west shore', {km:18}),
+          stop({name:'Shirahige Shrine', jp:'白鬚神社', extra:true, dur:40, lat:35.3385, lng:136.0175, what:'A vermilion torii standing 60 m out in the lake, the “Itsukushima of Ōmi”, with a 2,000-year-old shrine across the road. There is now a raised viewing deck on the shrine side; the road between is Route 161 with trucks and no crossing, so shoot from the deck.', park:'Shrine lot, free, 30 cars. Overflow parks illegally on the shoulder and gets ticketed.', tip:'Late afternoon puts the sun behind the torii; the sunset itself is behind you.', q:'Shirahige Shrine Takashima'}),
+          drive(30,'Route 161 → Ōmi-Maiko', {km:20}),
+          stop({name:'Ōmi-Maiko beach or Biwako Terrace', short:'Ōmi-Maiko', jp:'近江舞子 · びわ湖テラス', extra:true, dur:70, lat:35.2560, lng:135.9560, opt:true, what:'Ōmi-Maiko is a free pine-backed beach with the clearest water on the lake, good for feet-in-the-water and a last lakeside hour. Biwako Valley’s ropeway to the Biwako Terrace viewing deck is the glossy alternative, but ¥4,000 per adult plus ¥1,000 parking makes it the most expensive hour of the trip.', park:'Ōmi-Maiko lots free outside the swimming season; Biwako Valley ¥1,000 (¥2,000 holidays).', q:'Omi-Maiko Beach'}),
+          drive(90,'Kosei Road → Meishin (Kyoto-Higashi IC) → Suita → Hōshin', {km:75, toll:'≈¥1,900'}),
+          stop({name:'Dinner: Imakoko Kitchen Merrymomo', jp:'メリーモモ', extra:true, dur:0, lat:34.7318, lng:135.4980, what:'Macrobiotic set dinners ten minutes from Shin-Osaka, open until 21:00, closed Sundays and holidays. Order the seasonal plate.', veg:'Fully vegetarian, mostly vegan.', park:'Return the car first if the rental ends tonight; otherwise coin parking on Nishinakajima 6-chōme, ¥300 per 40 minutes.', q:'Imakoko Kitchen Merrymomo Osaka'}),
+        ]
+      }
+    ]
+  }
+};
+
+const EXTRAS = [
+  {name:'Ine funaya boathouses', where:'Tango coast · Plan B day 2', text:'230 boathouses around a horseshoe bay, 35 minutes past Amanohashidate. The 25-minute boat is the way in.'},
+  {name:'Dorogawa Onsen', where:'Nara · Plan B day 1', text:'Lantern-lit pilgrim village ten minutes from Mitarai. Sesame tofu, kudzu sweets, ¥800 public bath, and the Goro-goro spring.'},
+  {name:'Metasequoia Namiki', where:'Lake Biwa · Plan B day 3', text:'2.4 km of dawn redwoods near Makino. Free parking at Pic-Land; walk it, do not crawl-drive it.'},
+  {name:'Shirahige Shrine', where:'Lake Biwa · Plan B day 3', text:'Torii in the water, 30 free spaces, a new viewing deck so nobody has to dash across Route 161.'},
+  {name:'Takayama old town', where:'Hida · Plan A day 3', text:'Edo merchant streets on the way home from Norikura, with two English-menu vegetarian lunches near the station.'},
+  {name:'Shin-Hotaka Ropeway', where:'Okuhida · Plan A weather fallback', text:'Double-deck cable car to 2,156 m, 30 minutes from Hirayu. Swap it in if Norikura is in cloud; ¥3,800 return, parking ¥600.'},
+  {name:'Kōyasan (bonus day)', where:'Wakayama · 2 h from Osaka', text:'If you add a fourth day: 117 temples on a 900 m plateau, free parking, and shōjin ryōri lunch at Chūō Shokudō Sanbō or Hanabishi. The most vegetarian-friendly destination in Kansai.'},
+  {name:'Sōni Highlands and Akame 48 Falls', where:'Nara–Mie border · alternative day', text:'Silver-grass plateau glowing gold from late September, and a 4 km gorge walk past 23 named waterfalls. A calmer substitute for the Ōdaigahara day.'},
+  {name:'Gujō Hachiman', where:'Gifu · Plan A detour', text:'Castle town of canals and clear waterways 25 minutes below Hirugano. Worth an hour if you reach Hirugano early.'},
+];
+
+/* ---------------- render ---------------- */
+const $ = s => document.querySelector(s);
+const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const fmt = m => { const h = Math.floor(m/60), mm = m%60; return h ? `${h} h${mm ? ' ' + String(mm).padStart(2,'0') : ''}` : `${mm} min`; };
+const clock = (start, add) => { const [h,m] = start.split(':').map(Number); let t = h*60+m+add; return `${String(Math.floor(t/60)%24).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`; };
+
+// saved chips
+SAVED.forEach(s => {
+  const c = CLUSTERS[s.cl];
+  $('#savedChips').appendChild(el('span','chip',`<span class="dot" style="--c:${c.c}"></span>${s.name}<span class="star">★</span>`));
+});
+// clusters
+Object.values(CLUSTERS).forEach(c => {
+  const d = el('div','cluster'); d.style.setProperty('--c', c.c);
+  d.innerHTML = `<h3>${c.name}</h3><p class="dist">${c.dist}</p><ul>${c.places.map(p=>`<li>${p}</li>`).join('')}</ul><p class="verdict">${c.verdict}</p>`;
+  $('#clusters').appendChild(d);
+});
+// extras
+EXTRAS.forEach(x => $('#extraCards').appendChild(el('div','extra',`<div class="where">${x.where}</div><h4>${x.name}</h4><p>${x.text}</p>`)));
+
+const ICONS = {
+  what:'<svg viewBox="0 0 24 24"><path d="M3 20l6-14 4 8 3-4 5 10z"/></svg>',
+  park:'<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>',
+  veg:'<svg viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg>',
+  tip:'<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg>',
+};
+
+let map, layerGroup, markersByKey = {};
+function initMap(){
+  if (!window.L) return;
+  map = L.map('map', {scrollWheelZoom:false, zoomSnap:.5});
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
+  let errs = 0, oks = 0;
+  tiles.on('tileerror', () => { errs++; if (errs > 3 && oks === 0) $('#tilesBlocked').style.display = 'block'; });
+  tiles.on('tileload', () => { oks++; });
+  tiles.addTo(map);
+  layerGroup = L.layerGroup().addTo(map);
+  map.on('click', () => map.scrollWheelZoom.enable());
+}
+function pin(kind){ return L.divIcon({className:'', html:`<div class="${kind}"></div>`, iconSize: kind==='pin-saved'?[18,18]:[12,12], iconAnchor: kind==='pin-saved'?[9,18]:[6,6], popupAnchor:[0,-12]}); }
+
+function renderPlan(key){
+  const plan = PLANS[key];
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.plan === key)));
+  // head
+  $('#planHead').innerHTML = `<div class="eyebrow">${key==='alps'?'Recommended for the saved list':'Recommended if you want to sleep at home'}</div>
+    <h2>${plan.title}</h2><p class="tag">${plan.tagline}</p>
+    <div class="stats">
+      <div class="stat"><div class="eyebrow">Saved places</div><div class="v">${plan.covers}<small>/ 10</small></div><div class="d">covered by this plan</div></div>
+      <div class="stat"><div class="eyebrow">Distance</div><div class="v">${plan.km.toLocaleString()}<small>km</small></div><div class="d">over three days</div></div>
+      <div class="stat"><div class="eyebrow">Behind the wheel</div><div class="v">${plan.drive}</div><div class="d">total, without stops</div></div>
+      <div class="stat"><div class="eyebrow">Tolls</div><div class="v">${plan.tolls}</div><div class="d">with ETC card</div></div>
+      <div class="stat"><div class="eyebrow">Nights away</div><div class="v">${plan.lodging}</div><div class="d">${key==='alps'?'Hirayu Onsen ryokan':'back at Hōshin nightly'}</div></div>
+    </div>`;
+  // budget
+  $('#budget').innerHTML = `<div class="card"><div class="eyebrow">${plan.title}</div>${plan.budget.map((r,i)=>`<div class="rowb ${i===plan.budget.length-1?'total':''}"><span>${r[0]}</span><span class="mono">${r[1]}</span></div>`).join('')}</div>
+    <div class="card"><div class="eyebrow">Toll-saving notes</div><ul style="margin-top:8px;padding-left:18px;display:grid;gap:6px;font-size:.9rem;color:var(--ink-2)">
+      <li>ETC gets 30 percent off on weekends and holidays and 30 percent off 0:00–4:00 on weekdays. The Silver Week discount is suspended.</li>
+      <li>The Chūbu-Jūkan Expressway between Takayama and Hida-Kiyomi, and the Kyoto-Jūkan section around Kameoka, are toll-free.</li>
+      <li>Route 169 to Ōdaigahara and Route 309 to Tenkawa are ordinary roads; the only Nara toll is the Minami-Hanna Road.</li>
+      <li>The Central Nippon Expressway Pass for foreign drivers was discontinued in 2026, so there is no flat-rate pass for the Alps route; the ETC discounts above are what remain.</li>
+    </ul></div>`;
+  // days
+  const daysEl = $('#days'); daysEl.innerHTML = '';
+  if (layerGroup) layerGroup.clearLayers(); markersByKey = {};
+  const bounds = [];
+  if (map){
+    L.marker([HOME.lat, HOME.lng], {icon: pin('pin-home')}).bindPopup(`<b>${HOME.name}</b><span class="pp">Start and end of every day</span>`).addTo(layerGroup);
+    bounds.push([HOME.lat, HOME.lng]);
+  }
+  plan.days.forEach((day, di) => {
+    const d = el('section','day'); d.style.setProperty('--c', day.c); d.id = `${key}-day-${day.n}`;
+    const totalMin = day.items.reduce((a,i)=>a+(i.min||i.dur||0),0);
+    d.innerHTML = `<div class="day-head">
+        <div class="day-num"><small>Day</small>${day.n}</div>
+        <div class="day-title"><h3>${day.title}</h3><p>${day.sub}</p></div>
+        <div class="day-meta"><span><b>${day.km} km</b> · ${day.driveTime} driving</span><span>Leave <b>${day.start}</b> · back <b>${clock(day.start,totalMin)}</b></span></div>
+      </div>
+      <div class="signs">${day.signs.map(s=>`<span class="sign ${s.local?'local':''} ${s.bus?'bus':''}"><span class="rt">${s.rt}</span>${s.t}</span>`).join('')}</div>
+      <div class="ribbon-wrap"><div class="ribbon" role="list" aria-label="Day ${day.n} timeline"></div><div class="ribbon-scale"><span>${day.start}</span><span>${clock(day.start, Math.round(totalMin/2))}</span><span>${clock(day.start,totalMin)}</span></div></div>
+      <div class="stops"></div>`;
+    const ribbon = d.querySelector('.ribbon'), stops = d.querySelector('.stops');
+    let t = 0;
+    const pts = [[HOME.lat, HOME.lng]];
+    if (key==='alps' && di>0) pts.length = 0; // days 2-3 start in Hirayu, not at home
+    day.items.forEach((it, idx) => {
+      const mins = it.min || it.dur || 0;
+      const w = Math.max(mins/totalMin*100, mins? 1.2 : 0);
+      if (it.kind === 'drive' || it.kind === 'bus'){
+        const seg = el('div', it.kind==='drive'?'seg-d':'seg-b', w>7 ? (it.kind==='drive'?'🚗 ':'🚌 ') + fmt(mins) : ''); seg.style.width = w+'%'; seg.title = `${it.label} · ${fmt(mins)}`; ribbon.appendChild(seg);
+        const leg = el('div','leg',`<div class="t">${fmt(mins)}</div><div class="l"><span>${it.kind==='bus'?'Bus · ':''}${it.label}${it.km?` · ${it.km} km`:''}</span>${it.toll?`<span class="toll">${it.toll}</span>`:''}${it.fare?`<span class="toll">${it.fare}</span>`:''}</div>`);
+        stops.appendChild(leg);
+      } else {
+        const stopKey = `${key}-${day.n}-${idx}`;
+        if (mins){ const seg = el('div','seg-s', w>6 ? (it.short||it.name) : ''); seg.style.width = w+'%'; seg.title = `${it.name} · ${fmt(mins)}`; seg.setAttribute('role','listitem'); seg.onclick = () => focusStop(stopKey, true); ribbon.appendChild(seg); }
+        const tag = it.saved ? '<span class="tag-saved">★ saved</span>' : it.kind2==='logistics' ? '' : it.opt ? '<span class="tag-opt">optional</span><span class="tag-extra">added</span>' : '<span class="tag-extra">added</span>';
+        const s = el('article','stop'); s.id = 'stop-'+stopKey;
+        s.innerHTML = `<div class="time">${clock(day.start,t)}${mins?`<small>${fmt(mins)}</small>`:''}</div>
+          <div class="body">
+            <h4>${it.name} <span class="jp">${it.jp||''}</span> ${tag}</h4>
+            <p class="what">${it.what}</p>
+            <div class="facts">
+              ${it.park?`<div class="fact park">${ICONS.park}<div><b>Parking.</b> ${it.park}</div></div>`:''}
+              ${it.veg?`<div class="fact veg">${ICONS.veg}<div><b>Vegetarian.</b> ${it.veg}</div></div>`:''}
+              ${it.tip?`<div class="fact tip">${ICONS.tip}<div><b>Tip.</b> ${it.tip}</div></div>`:''}
+            </div>
+            <div class="links">
+              <a class="btn" href="${G(it.q||it.name)}" target="_blank" rel="noopener">Navigate ↗</a>
+              <button class="btn map" type="button" data-key="${stopKey}">Show on map</button>
+            </div>
+          </div>`;
+        s.querySelector('button.map').onclick = () => focusStop(stopKey, false);
+        stops.appendChild(s);
+        if (map && it.lat){
+          const m = L.marker([it.lat, it.lng], {icon: pin(it.saved?'pin-saved':'pin-extra')})
+            .bindPopup(`<b>${it.name}</b><span class="pp">Day ${day.n} · ${clock(day.start,t)}${mins?' · '+fmt(mins):''}</span><br><a href="${G(it.q||it.name)}" target="_blank" rel="noopener">Open in Google Maps ↗</a>`)
+            .bindTooltip(it.name, {permanent: !!it.saved, direction:'right', offset:[8,0], className:'pin-lbl', opacity: .95});
+          m.on('click', () => { const card = document.getElementById('stop-'+stopKey); if (card){ card.scrollIntoView({behavior:'smooth', block:'center'}); } });
+          m.addTo(layerGroup); markersByKey[stopKey] = m; bounds.push([it.lat, it.lng]);
+          if (it.kind2 !== 'logistics' || idx === 0) pts.push([it.lat, it.lng]);
+        }
+      }
+      t += mins;
+    });
+    // route line for the day
+    if (map){
+      const last = day.items[day.items.length-1];
+      if (last.kind === 'drive' && !(key==='alps' && di<2)) pts.push([HOME.lat, HOME.lng]);
+      if (key==='alps' && di===2) pts.push([HOME.lat, HOME.lng]);
+      if (pts.length > 1){
+        L.polyline(pts, {color: day.c, weight: 4, opacity: .55, dashArray: '2 8', lineCap:'round'}).addTo(layerGroup);
+        L.polyline(pts, {color: day.c, weight: 2.5, opacity: .9}).addTo(layerGroup);
+      }
+    }
+    daysEl.appendChild(d);
+  });
+  // legend
+  $('#legend').innerHTML = plan.days.map(d=>`<span><i class="sw" style="--c:${d.c}"></i>Day ${d.n}</span>`).join('') + '<span><i class="pin"></i>saved place</span><span><i class="pin pin-x"></i>added stop</span>';
+  $('#mapCount').textContent = `${Object.keys(markersByKey).length} stops`;
+  if (map && bounds.length) map.fitBounds(bounds, {padding:[30,30]});
+}
+function focusStop(stopKey, scrollCard){
+  const m = markersByKey[stopKey];
+  if (m && map){ map.flyTo(m.getLatLng(), Math.max(map.getZoom(), 11), {duration:.8}); setTimeout(()=>m.openPopup(), 850); }
+  if (scrollCard){ const card = document.getElementById('stop-'+stopKey); if (card) card.scrollIntoView({behavior:'smooth', block:'center'}); }
+  if (window.innerWidth < 1060) $('#map').scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { renderPlan(b.dataset.plan); history.replaceState(null,'','#'+b.dataset.plan); }));
+
+initMap();
+renderPlan(location.hash === '#kansai' ? 'kansai' : 'alps');
+</script>
+</body>
+</html>
