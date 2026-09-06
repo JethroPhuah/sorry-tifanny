@@ -4,1118 +4,456 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Japan Driving Trip September</title>
-<meta name="description" content="Three-day nature road trip from Osaka: routes, maps, parking, vegetarian food and cheap car rental for the saved Google Maps list.">
+<meta name="description" content="A three-day nature road trip for two out of Osaka: generated landscapes, a hand-drawn atlas of the route, parking, vegetarian food and the car.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
-<style>
-/* Leaflet 1.9.4 CSS, inlined (BSD-2, (c) Vladimir Agafonkin) */
-/* required styles */
-
-.leaflet-pane,
-.leaflet-tile,
-.leaflet-marker-icon,
-.leaflet-marker-shadow,
-.leaflet-tile-container,
-.leaflet-pane > svg,
-.leaflet-pane > canvas,
-.leaflet-zoom-box,
-.leaflet-image-layer,
-.leaflet-layer {
-	position: absolute;
-	left: 0;
-	top: 0;
-	}
-.leaflet-container {
-	overflow: hidden;
-	}
-.leaflet-tile,
-.leaflet-marker-icon,
-.leaflet-marker-shadow {
-	-webkit-user-select: none;
-	   -moz-user-select: none;
-	        user-select: none;
-	  -webkit-user-drag: none;
-	}
-/* Prevents IE11 from highlighting tiles in blue */
-.leaflet-tile::selection {
-	background: transparent;
-}
-/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
-.leaflet-safari .leaflet-tile {
-	image-rendering: -webkit-optimize-contrast;
-	}
-/* hack that prevents hw layers "stretching" when loading new tiles */
-.leaflet-safari .leaflet-tile-container {
-	width: 1600px;
-	height: 1600px;
-	-webkit-transform-origin: 0 0;
-	}
-.leaflet-marker-icon,
-.leaflet-marker-shadow {
-	display: block;
-	}
-/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
-/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
-.leaflet-container .leaflet-overlay-pane svg {
-	max-width: none !important;
-	max-height: none !important;
-	}
-.leaflet-container .leaflet-marker-pane img,
-.leaflet-container .leaflet-shadow-pane img,
-.leaflet-container .leaflet-tile-pane img,
-.leaflet-container img.leaflet-image-layer,
-.leaflet-container .leaflet-tile {
-	max-width: none !important;
-	max-height: none !important;
-	width: auto;
-	padding: 0;
-	}
-
-.leaflet-container img.leaflet-tile {
-	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
-	mix-blend-mode: plus-lighter;
-}
-
-.leaflet-container.leaflet-touch-zoom {
-	-ms-touch-action: pan-x pan-y;
-	touch-action: pan-x pan-y;
-	}
-.leaflet-container.leaflet-touch-drag {
-	-ms-touch-action: pinch-zoom;
-	/* Fallback for FF which doesn't support pinch-zoom */
-	touch-action: none;
-	touch-action: pinch-zoom;
-}
-.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
-	-ms-touch-action: none;
-	touch-action: none;
-}
-.leaflet-container {
-	-webkit-tap-highlight-color: transparent;
-}
-.leaflet-container a {
-	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
-}
-.leaflet-tile {
-	filter: inherit;
-	visibility: hidden;
-	}
-.leaflet-tile-loaded {
-	visibility: inherit;
-	}
-.leaflet-zoom-box {
-	width: 0;
-	height: 0;
-	-moz-box-sizing: border-box;
-	     box-sizing: border-box;
-	z-index: 800;
-	}
-/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
-.leaflet-overlay-pane svg {
-	-moz-user-select: none;
-	}
-
-.leaflet-pane         { z-index: 400; }
-
-.leaflet-tile-pane    { z-index: 200; }
-.leaflet-overlay-pane { z-index: 400; }
-.leaflet-shadow-pane  { z-index: 500; }
-.leaflet-marker-pane  { z-index: 600; }
-.leaflet-tooltip-pane   { z-index: 650; }
-.leaflet-popup-pane   { z-index: 700; }
-
-.leaflet-map-pane canvas { z-index: 100; }
-.leaflet-map-pane svg    { z-index: 200; }
-
-.leaflet-vml-shape {
-	width: 1px;
-	height: 1px;
-	}
-.lvml {
-	behavior: url(#default#VML);
-	display: inline-block;
-	position: absolute;
-	}
-
-
-/* control positioning */
-
-.leaflet-control {
-	position: relative;
-	z-index: 800;
-	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
-	pointer-events: auto;
-	}
-.leaflet-top,
-.leaflet-bottom {
-	position: absolute;
-	z-index: 1000;
-	pointer-events: none;
-	}
-.leaflet-top {
-	top: 0;
-	}
-.leaflet-right {
-	right: 0;
-	}
-.leaflet-bottom {
-	bottom: 0;
-	}
-.leaflet-left {
-	left: 0;
-	}
-.leaflet-control {
-	float: left;
-	clear: both;
-	}
-.leaflet-right .leaflet-control {
-	float: right;
-	}
-.leaflet-top .leaflet-control {
-	margin-top: 10px;
-	}
-.leaflet-bottom .leaflet-control {
-	margin-bottom: 10px;
-	}
-.leaflet-left .leaflet-control {
-	margin-left: 10px;
-	}
-.leaflet-right .leaflet-control {
-	margin-right: 10px;
-	}
-
-
-/* zoom and fade animations */
-
-.leaflet-fade-anim .leaflet-popup {
-	opacity: 0;
-	-webkit-transition: opacity 0.2s linear;
-	   -moz-transition: opacity 0.2s linear;
-	        transition: opacity 0.2s linear;
-	}
-.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
-	opacity: 1;
-	}
-.leaflet-zoom-animated {
-	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
-	        transform-origin: 0 0;
-	}
-svg.leaflet-zoom-animated {
-	will-change: transform;
-}
-
-.leaflet-zoom-anim .leaflet-zoom-animated {
-	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
-	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
-	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
-	}
-.leaflet-zoom-anim .leaflet-tile,
-.leaflet-pan-anim .leaflet-tile {
-	-webkit-transition: none;
-	   -moz-transition: none;
-	        transition: none;
-	}
-
-.leaflet-zoom-anim .leaflet-zoom-hide {
-	visibility: hidden;
-	}
-
-
-/* cursors */
-
-.leaflet-interactive {
-	cursor: pointer;
-	}
-.leaflet-grab {
-	cursor: -webkit-grab;
-	cursor:    -moz-grab;
-	cursor:         grab;
-	}
-.leaflet-crosshair,
-.leaflet-crosshair .leaflet-interactive {
-	cursor: crosshair;
-	}
-.leaflet-popup-pane,
-.leaflet-control {
-	cursor: auto;
-	}
-.leaflet-dragging .leaflet-grab,
-.leaflet-dragging .leaflet-grab .leaflet-interactive,
-.leaflet-dragging .leaflet-marker-draggable {
-	cursor: move;
-	cursor: -webkit-grabbing;
-	cursor:    -moz-grabbing;
-	cursor:         grabbing;
-	}
-
-/* marker & overlays interactivity */
-.leaflet-marker-icon,
-.leaflet-marker-shadow,
-.leaflet-image-layer,
-.leaflet-pane > svg path,
-.leaflet-tile-container {
-	pointer-events: none;
-	}
-
-.leaflet-marker-icon.leaflet-interactive,
-.leaflet-image-layer.leaflet-interactive,
-.leaflet-pane > svg path.leaflet-interactive,
-svg.leaflet-image-layer.leaflet-interactive path {
-	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
-	pointer-events: auto;
-	}
-
-/* visual tweaks */
-
-.leaflet-container {
-	background: #ddd;
-	outline-offset: 1px;
-	}
-.leaflet-container a {
-	color: #0078A8;
-	}
-.leaflet-zoom-box {
-	border: 2px dotted #38f;
-	background: rgba(255,255,255,0.5);
-	}
-
-
-/* general typography */
-.leaflet-container {
-	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-size: 0.75rem;
-	line-height: 1.5;
-	}
-
-
-/* general toolbar styles */
-
-.leaflet-bar {
-	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-	border-radius: 4px;
-	}
-.leaflet-bar a {
-	background-color: #fff;
-	border-bottom: 1px solid #ccc;
-	width: 26px;
-	height: 26px;
-	line-height: 26px;
-	display: block;
-	text-align: center;
-	text-decoration: none;
-	color: black;
-	}
-.leaflet-bar a,
-.leaflet-control-layers-toggle {
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	display: block;
-	}
-.leaflet-bar a:hover,
-.leaflet-bar a:focus {
-	background-color: #f4f4f4;
-	}
-.leaflet-bar a:first-child {
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
-	}
-.leaflet-bar a:last-child {
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
-	border-bottom: none;
-	}
-.leaflet-bar a.leaflet-disabled {
-	cursor: default;
-	background-color: #f4f4f4;
-	color: #bbb;
-	}
-
-.leaflet-touch .leaflet-bar a {
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	}
-.leaflet-touch .leaflet-bar a:first-child {
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	}
-.leaflet-touch .leaflet-bar a:last-child {
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
-	}
-
-/* zoom control */
-
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out {
-	font: bold 18px 'Lucida Console', Monaco, monospace;
-	text-indent: 1px;
-	}
-
-.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
-	font-size: 22px;
-	}
-
-
-/* layers control */
-
-.leaflet-control-layers {
-	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-	background: #fff;
-	border-radius: 5px;
-	}
-.leaflet-control-layers-toggle {
-	background-image: url(images/layers.png);
-	width: 36px;
-	height: 36px;
-	}
-.leaflet-retina .leaflet-control-layers-toggle {
-	background-image: url(images/layers-2x.png);
-	background-size: 26px 26px;
-	}
-.leaflet-touch .leaflet-control-layers-toggle {
-	width: 44px;
-	height: 44px;
-	}
-.leaflet-control-layers .leaflet-control-layers-list,
-.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
-	display: none;
-	}
-.leaflet-control-layers-expanded .leaflet-control-layers-list {
-	display: block;
-	position: relative;
-	}
-.leaflet-control-layers-expanded {
-	padding: 6px 10px 6px 6px;
-	color: #333;
-	background: #fff;
-	}
-.leaflet-control-layers-scrollbar {
-	overflow-y: scroll;
-	overflow-x: hidden;
-	padding-right: 5px;
-	}
-.leaflet-control-layers-selector {
-	margin-top: 2px;
-	position: relative;
-	top: 1px;
-	}
-.leaflet-control-layers label {
-	display: block;
-	font-size: 13px;
-	font-size: 1.08333em;
-	}
-.leaflet-control-layers-separator {
-	height: 0;
-	border-top: 1px solid #ddd;
-	margin: 5px -10px 5px -6px;
-	}
-
-/* Default icon URLs */
-.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
-	background-image: url(images/marker-icon.png);
-	}
-
-
-/* attribution and scale controls */
-
-.leaflet-container .leaflet-control-attribution {
-	background: #fff;
-	background: rgba(255, 255, 255, 0.8);
-	margin: 0;
-	}
-.leaflet-control-attribution,
-.leaflet-control-scale-line {
-	padding: 0 5px;
-	color: #333;
-	line-height: 1.4;
-	}
-.leaflet-control-attribution a {
-	text-decoration: none;
-	}
-.leaflet-control-attribution a:hover,
-.leaflet-control-attribution a:focus {
-	text-decoration: underline;
-	}
-.leaflet-attribution-flag {
-	display: inline !important;
-	vertical-align: baseline !important;
-	width: 1em;
-	height: 0.6669em;
-	}
-.leaflet-left .leaflet-control-scale {
-	margin-left: 5px;
-	}
-.leaflet-bottom .leaflet-control-scale {
-	margin-bottom: 5px;
-	}
-.leaflet-control-scale-line {
-	border: 2px solid #777;
-	border-top: none;
-	line-height: 1.1;
-	padding: 2px 5px 1px;
-	white-space: nowrap;
-	-moz-box-sizing: border-box;
-	     box-sizing: border-box;
-	background: rgba(255, 255, 255, 0.8);
-	text-shadow: 1px 1px #fff;
-	}
-.leaflet-control-scale-line:not(:first-child) {
-	border-top: 2px solid #777;
-	border-bottom: none;
-	margin-top: -2px;
-	}
-.leaflet-control-scale-line:not(:first-child):not(:last-child) {
-	border-bottom: 2px solid #777;
-	}
-
-.leaflet-touch .leaflet-control-attribution,
-.leaflet-touch .leaflet-control-layers,
-.leaflet-touch .leaflet-bar {
-	box-shadow: none;
-	}
-.leaflet-touch .leaflet-control-layers,
-.leaflet-touch .leaflet-bar {
-	border: 2px solid rgba(0,0,0,0.2);
-	background-clip: padding-box;
-	}
-
-
-/* popup */
-
-.leaflet-popup {
-	position: absolute;
-	text-align: center;
-	margin-bottom: 20px;
-	}
-.leaflet-popup-content-wrapper {
-	padding: 1px;
-	text-align: left;
-	border-radius: 12px;
-	}
-.leaflet-popup-content {
-	margin: 13px 24px 13px 20px;
-	line-height: 1.3;
-	font-size: 13px;
-	font-size: 1.08333em;
-	min-height: 1px;
-	}
-.leaflet-popup-content p {
-	margin: 17px 0;
-	margin: 1.3em 0;
-	}
-.leaflet-popup-tip-container {
-	width: 40px;
-	height: 20px;
-	position: absolute;
-	left: 50%;
-	margin-top: -1px;
-	margin-left: -20px;
-	overflow: hidden;
-	pointer-events: none;
-	}
-.leaflet-popup-tip {
-	width: 17px;
-	height: 17px;
-	padding: 1px;
-
-	margin: -10px auto 0;
-	pointer-events: auto;
-
-	-webkit-transform: rotate(45deg);
-	   -moz-transform: rotate(45deg);
-	    -ms-transform: rotate(45deg);
-	        transform: rotate(45deg);
-	}
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-	background: white;
-	color: #333;
-	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
-	}
-.leaflet-container a.leaflet-popup-close-button {
-	position: absolute;
-	top: 0;
-	right: 0;
-	border: none;
-	text-align: center;
-	width: 24px;
-	height: 24px;
-	font: 16px/24px Tahoma, Verdana, sans-serif;
-	color: #757575;
-	text-decoration: none;
-	background: transparent;
-	}
-.leaflet-container a.leaflet-popup-close-button:hover,
-.leaflet-container a.leaflet-popup-close-button:focus {
-	color: #585858;
-	}
-.leaflet-popup-scrolled {
-	overflow: auto;
-	}
-
-.leaflet-oldie .leaflet-popup-content-wrapper {
-	-ms-zoom: 1;
-	}
-.leaflet-oldie .leaflet-popup-tip {
-	width: 24px;
-	margin: 0 auto;
-
-	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
-	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
-	}
-
-.leaflet-oldie .leaflet-control-zoom,
-.leaflet-oldie .leaflet-control-layers,
-.leaflet-oldie .leaflet-popup-content-wrapper,
-.leaflet-oldie .leaflet-popup-tip {
-	border: 1px solid #999;
-	}
-
-
-/* div icon */
-
-.leaflet-div-icon {
-	background: #fff;
-	border: 1px solid #666;
-	}
-
-
-/* Tooltip */
-/* Base styles for the element that has a tooltip */
-.leaflet-tooltip {
-	position: absolute;
-	padding: 6px;
-	background-color: #fff;
-	border: 1px solid #fff;
-	border-radius: 3px;
-	color: #222;
-	white-space: nowrap;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	pointer-events: none;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-	}
-.leaflet-tooltip.leaflet-interactive {
-	cursor: pointer;
-	pointer-events: auto;
-	}
-.leaflet-tooltip-top:before,
-.leaflet-tooltip-bottom:before,
-.leaflet-tooltip-left:before,
-.leaflet-tooltip-right:before {
-	position: absolute;
-	pointer-events: none;
-	border: 6px solid transparent;
-	background: transparent;
-	content: "";
-	}
-
-/* Directions */
-
-.leaflet-tooltip-bottom {
-	margin-top: 6px;
-}
-.leaflet-tooltip-top {
-	margin-top: -6px;
-}
-.leaflet-tooltip-bottom:before,
-.leaflet-tooltip-top:before {
-	left: 50%;
-	margin-left: -6px;
-	}
-.leaflet-tooltip-top:before {
-	bottom: 0;
-	margin-bottom: -12px;
-	border-top-color: #fff;
-	}
-.leaflet-tooltip-bottom:before {
-	top: 0;
-	margin-top: -12px;
-	margin-left: -6px;
-	border-bottom-color: #fff;
-	}
-.leaflet-tooltip-left {
-	margin-left: -6px;
-}
-.leaflet-tooltip-right {
-	margin-left: 6px;
-}
-.leaflet-tooltip-left:before,
-.leaflet-tooltip-right:before {
-	top: 50%;
-	margin-top: -6px;
-	}
-.leaflet-tooltip-left:before {
-	right: 0;
-	margin-right: -12px;
-	border-left-color: #fff;
-	}
-.leaflet-tooltip-right:before {
-	left: 0;
-	margin-left: -12px;
-	border-right-color: #fff;
-	}
-
-/* Printing */
-
-@media print {
-	/* Prevent printers from removing background-images of controls. */
-	.leaflet-control {
-		-webkit-print-color-adjust: exact;
-		print-color-adjust: exact;
-		}
-	}
-
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Shippori+Mincho:wght@500&display=swap">
 <style>
 :root{
-  --bg:#eef0eb;            /* morning mist */
-  --bg-2:#e3e7e0;
-  --paper:#f8f9f6;
-  --ink:#1b211d;
-  --ink-2:#45514a;
-  --ink-3:#7c877f;
-  --line:#cfd6cf;
-  --cedar:#1f4d3a;         /* expressway-sign green */
-  --cedar-2:#2b6a50;
-  --lake:#2f7f8c;
-  --kokia:#c2452d;         /* saved-place red */
-  --kokia-soft:#f3d9d2;
-  --sun:#d9a441;
-  --sign:#1f5e3d;          /* Japanese expressway sign */
-  --sign-text:#ffffff;
-  --shadow:0 12px 32px rgba(27,33,29,.10);
-  --radius:14px;
-  --map-bg:#dfe6df;
+  --ground:#f4f5f2;
+  --ground-2:#e9ece8;
+  --panel:#ffffff;
+  --ink:#141a1c;
+  --ink-2:#3e4a4d;
+  --ink-3:#7b8689;
+  --line:#d6dbd8;
+  --line-2:#c2c9c5;
+  --cedar:#2f6b4f;
+  --lake:#3a7ca5;
+  --sunset:#d97a3a;
+  --granite:#9a4f6a;
+  --sign:#1f5e3d;
+  --star:#c2452d;
+  --sea:#dbe6ec;
+  --land:#f7f6f1;
+  --coast:#9fb0b6;
+  --shadow:0 30px 80px -30px rgba(20,26,28,.35);
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#111614; --bg-2:#181e1b; --paper:#1c2320; --ink:#e6e9e4; --ink-2:#b6bfb8; --ink-3:#7f8a82;
-    --line:#2c352f; --cedar:#7fc4a3; --cedar-2:#5aa886; --lake:#6cc0cc; --kokia:#ef7b62; --kokia-soft:#3a221d;
-    --sun:#e6b85a; --sign:#245a3f; --sign-text:#f2f6f2; --shadow:0 12px 32px rgba(0,0,0,.45); --map-bg:#1a211e;
+    --ground:#0f1416; --ground-2:#151b1e; --panel:#171e21; --ink:#e9ece9; --ink-2:#b5bfbf; --ink-3:#7d8a8c; --line:#28323500; --line:#283235; --line-2:#344045;
+    --cedar:#7cc4a0; --lake:#7fb8d8; --sunset:#f0a06a; --granite:#d08aa3; --sign:#255f42; --star:#f08068; --sea:#141c21; --land:#1d2529; --coast:#4a5a61; --shadow:0 30px 80px -30px rgba(0,0,0,.7);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#111614; --bg-2:#181e1b; --paper:#1c2320; --ink:#e6e9e4; --ink-2:#b6bfb8; --ink-3:#7f8a82;
-  --line:#2c352f; --cedar:#7fc4a3; --cedar-2:#5aa886; --lake:#6cc0cc; --kokia:#ef7b62; --kokia-soft:#3a221d;
-  --sun:#e6b85a; --sign:#245a3f; --sign-text:#f2f6f2; --shadow:0 12px 32px rgba(0,0,0,.45); --map-bg:#1a211e;
+  --ground:#0f1416; --ground-2:#151b1e; --panel:#171e21; --ink:#e9ece9; --ink-2:#b5bfbf; --ink-3:#7d8a8c; --line:#283235; --line-2:#344045;
+  --cedar:#7cc4a0; --lake:#7fb8d8; --sunset:#f0a06a; --granite:#d08aa3; --sign:#255f42; --star:#f08068; --sea:#141c21; --land:#1d2529; --coast:#4a5a61; --shadow:0 30px 80px -30px rgba(0,0,0,.7);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",Georgia,serif;font-weight:700;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:-.005em}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,.display{font-family:"Cormorant Garamond","Iowan Old Style",Georgia,serif;font-weight:600;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
 p{margin:0}
-a{color:var(--cedar);text-decoration-color:color-mix(in srgb,var(--cedar) 40%,transparent)}
-a:hover{text-decoration-color:var(--cedar)}
-.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
-.eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
-.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
-:focus-visible{outline:2px solid var(--lake);outline-offset:3px;border-radius:6px}
+a{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--ink) 30%,transparent);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--ink)}
+button{font:inherit;color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums;font-size:.86em}
+.jp{font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:500}
+.eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+.narrow{width:min(720px,100% - 48px);margin-inline:auto}
+:focus-visible{outline:2px solid var(--lake);outline-offset:3px}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* ---------- hero ---------- */
-.hero{padding:56px 0 28px;border-bottom:1px solid var(--line);background:
-  radial-gradient(1200px 400px at 10% -10%, color-mix(in srgb,var(--lake) 14%,transparent), transparent 60%),
-  radial-gradient(900px 380px at 100% 0%, color-mix(in srgb,var(--cedar) 12%,transparent), transparent 60%)}
-.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:end}
-.hero h1{font-size:clamp(2.2rem,5vw,4rem);margin-top:10px}
-.hero h1 .jp{display:block;font-size:.42em;font-weight:500;color:var(--ink-2);margin-top:10px;letter-spacing:.06em}
-.hero .lede{max-width:62ch;color:var(--ink-2);margin-top:18px;font-size:1.05rem}
-.base-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow)}
-.base-card .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--line);font-size:.93rem}
-.base-card .row:first-of-type{border-top:0;padding-top:4px}
-.base-card .row span:last-child{text-align:right;color:var(--ink-2)}
-.base-card .k{color:var(--ink-3)}
+.hero{position:relative;height:min(92vh,860px);min-height:560px;overflow:hidden;background:#1a1c2e;color:#fff}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,12,24,.25),transparent 35%,transparent 70%,rgba(10,12,24,.55))}
+.hero .inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:34px 0 46px}
+.hero .top{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.78);font-weight:600}
+.hero .top .jp{letter-spacing:.3em;text-transform:none}
+.hero h1{font-size:clamp(3rem,8.5vw,7.4rem);font-weight:500;line-height:.98;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.hero h1 em{font-style:italic;font-weight:500;color:#ffe2c2}
+.hero .sub{margin-top:22px;max-width:52ch;font-size:clamp(1rem,1.4vw,1.2rem);color:rgba(255,255,255,.88);line-height:1.5}
+.hero .meta{display:flex;gap:34px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.28)}
+.hero .meta div{font-size:.8rem;color:rgba(255,255,255,.7);letter-spacing:.02em}
+.hero .meta b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.65rem;font-weight:600;color:#fff;letter-spacing:0;line-height:1.1;margin-bottom:2px}
+.scrollcue{position:absolute;right:48px;bottom:46px;width:1px;height:70px;background:linear-gradient(to bottom,rgba(255,255,255,.0),rgba(255,255,255,.8));animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.6);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
 
-/* saved chips */
-.saved{margin-top:26px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 8px;border-radius:999px;background:var(--paper);border:1px solid var(--line);font-size:.85rem;font-weight:500}
-.chip .dot{width:9px;height:9px;border-radius:50%;background:var(--c,var(--cedar))}
-.chip .star{color:var(--kokia);font-size:.8rem}
+/* ---------- intro ---------- */
+.intro{padding:96px 0 40px}
+.intro .lede{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,2.6vw,2.15rem);line-height:1.3;font-weight:500;color:var(--ink);max-width:30ch}
+.intro .lede em{font-style:italic;color:var(--ink-2)}
+.intro .body{margin-top:26px;color:var(--ink-2);max-width:62ch;font-size:1.03rem}
+.intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start}
+.regions{display:grid;gap:0;border-top:1px solid var(--line)}
+.region{display:grid;grid-template-columns:14px 1fr auto;gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line)}
+.region .sw{width:14px;height:14px;border-radius:50%;background:var(--c);margin-top:5px}
+.region h3{font-family:"Manrope",sans-serif;font-size:1rem;font-weight:700;letter-spacing:-.005em}
+.region p{color:var(--ink-2);font-size:.9rem;margin-top:3px}
+.region .places{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.86rem;color:var(--ink)}
+.region .places span::before{content:"★";color:var(--star);font-size:.75em;margin-right:5px;vertical-align:1px}
+.region .dist{font-size:.8rem;color:var(--ink-3);text-align:right;white-space:nowrap;padding-top:3px}
+.notice{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:18px 20px;border:1px solid var(--line-2);border-radius:6px;background:var(--panel)}
+.notice .d{width:10px;height:10px;border-radius:50%;background:var(--sunset);margin-top:7px;box-shadow:0 0 0 4px color-mix(in srgb,var(--sunset) 20%,transparent)}
+.notice p{color:var(--ink-2);font-size:.93rem}
+.notice b{color:var(--ink)}
 
-/* ---------- clusters ---------- */
-.section{padding:44px 0}
-.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:18px}
-.section-head h2{font-size:clamp(1.5rem,2.6vw,2.1rem)}
-.section-head .sub{color:var(--ink-2);max-width:60ch}
-.clusters{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.cluster{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;position:relative;overflow:hidden}
-.cluster::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c)}
-.cluster h3{font-size:1.1rem;margin-bottom:6px}
-.cluster .dist{font-size:.85rem;color:var(--ink-2)}
-.cluster ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:4px;font-size:.9rem}
-.cluster li::before{content:"★ ";color:var(--kokia);font-size:.8em}
-.cluster .verdict{margin-top:12px;font-size:.85rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:10px}
-.callout{margin-top:18px;background:color-mix(in srgb,var(--sun) 16%,var(--paper));border:1px solid color-mix(in srgb,var(--sun) 45%,var(--line));border-radius:var(--radius);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
-.callout .mark{width:34px;height:34px;border-radius:50%;background:var(--sun);color:#1b211d;display:grid;place-items:center;font-weight:700;font-family:"Zen Old Mincho",serif}
-.callout p{color:var(--ink-2)}
-.callout strong{color:var(--ink)}
+/* ---------- atlas ---------- */
+.atlas{padding:40px 0 20px}
+.atlas-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}
+.atlas-head h2{font-size:clamp(1.8rem,3vw,2.6rem)}
+.atlas-head p{color:var(--ink-2);max-width:48ch;font-size:.95rem}
+.atlas-frame{position:relative;border:1px solid var(--line);background:var(--sea);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+.atlas-frame svg{display:block;width:100%;height:auto;aspect-ratio:1000/620}
+.atlas-controls{position:absolute;left:16px;top:16px;display:flex;gap:6px;background:color-mix(in srgb,var(--panel) 85%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:4px}
+.atlas-controls button{border:0;background:transparent;border-radius:999px;padding:6px 13px;font-size:.78rem;font-weight:600;letter-spacing:.04em;cursor:pointer;color:var(--ink-2)}
+.atlas-controls button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.atlas-key{position:absolute;right:16px;bottom:14px;display:flex;gap:14px;font-size:.74rem;color:var(--ink-2);background:color-mix(in srgb,var(--panel) 85%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:6px;padding:7px 11px}
+.atlas-key i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.atlas-key i.star{background:var(--star)}
+.atlas-key i.ext{background:var(--ink-3)}
+.atlas-key i.home{border-radius:2px;background:var(--lake)}
+.atlas figcaption{margin-top:12px;font-size:.8rem;color:var(--ink-3);display:flex;justify-content:space-between;gap:14px}
+/* svg styles */
+.m-sea{fill:var(--sea)}
+.m-land{fill:var(--land);stroke:var(--coast);stroke-width:.7;stroke-linejoin:round}
+.m-lake{fill:var(--sea);stroke:var(--coast);stroke-width:.6}
+.m-grid{stroke:var(--coast);stroke-opacity:.25;stroke-width:.5;stroke-dasharray:2 4}
+.m-lbl{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;fill:var(--ink-3);letter-spacing:.08em}
+.m-lbl.sea{fill:var(--coast);font-size:17px;letter-spacing:.3em;text-transform:uppercase;font-style:normal;font-weight:600}
+.m-city{fill:var(--ink-3)}
+.m-citylbl{font-family:"Manrope",sans-serif;font-size:10px;fill:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.m-route{fill:none;stroke:var(--c);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.m-route-halo{fill:none;stroke:var(--ground);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.m-pin{fill:var(--c);stroke:#fff;stroke-width:1.6;cursor:pointer}
+.m-pin.star{fill:var(--star)}
+.m-pin.ext{fill:var(--ink-3)}
+.m-pin.home{fill:var(--lake)}
+.m-pin.active{stroke:var(--ink);stroke-width:2.2}
+.m-ring{fill:none;stroke:var(--star);stroke-width:1.2;opacity:0;pointer-events:none}
+.m-ring.on{animation:ring 1.6s ease-out infinite}
+@keyframes ring{0%{r:6;opacity:.9}100%{r:22;opacity:0}}
+.m-pinlbl{font-family:"Manrope",sans-serif;font-size:10.5px;font-weight:600;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.m-pinlbl.minor{display:none;font-weight:500;fill:var(--ink-2)}
+svg.zoomed .m-pinlbl.minor{display:block}
+.m-scale{stroke:var(--ink-2);stroke-width:1.2}
+.m-scalelbl{font-family:"JetBrains Mono",monospace;font-size:9.5px;fill:var(--ink-2)}
+.m-hull{fill:var(--c);fill-opacity:.09;stroke:var(--c);stroke-opacity:.5;stroke-width:1;stroke-dasharray:3 4}
 
-/* ---------- plan switch ---------- */
-.plan-bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.plan-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
-.seg{display:inline-flex;background:var(--bg-2);border:1px solid var(--line);border-radius:999px;padding:4px}
-.seg button{border:0;background:transparent;color:var(--ink-2);font:inherit;font-weight:600;padding:9px 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:10px}
-.seg button .n{font-family:"Zen Old Mincho",serif;font-weight:700;color:var(--ink-3)}
-.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.08)}
-.seg button[aria-pressed="true"] .n{color:var(--kokia)}
-.plan-bar .hint{font-size:.85rem;color:var(--ink-2)}
+/* ---------- plan chooser ---------- */
+.choose{padding:60px 0 20px}
+.choose-head{max-width:60ch;margin-bottom:26px}
+.choose-head h2{font-size:clamp(1.8rem,3vw,2.6rem)}
+.choose-head p{color:var(--ink-2);margin-top:10px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.plan-card{position:relative;text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;transition:transform .25s ease,box-shadow .25s ease,border-color .2s ease;display:grid;grid-template-rows:200px auto}
+.plan-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.plan-card[aria-pressed="true"]{border-color:var(--ink);box-shadow:var(--shadow)}
+.plan-card canvas{display:block;width:100%;height:100%}
+.plan-card .pc-body{padding:20px 22px 22px}
+.plan-card .pc-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.plan-card .pc-letter{font-family:"Cormorant Garamond",serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.plan-card h3{font-size:1.7rem;margin-top:4px;font-weight:600}
+.plan-card .pc-tag{color:var(--ink-2);font-size:.92rem;margin-top:8px;line-height:1.5}
+.plan-card .pc-stats{display:flex;gap:22px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.plan-card .pc-stats div{font-size:.72rem;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.plan-card .pc-stats b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.45rem;color:var(--ink);letter-spacing:0;text-transform:none;font-weight:600;line-height:1.1}
+.plan-card .chosen{position:absolute;top:14px;right:14px;background:var(--ink);color:var(--ground);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:999px;opacity:0;transition:opacity .2s}
+.plan-card[aria-pressed="true"] .chosen{opacity:1}
 
-/* ---------- plan header + stats ---------- */
-.plan-head{padding:36px 0 8px}
-.plan-head h2{font-size:clamp(1.7rem,3vw,2.5rem)}
-.plan-head .tag{color:var(--ink-2);margin-top:8px;max-width:70ch}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px}
-.stat{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.stat .v{font-size:1.5rem;font-weight:600;margin-top:2px}
-.stat .v small{font-size:.7em;color:var(--ink-3);font-weight:500;margin-left:3px}
-.stat .d{font-size:.78rem;color:var(--ink-3);margin-top:2px}
+/* ---------- chapters ---------- */
+.chapters{padding:50px 0 10px}
+.chapter{margin-bottom:70px}
+.band{position:relative;height:300px;border-radius:10px;overflow:hidden;color:#fff;background:#223}
+.band canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.band .veil{position:absolute;inset:0;background:linear-gradient(to right,rgba(8,10,18,.62),rgba(8,10,18,.15) 60%,transparent)}
+.band .bt{position:absolute;inset:0;padding:30px 36px;display:flex;flex-direction:column;justify-content:flex-end}
+.band .roman{font-family:"Cormorant Garamond",serif;font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:600}
+.band .roman b{font-size:2.2rem;letter-spacing:0;display:block;line-height:1;margin:6px 0 10px;color:#fff;font-weight:500}
+.band h3{font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:500;max-width:22ch;text-shadow:0 2px 20px rgba(0,0,0,.35)}
+.band p{margin-top:8px;color:rgba(255,255,255,.85);max-width:56ch;font-size:.95rem}
+.specs{display:flex;gap:0;margin-top:0;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;background:var(--panel);overflow-x:auto}
+.specs div{flex:1;padding:14px 20px;border-right:1px solid var(--line);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600;min-width:130px}
+.specs div:last-child{border-right:0}
+.specs b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:var(--ink);letter-spacing:0;text-transform:none;font-weight:600;line-height:1.1;margin-top:2px}
+.signs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.sign{display:inline-flex;align-items:center;gap:8px;background:var(--sign);color:#fff;border-radius:6px;padding:5px 11px 5px 7px;font-size:.74rem;font-weight:600;border:1.5px solid rgba(255,255,255,.35)}
+.sign .rt{background:#fff;color:var(--sign);border-radius:3px;padding:0 6px;font-family:"JetBrains Mono",monospace;font-size:.7rem;font-weight:600}
+.sign.local{background:#3459a3}.sign.local .rt{color:#3459a3}
+.sign.bus{background:#7a4f1d}.sign.bus .rt{color:#7a4f1d}
 
-/* ---------- layout: days + map ---------- */
-.trip{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:28px;align-items:start;padding:20px 0 50px}
-.map-col{position:sticky;top:74px}
-#map{height:min(72vh,720px);border-radius:var(--radius);border:1px solid var(--line);background:var(--map-bg);box-shadow:var(--shadow)}
-.map-note{font-size:.78rem;color:var(--ink-3);margin-top:8px;display:flex;justify-content:space-between;gap:10px}
-.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:.8rem;color:var(--ink-2)}
-.legend span{display:inline-flex;align-items:center;gap:6px}
-.legend .sw{width:14px;height:4px;border-radius:2px;background:var(--c)}
-.legend .pin{width:10px;height:10px;border-radius:50%;background:var(--kokia);border:2px solid #fff;box-shadow:0 0 0 1px var(--kokia)}
-.legend .pin.pin-x{background:var(--cedar);box-shadow:0 0 0 1px var(--cedar)}
-.tiles-blocked{display:none;position:absolute;inset:auto 10px 10px 10px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.8rem;color:var(--ink-2);z-index:600}
-.map-wrap{position:relative}
+/* route timeline */
+.route{max-width:860px;margin:34px auto 0;position:relative}
+.rail{list-style:none;margin:0;padding:0;position:relative}
+.rail::before{content:"";position:absolute;left:95px;top:14px;bottom:14px;width:2px;background:var(--line-2)}
+.leg{display:grid;grid-template-columns:76px 40px 1fr;gap:0 14px;align-items:center;padding:8px 0;font-size:.82rem;color:var(--ink-3)}
+.leg .t{text-align:right;font-family:"JetBrains Mono",monospace;font-size:.78rem}
+.leg .k{position:relative;height:100%}
+.leg .k::before{content:"";position:absolute;left:14px;top:50%;width:2px;height:22px;transform:translateY(-50%);background:repeating-linear-gradient(to bottom,var(--c) 0 3px,transparent 3px 6px)}
+.leg .l{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.leg .l .toll{margin-left:auto;font-family:"JetBrains Mono",monospace;color:var(--ink-2);font-size:.78rem}
+.node{display:grid;grid-template-columns:76px 40px 1fr;gap:0 14px;padding:22px 0 26px}
+.node time{font-family:"JetBrains Mono",monospace;font-size:.86rem;color:var(--ink);text-align:right;padding-top:5px}
+.node time small{display:block;color:var(--ink-3);font-size:.72rem;margin-top:2px}
+.node .k{position:relative}
+.node .k::before{content:"";position:absolute;left:8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px var(--ground)}
+.node.saved .k::before{background:var(--star)}
+.node.logi .k::before{width:10px;height:10px;left:10px;top:8px;background:var(--ground);border:2px solid var(--line-2)}
+.node h4{font-family:"Cormorant Garamond",serif;font-size:1.7rem;font-weight:600;line-height:1.1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0}
+.node h4 .jp{font-size:1rem;color:var(--ink-3);font-weight:500}
+.node .tag{font-family:"Manrope",sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:3px 7px;border-radius:3px;line-height:1;align-self:center}
+.tag.s{color:var(--star);border:1px solid color-mix(in srgb,var(--star) 45%,transparent)}
+.tag.a{color:var(--cedar);border:1px solid color-mix(in srgb,var(--cedar) 45%,transparent)}
+.tag.o{color:var(--ink-3);border:1px solid var(--line-2)}
+.node .what{margin-top:10px;color:var(--ink-2);font-size:.98rem;max-width:64ch}
+.facts{margin-top:14px;display:grid;gap:8px;max-width:64ch}
+.fact{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:.88rem;color:var(--ink-2);line-height:1.5}
+.fact svg{width:16px;height:16px;margin-top:4px;fill:none;stroke:var(--ink-3);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.fact.veg svg{stroke:var(--cedar)}.fact.park svg{stroke:var(--lake)}.fact.tip svg{stroke:var(--sunset)}
+.fact b{color:var(--ink);font-weight:700}
+.node .links{margin-top:12px;display:flex;gap:18px;font-size:.82rem;font-weight:600}
+.node .links a,.node .links button{background:none;border:0;padding:0;cursor:pointer;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:4px}
+.node .links a:hover,.node .links button:hover{text-decoration-color:var(--ink)}
 
-/* day */
-.day{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:22px;box-shadow:var(--shadow)}
-.day-head{padding:20px 22px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;border-left:6px solid var(--c)}
-.day-num{font-family:"Zen Old Mincho",serif;font-weight:700;font-size:2.4rem;line-height:1;color:var(--c)}
-.day-num small{display:block;font-family:"Instrument Sans",sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:4px}
-.day-title h3{font-size:1.25rem}
-.day-title p{color:var(--ink-2);font-size:.92rem;margin-top:4px}
-.day-meta{text-align:right;font-size:.82rem;color:var(--ink-2);display:grid;gap:2px}
-.day-meta b{color:var(--ink);font-weight:600}
-
-/* road signs */
-.signs{display:flex;flex-wrap:wrap;gap:8px;padding:14px 22px 0}
-.sign{display:inline-flex;align-items:center;gap:8px;background:var(--sign);color:var(--sign-text);border-radius:8px;padding:5px 10px 5px 8px;font-size:.78rem;font-weight:600;letter-spacing:.01em;border:2px solid color-mix(in srgb,#fff 30%,var(--sign))}
-.sign .rt{background:#fff;color:#1f5e3d;border-radius:4px;padding:0 6px;font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:600}
-.sign.local{background:#3b5fa8;border-color:color-mix(in srgb,#fff 30%,#3b5fa8)}
-.sign.local .rt{color:#3b5fa8}
-.sign.bus{background:#8a5a1e;border-color:color-mix(in srgb,#fff 30%,#8a5a1e)}
-.sign.bus .rt{color:#8a5a1e}
-
-/* ribbon timeline */
-.ribbon-wrap{padding:16px 22px 4px}
-.ribbon{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--bg-2)}
-.ribbon .seg-d{background:repeating-linear-gradient(135deg,var(--bg-2) 0 6px,color-mix(in srgb,var(--ink-3) 22%,var(--bg-2)) 6px 8px);display:grid;place-items:center;font-size:.68rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;border-right:1px solid var(--line);font-family:"JetBrains Mono",monospace}
-.ribbon .seg-b{background:repeating-linear-gradient(135deg,#d9c4a6 0 6px,#c7ad86 6px 8px);display:grid;place-items:center;font-size:.68rem;color:#3a2a12;white-space:nowrap;overflow:hidden;border-right:1px solid var(--line);font-family:"JetBrains Mono",monospace}
-.ribbon .seg-s{background:var(--c);display:grid;place-items:center;font-size:.7rem;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;padding:0 6px;border-right:1px solid rgba(255,255,255,.35);cursor:pointer;text-overflow:ellipsis}
-.ribbon .seg-s:hover{filter:brightness(1.08)}
-.ribbon-scale{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ink-3);margin-top:6px;font-family:"JetBrains Mono",monospace}
-
-/* stops */
-.stops{padding:10px 22px 22px;display:grid;gap:0}
-.leg{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;color:var(--ink-3);font-size:.8rem;padding:6px 0}
-.leg .t{font-family:"JetBrains Mono",monospace;text-align:right}
-.leg .l{display:flex;align-items:center;gap:10px}
-.leg .l::before{content:"";width:2px;height:22px;background:repeating-linear-gradient(to bottom,var(--line) 0 4px,transparent 4px 7px);margin-left:6px}
-.leg .toll{margin-left:auto;color:var(--ink-2);font-family:"JetBrains Mono",monospace}
-.stop{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
-.stop:first-child{border-top:0}
-.stop .time{font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--ink-2);text-align:right;padding-top:3px}
-.stop .time small{display:block;font-size:.72rem;color:var(--ink-3)}
-.stop .body h4{font-size:1.08rem;font-family:"Instrument Sans",sans-serif;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.stop .body h4 .jp{color:var(--ink-3);font-weight:400;font-size:.9rem;font-family:"Zen Old Mincho",serif}
-.tag-saved{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--kokia);background:var(--kokia-soft);border-radius:4px;padding:2px 6px}
-.tag-extra{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--cedar);background:color-mix(in srgb,var(--cedar) 14%,var(--paper));border-radius:4px;padding:2px 6px}
-.tag-opt{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-2);background:var(--bg-2);border-radius:4px;padding:2px 6px}
-.stop .what{color:var(--ink-2);margin-top:5px;font-size:.95rem;max-width:68ch}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px;margin-top:10px}
-.fact{font-size:.86rem;display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start;color:var(--ink-2)}
-.fact svg{width:16px;height:16px;margin-top:3px;fill:none;stroke:var(--ink-3);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.fact b{color:var(--ink);font-weight:600}
-.fact.veg svg{stroke:var(--cedar-2)}
-.fact.park svg{stroke:var(--lake)}
-.fact.tip svg{stroke:var(--sun)}
-.stop .links{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);border-radius:8px;padding:5px 10px;font-size:.8rem;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit}
-.btn:hover{border-color:var(--ink-3)}
-.btn.map{background:transparent}
-
-/* ---------- info sections ---------- */
-.two{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
-.card h3{font-size:1.2rem;margin-bottom:10px}
-.card p,.card li{color:var(--ink-2);font-size:.95rem}
-.card ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px}
-.card li b{color:var(--ink)}
-table{width:100%;border-collapse:collapse;font-size:.9rem}
-th{text-align:left;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
-td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
-td b{color:var(--ink);font-weight:600}
-tr:last-child td{border-bottom:0}
+/* ---------- field notes ---------- */
+.notes{padding:70px 0 60px;border-top:1px solid var(--line);margin-top:40px}
+.notes-head{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start;margin-bottom:40px}
+.notes-head h2{font-size:clamp(2rem,3.4vw,3rem)}
+.notes-head p{color:var(--ink-2);max-width:56ch;padding-top:10px}
+.note{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:38px 0;border-top:1px solid var(--line)}
+.note h3{font-size:1.55rem;font-weight:600}
+.note .n-sub{color:var(--ink-3);font-size:.9rem;margin-top:6px;max-width:26ch}
+.note .n-body{color:var(--ink-2);font-size:.95rem}
+.note .n-body p+p{margin-top:12px}
+.note ul{margin:8px 0 0;padding-left:18px;display:grid;gap:8px}
+.note li b{color:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{text-align:left;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700;padding:8px 10px 8px 0;border-bottom:1px solid var(--line-2)}
+td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+td b{color:var(--ink);font-weight:700}
 .table-wrap{overflow-x:auto}
-.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:700;letter-spacing:.04em}
-.pill.good{background:color-mix(in srgb,var(--cedar) 16%,var(--paper));color:var(--cedar)}
-.pill.mid{background:color-mix(in srgb,var(--sun) 24%,var(--paper));color:#7a5a12}
-.pill.near{background:color-mix(in srgb,var(--lake) 16%,var(--paper));color:var(--lake)}
-.budget{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-.budget .card{padding:16px 18px}
-.budget .rowb{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px dashed var(--line);font-size:.9rem}
-.budget .rowb:first-of-type{border-top:0}
-.budget .rowb.total{border-top:1px solid var(--ink-3);font-weight:600;color:var(--ink)}
-.phrase{background:var(--bg-2);border-radius:10px;padding:12px 14px;margin-top:12px;font-family:"Zen Old Mincho",serif;font-size:1.05rem;line-height:1.7}
-.phrase small{display:block;font-family:"Instrument Sans",sans-serif;color:var(--ink-3);font-size:.8rem;margin-top:4px}
-.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.extra{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.extra h4{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:1rem;display:flex;justify-content:space-between;gap:8px}
-.extra p{font-size:.88rem;color:var(--ink-2);margin-top:6px}
-.extra .where{font-size:.74rem;color:var(--ink-3);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--ink-3);font-size:.85rem}
-footer ul{columns:2;gap:30px;padding-left:18px;margin:10px 0 0}
-footer li{margin-bottom:4px}
-.hidden{display:none!important}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.pill.good{background:color-mix(in srgb,var(--cedar) 16%,transparent);color:var(--cedar)}
+.pill.near{background:color-mix(in srgb,var(--lake) 16%,transparent);color:var(--lake)}
+.pill.mid{background:color-mix(in srgb,var(--sunset) 20%,transparent);color:var(--sunset)}
+.ledger{border-top:1px solid var(--line-2)}
+.ledger .r{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.ledger .r.total{font-weight:700;color:var(--ink);border-bottom:0;border-top:1px solid var(--ink-3)}
+.ledger .r span:last-child{font-family:"JetBrains Mono",monospace;font-size:.82rem;white-space:nowrap}
+.phrase{font-family:"Shippori Mincho",serif;font-size:1.15rem;line-height:1.75;color:var(--ink);padding:14px 18px;border-left:2px solid var(--line-2);margin-top:14px}
+.phrase small{display:block;font-family:"Manrope",sans-serif;color:var(--ink-3);font-size:.8rem;line-height:1.5;margin-top:6px}
+.h4{font-family:"Manrope",sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px}
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:0 30px}
+.extra{padding:16px 0;border-bottom:1px solid var(--line)}
+.extra .where{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.extra h4{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:600;margin:4px 0 6px}
+.extra p{font-size:.88rem;color:var(--ink-2)}
+.season{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.season h4{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:600;margin:0 0 6px;padding-top:12px;border-top:2px solid var(--c)}
+.season p{font-size:.88rem;color:var(--ink-2)}
+footer{padding:40px 0 70px;border-top:1px solid var(--line);color:var(--ink-3);font-size:.82rem}
+footer ul{columns:2;gap:40px;padding-left:16px;margin:10px 0 0}
+footer li{margin-bottom:5px}
 
-/* leaflet overrides */
-.leaflet-container{font-family:"Instrument Sans",sans-serif;background:var(--map-bg)}
-.leaflet-popup-content-wrapper{border-radius:10px;background:var(--paper);color:var(--ink);box-shadow:var(--shadow)}
-.leaflet-popup-tip{background:var(--paper)}
-.leaflet-popup-content{margin:12px 14px;font-size:.88rem;line-height:1.45}
-.leaflet-popup-content b{display:block;font-size:1rem;margin-bottom:2px}
-.leaflet-popup-content .pp{color:var(--ink-2)}
-.leaflet-popup-content a{font-weight:600}
-.pin-saved{width:18px;height:18px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--kokia);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.pin-extra{width:12px;height:12px;border-radius:50%;background:var(--cedar);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
-.pin-home{width:16px;height:16px;border-radius:3px;background:var(--lake);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
-.pin-lbl{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.72rem;font-weight:600;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15)}
-.leaflet-control-attribution{background:color-mix(in srgb,var(--paper) 85%,transparent)!important;color:var(--ink-3)!important;font-size:.65rem!important}
-.leaflet-control-attribution a{color:var(--ink-2)!important}
-.leaflet-bar a{background:var(--paper)!important;color:var(--ink)!important;border-color:var(--line)!important}
-
-@media (max-width:1060px){
-  .trip{grid-template-columns:1fr}
-  .map-col{position:relative;top:0;order:-1}
-  #map{height:56vh}
-  .clusters{grid-template-columns:repeat(2,1fr)}
-  .stats{grid-template-columns:repeat(3,1fr)}
-  .extras{grid-template-columns:repeat(2,1fr)}
-  .two{grid-template-columns:1fr}
+@media (max-width:960px){
+  .intro-grid,.notes-head,.note,.cols,.plans{grid-template-columns:1fr}
+  .extras{grid-template-columns:1fr 1fr}
+  .season{grid-template-columns:1fr 1fr}
+  .hero{height:auto;min-height:0}
+  .hero .inner{position:relative;padding:34px 0 40px}
+  .hero canvas{height:100%}
+  .scrollcue{display:none}
 }
-@media (max-width:720px){
-  .wrap{width:min(1240px,100% - 28px)}
-  .hero{padding:36px 0 22px}
-  .hero-grid{grid-template-columns:1fr;gap:22px}
-  .clusters{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .extras{grid-template-columns:1fr}
-  .day-head{grid-template-columns:auto 1fr}
-  .day-meta{grid-column:1/-1;text-align:left;display:flex;gap:14px;flex-wrap:wrap}
-  .stop,.leg{grid-template-columns:52px 1fr;gap:12px}
-  .stops,.signs,.ribbon-wrap,.day-head{padding-left:14px;padding-right:14px}
-  .plan-bar .hint{display:none}
-  .seg button{padding:8px 12px;font-size:.9rem}
-  .budget{grid-template-columns:1fr}
-  footer ul{columns:1}
+@media (max-width:640px){
+  .wrap,.narrow{width:min(1180px,100% - 32px)}
+  .hero h1{font-size:clamp(2.6rem,13vw,4rem)}
+  .hero .top .jp{display:none}
+  .rail::before{left:63px}
+  .leg,.node{grid-template-columns:48px 36px 1fr;gap:0 8px}
+  .node h4{font-size:1.4rem}
+  .band{height:260px}.band .bt{padding:22px 20px}
+  .extras,.season{grid-template-columns:1fr}
+  .atlas-controls{left:10px;top:10px}
+  .atlas-key{display:none}
+  .specs div{padding:12px 14px}
 }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap hero-grid">
+<header class="hero" id="top">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="veil"></div>
+  <div class="inner wrap">
+    <div class="top"><span>A three-day drive for two</span><span class="jp">大阪 → 山 → 海</span><span>September 2026</span></div>
     <div>
-      <div class="eyebrow">Saved list · 10 places · 3 days · September 2026</div>
-      <h1>Japan Driving Trip September
-        <span class="jp">大阪発 · 山と海のドライブ旅</span>
-      </h1>
-      <p class="lede">Your ten saved places sit in three different regions, roughly 600 km apart. This page turns them into two honest three-day plans: an Alps loop that sleeps in a hot-spring village, or three nature day trips that return to Hōshin every night. Both come with parking, vegetarian food, tolls and a cheap automatic rental.</p>
-      <div class="saved">
-        <div class="eyebrow">From your Google Maps list</div>
-        <div class="chips" id="savedChips"></div>
+      <h1>Japan Driving<br>Trip <em>September</em></h1>
+      <p class="sub">Ten places you saved, arranged into three days of cedar plateaus, a sandbar in the Sea of Japan, a bench on Lake Biwa and the high road into the Northern Alps. Vegetarian the whole way. Home is a flat in Higashiyodogawa.</p>
+      <div class="meta">
+        <div><b>10</b>saved places</div>
+        <div><b>3</b>days behind the wheel</div>
+        <div><b>2</b>plans to choose from</div>
+        <div><b>Hōshin 5-chōme</b>start and end</div>
       </div>
     </div>
-    <aside class="base-card">
-      <div class="eyebrow">Home base</div>
-      <div class="row"><span class="k">Address</span><span>5-chōme-1-1 Hōshin, Higashiyodogawa, Osaka 533-0014</span></div>
-      <div class="row"><span class="k">Nearest station</span><span>Kami-Shinjō (Hankyu Kyoto Line), 4 min walk</span></div>
-      <div class="row"><span class="k">Nearest rental desks</span><span>Higashi-Mikuni · Shin-Osaka, 8–12 min</span></div>
-      <div class="row"><span class="k">Expressway on-ramp</span><span>Suita IC (Meishin) · Moriguchi (Kinki Expwy), 15 min</span></div>
-      <div class="row"><span class="k">Drives on the</span><span>Left, like Singapore and Malaysia</span></div>
-    </aside>
   </div>
+  <div class="scrollcue" aria-hidden="true"></div>
 </header>
 
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Where your ten places actually are</h2>
-      <p class="sub">Grouped by driving cluster from Hōshin. Each cluster is a day on its own; the Alps cluster needs two nights.</p>
-    </div>
-    <div class="clusters" id="clusters"></div>
-    <div class="callout">
-      <div class="mark">!</div>
-      <div>
-        <p><strong>Silver Week falls on 19–23 September 2026.</strong> Respect for the Aged Day (Mon 21), a bridge holiday (Tue 22) and the Autumnal Equinox (Wed 23) make a five-day national holiday. Rental prices roughly double, Kamikōchi shuttles queue for an hour, and Yuhigaura parking fills by 4 pm. If your dates are flexible, drive on 8–11 or 14–17 September instead.</p>
+<section class="intro">
+  <div class="wrap intro-grid">
+    <div>
+      <p class="lede">Your list is three trips wearing one coat. <em>The honest plan picks which one to wear.</em></p>
+      <p class="body">The pins fall into four driving clusters that are up to six hundred kilometres apart. Nara’s mountains, the Tango coast and Lake Biwa each make a fine day out of Osaka. The four Alpine places, Kamikōchi, Norikura, Hirayu and Hirugano, sit five hours north and two of them ban private cars, so they need two nights in the hot-spring village of Hirayu. Below the atlas you choose: the Alps loop your list was really pointing at, or three day trips that sleep at home.</p>
+      <div class="notice">
+        <div class="d"></div>
+        <p><b>Silver Week falls on 19–23 September 2026.</b> Respect for the Aged Day, a bridge holiday and the Autumnal Equinox line up into a five-day national holiday. Rental prices roughly double and Kamikōchi shuttles queue for an hour. If your dates can move, drive on 8–11 or 14–17 September.</p>
       </div>
     </div>
+    <div class="regions" id="regions"></div>
   </div>
 </section>
 
-<div class="plan-bar">
-  <div class="wrap">
-    <div class="seg" role="tablist" aria-label="Choose a plan">
-      <button role="tab" id="tab-alps" aria-pressed="true" data-plan="alps"><span class="n">A</span> Northern Alps loop</button>
-      <button role="tab" id="tab-kansai" aria-pressed="false" data-plan="kansai"><span class="n">B</span> Kansai day trips</button>
+<section class="atlas wrap" id="atlas">
+  <div class="atlas-head">
+    <div>
+      <div class="eyebrow">The atlas</div>
+      <h2>Kansai to the Alps, in one frame</h2>
     </div>
-    <div class="hint">Click any stop to fly the map there · ★ red pins are your saved places</div>
+    <p>Coastline from 1 km survey data, drawn in the page’s own hand. Choose a plan below and the routes appear; pick a day to zoom.</p>
   </div>
-</div>
-
-<section class="wrap plan-head" id="planHead"></section>
-
-<section class="wrap trip">
-  <div class="days" id="days"></div>
-  <div class="map-col">
-    <div class="map-wrap">
-      <div id="map" role="img" aria-label="Map of the driving route"></div>
-      <div class="tiles-blocked" id="tilesBlocked">Map tiles are blocked on this host, so you are seeing the route on a blank ground. Open the page from the repository (GitHub Pages or locally) for the full OpenStreetMap basemap.</div>
+  <figure style="margin:0">
+    <div class="atlas-frame">
+      <div id="mapHost"></div>
+      <div class="atlas-controls" id="atlasControls" role="group" aria-label="Zoom the atlas"></div>
+      <div class="atlas-key" id="atlasKey"></div>
     </div>
-    <div class="legend" id="legend"></div>
-    <div class="map-note"><span>Pins are placed for orientation. Use the “Navigate” buttons for turn-by-turn.</span><span class="mono" id="mapCount"></span></div>
-  </div>
+    <figcaption><span id="atlasCaption">All ten saved places, coloured by cluster.</span><span class="mono">Equirectangular · 1° graticule · 50 km bar</span></figcaption>
+  </figure>
 </section>
 
-<section class="section" id="rental">
+<section class="choose wrap" id="choose">
+  <div class="choose-head">
+    <div class="eyebrow">Choose the trip</div>
+    <h2>Two ways to spend the three days</h2>
+    <p>Same car, same start. One sleeps in the mountains and reaches the places you cannot day-trip; the other sleeps at home and costs half as much.</p>
+  </div>
+  <div class="plans" id="plans"></div>
+</section>
+
+<section class="chapters wrap" id="chapters"></section>
+
+<section class="notes" id="notes">
   <div class="wrap">
-    <div class="section-head">
-      <h2>The car: cheap, automatic, close to home</h2>
-      <p class="sub">Every rental car in Japan is automatic unless you specifically ask for manual. The savings are in the class you pick and the desk you book through.</p>
+    <div class="notes-head">
+      <div><div class="eyebrow">Field notes</div><h2>The car, the money, the food</h2></div>
+      <p>Everything that is not a view. Rental desks within twelve minutes of the flat, what to book, where the car sleeps, what the tolls add up to, and how to eat vegetarian in villages that cook with fish stock.</p>
     </div>
-    <div class="two">
-      <div class="card">
-        <h3>Pick-up desks within 12 minutes of Hōshin</h3>
-        <div class="table-wrap">
-        <table>
+
+    <div class="note" id="car">
+      <div><h3>The car</h3><p class="n-sub">Cheap, automatic, picked up close to Hōshin.</p></div>
+      <div class="n-body">
+        <p>Every rental car in Japan is automatic unless you ask for manual. The saving is in the class you pick and the desk you book through. Book a compact hybrid: it is ¥1,500 a day more than a kei car and the only one of the two that climbs to Hirayu with luggage without complaint.</p>
+        <div class="h4">Desks within twelve minutes</div>
+        <div class="table-wrap"><table>
           <thead><tr><th>Desk</th><th>Where</th><th>From home</th><th>Why</th></tr></thead>
           <tbody>
-            <tr><td><b>Toyota Rent a Car Higashi-Mikuni</b></td><td>3-10-21 Higashimikuni, Yodogawa-ku (inside Toyota Mobility Shin-Osaka)</td><td><span class="pill near">2 km · 8 min taxi</span></td><td>Closest desk to the flat. Newer Yaris and Aqua fleet; easy return at night.</td></tr>
-            <tr><td><b>Times Car Rental Shin-Osaka</b></td><td>Shin-Osaka Prime Tower 1F, 6-1-1 Nishinakajima, Yodogawa-ku</td><td><span class="pill near">Metro Shin-Osaka · 12 min</span></td><td>Usually the cheapest of the majors on web-only rates; ETC card rental about ¥330.</td></tr>
-            <tr><td><b>ORIX Rent a Car Shin-Osaka</b></td><td>Near Shin-Osaka station, Nishinakajima</td><td><span class="pill near">12 min</span></td><td>Comparison sites listed it as the cheapest desk at Shin-Osaka recently. Frequent “early-bird 30 days” discounts.</td></tr>
-            <tr><td><b>Toyota Rent a Car Shin-Osaka</b></td><td>5-14-10 Nishinakajima, right outside Midōsuji Line Shin-Osaka exit</td><td><span class="pill near">12 min</span></td><td>Backup if Higashi-Mikuni has no compact left.</td></tr>
-            <tr><td><b>NICONICO Rent a Car</b></td><td>Budget chain, several Osaka desks; check the nearest on their site</td><td><span class="pill mid">Varies</span></td><td>From about ¥4,600 a day. Older cars, fewer English staff, but the lowest sticker price.</td></tr>
+            <tr><td><b>Toyota Rent a Car Higashi-Mikuni</b></td><td>3-10-21 Higashimikuni, Yodogawa-ku, inside Toyota Mobility Shin-Osaka</td><td><span class="pill near">2 km · 8 min taxi</span></td><td>Closest desk to the flat. Newer Yaris and Aqua fleet.</td></tr>
+            <tr><td><b>Times Car Rental Shin-Osaka</b></td><td>Shin-Osaka Prime Tower 1F, 6-1-1 Nishinakajima</td><td><span class="pill near">Metro · 12 min</span></td><td>Usually the cheapest major on web-only rates; ETC card about ¥330.</td></tr>
+            <tr><td><b>ORIX Rent a Car Shin-Osaka</b></td><td>Nishinakajima, by Shin-Osaka station</td><td><span class="pill near">12 min</span></td><td>Listed as the cheapest desk at Shin-Osaka on comparison sites this summer; early-bird discounts at 30 days.</td></tr>
+            <tr><td><b>Toyota Rent a Car Shin-Osaka</b></td><td>5-14-10 Nishinakajima, at the Midōsuji Line exit</td><td><span class="pill near">12 min</span></td><td>Backup if Higashi-Mikuni has no compact left.</td></tr>
+            <tr><td><b>NICONICO Rent a Car</b></td><td>Budget chain, several Osaka desks</td><td><span class="pill mid">Varies</span></td><td>From about ¥4,600 a day. Older cars, little English, lowest sticker price.</td></tr>
           </tbody>
-        </table>
-        </div>
-        <p style="margin-top:12px">Book through <a href="https://www.tabirai.net/en/car/" target="_blank" rel="noopener">Tabirai Japan</a> or <a href="https://www2.tocoo.jp/en/" target="_blank" rel="noopener">ToCoo!</a>. Both compare the desks above in English, include basic insurance, and let you add an ETC card at checkout. Search with pick-up “Shin-Osaka” and filter “Compact”.</p>
-      </div>
-      <div style="display:grid;gap:14px">
-        <div class="card">
-          <h3>Which class to book</h3>
-          <div class="table-wrap">
-          <table>
-            <thead><tr><th>Class</th><th>Typical car</th><th>Sept weekday</th><th>Verdict</th></tr></thead>
-            <tbody>
-              <tr><td><b>Kei (K)</b></td><td>Daihatsu Tanto, Suzuki Wagon R · 660 cc</td><td class="mono">¥4,500–6,500 / day</td><td>Fine for Plan B. Struggles on the climb to Hirayu with two people and bags.</td></tr>
-              <tr><td><b>Compact (S)</b> <span class="pill good">Pick this</span></td><td>Toyota Yaris, Aqua, Honda Fit, Nissan Note</td><td class="mono">¥6,000–8,500 / day</td><td>Hybrid, 25 km/L, happy on mountain roads. Best value for either plan.</td></tr>
-              <tr><td><b>Standard (A)</b></td><td>Corolla, Prius</td><td class="mono">¥8,500–11,000 / day</td><td>Unnecessary for two.</td></tr>
-            </tbody>
-          </table>
+        </table></div>
+        <div class="cols" style="margin-top:22px">
+          <div>
+            <div class="h4">Class</div>
+            <div class="table-wrap"><table>
+              <tbody>
+                <tr><td><b>Kei</b><br>Tanto, Wagon R · 660 cc</td><td class="mono">¥4,500–6,500</td><td>Fine for Plan B. Slow on the Hirayu climb.</td></tr>
+                <tr><td><b>Compact</b> <span class="pill good">Pick this</span><br>Yaris, Aqua, Fit, Note</td><td class="mono">¥6,000–8,500</td><td>Hybrid, 25 km/L, happy on mountain roads.</td></tr>
+                <tr><td><b>Standard</b><br>Corolla, Prius</td><td class="mono">¥8,500–11,000</td><td>Unnecessary for two.</td></tr>
+              </tbody>
+            </table></div>
+            <p style="margin-top:10px;font-size:.85rem">Prices are September weekday rates per day. Compare on <a href="https://www.tabirai.net/en/car/" target="_blank" rel="noopener">Tabirai Japan</a> or <a href="https://www2.tocoo.jp/en/" target="_blank" rel="noopener">ToCoo!</a>, pick-up “Shin-Osaka”, filter “Compact”.</p>
+          </div>
+          <div>
+            <div class="h4">Bring to the counter</div>
+            <ul>
+              <li><b>Passport, home licence, and a 1949 Geneva Convention International Driving Permit.</b> Singapore (AA Singapore, same day) and Malaysia (JPJ) permits are accepted.</li>
+              <li>Licences from Germany, France, Switzerland, Belgium, Monaco, Taiwan, Slovenia or Estonia need a <b>JAF Japanese translation</b> instead.</li>
+              <li>Ask for an <b>ETC card</b>: 30 percent off weekend tolls and the only way through the Hirugano smart interchange.</li>
+              <li>Add the <b>NOC waiver</b>, about ¥550 a day. Without it a scratch costs ¥20,000–50,000 on top of insurance.</li>
+              <li>Return with a <b>full tank</b> (“mantan”) and keep the receipt.</li>
+            </ul>
           </div>
         </div>
-        <div class="card">
-          <h3>Bring to the counter</h3>
-          <ul>
-            <li><b>Passport</b>, home driving licence, and a <b>1949 Geneva Convention International Driving Permit</b>. Singapore (AA Singapore, same-day) and Malaysia (JPJ) permits are accepted.</li>
-            <li>If your licence is from Germany, France, Switzerland, Belgium, Monaco, Taiwan, Slovenia or Estonia you need a <b>JAF Japanese translation</b> instead of an IDP.</li>
-            <li>Ask for an <b>ETC card</b> (about ¥330 for the rental). It saves 30 percent on many tolls and is the only way through the Hirugano Kōgen smart interchange.</li>
-            <li>Add the <b>NOC waiver</b> (about ¥550 a day). Without it a scratch costs ¥20,000–50,000 on top of insurance.</li>
-            <li>Return with a <b>full tank</b> (say “mantan”), and keep the receipt.</li>
+      </div>
+    </div>
+
+    <div class="note" id="money">
+      <div><h3>Parking and the bill</h3><p class="n-sub">Where the car sleeps, and what three days cost.</p></div>
+      <div class="n-body cols">
+        <div>
+          <ul style="margin-top:0">
+            <li><b>Overnight near Hōshin.</b> Coin parking around Kami-Shinjō and Awaji stations caps at ¥800–1,200 a night; look for 夜間最大 on the sign. The <a href="https://www.akippa.com/" target="_blank" rel="noopener">akippa</a> app pre-books private spaces from about ¥500 a day. Ask about the building’s visitor bay first.</li>
+            <li><b>Plan B keeps the car three days</b> and parks at home. Returning to the desk each night wastes more time than the parking costs.</li>
+            <li><b>Mountain lots are free or nearly.</b> Ōdaigahara, Hirayu Falls, Honokidaira and Makino Pic-Land are free; Akandana is ¥600 a day. Only beach and ropeway lots charge ¥1,000–2,000.</li>
+            <li><b>Never on the shoulder</b> at Shirahige Shrine or That Bench. Both get patrolled.</li>
           </ul>
+          <div class="h4">Toll notes</div>
+          <ul style="margin-top:0">
+            <li>ETC takes 30 percent off on weekends and holidays, and 30 percent off between midnight and 04:00 on weekdays. The discount is suspended during Silver Week.</li>
+            <li>The Chūbu-Jūkan Expressway between Takayama and Hida-Kiyomi, and the Kyoto-Jūkan section around Kameoka, are toll-free.</li>
+            <li>The foreign-visitor Central Nippon Expressway Pass was discontinued in 2026; there is no flat-rate pass for the Alps route.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="h4" id="ledgerTitle">Estimate for two</div>
+          <div class="ledger" id="ledger"></div>
+          <p style="margin-top:12px;font-size:.82rem;color:var(--ink-3)">Compact car with ETC card. Figures marked ≈ were not confirmed on an official page; check live tolls in Google Maps with “show tolls” on.</p>
         </div>
       </div>
     </div>
-    <div class="two" style="margin-top:24px">
-      <div class="card">
-        <h3>Parking at home and on the road</h3>
-        <ul>
-          <li><b>Overnight near Hōshin.</b> Coin parking around Kami-Shinjō and Awaji stations caps at roughly ¥800–1,200 per night (look for 夜間最大 “night maximum” on the sign). The <a href="https://www.akippa.com/" target="_blank" rel="noopener">akippa</a> app pre-books private spaces from about ¥500 a day, and Times Parking has several lots within 300 m of the address. Ask whether the building has a visitor bay first.</li>
-          <li><b>Plan B keeps the car three days</b> and parks at home each night. Returning to the desk nightly costs more in time than the parking does.</li>
-          <li><b>Mountain lots are cheap or free.</b> Ōdaigahara, Kōyasan-style temple lots, Hirayu Falls, Honokidaira and Makino Pic-Land are free. Akandana (Kamikōchi) is ¥600 a day. Only beach and ropeway lots charge ¥1,000–2,000.</li>
-          <li><b>Park facing out</b> in tight lots, and never on the shoulder at Shirahige Shrine or That Bench; both get patrolled.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Tolls, fuel and the total</h3>
-        <p>Estimates for a compact car with an ETC card. Confirm live prices in Google Maps (toggle “Show tolls”) or the NAVITIME toll calculator.</p>
-        <div class="budget" id="budget"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section" id="veg">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Eating vegetarian in the mountains</h2>
-      <p class="sub">Rural Japan hides fish in dashi stock. The stops above name a checked vegetarian place for every lunch; this is the safety net for everything else.</p>
-    </div>
-    <div class="two">
-      <div class="card">
-        <h3>Show this at any counter</h3>
-        <div class="phrase">私はベジタリアンです。肉・魚・魚のだし・かつおぶしは食べられません。卵と乳製品は大丈夫です。<small>“I am vegetarian. I cannot eat meat, fish, fish stock or bonito flakes. Egg and dairy are fine.” Delete the last sentence if you are vegan.</small></div>
-        <div class="phrase">これは肉や魚のだしが入っていますか？<small>“Does this contain meat or fish stock?” Answer to hope for: 入っていません (haitte imasen, “it does not”).</small></div>
-        <h3 style="margin-top:18px">Chains that always work</h3>
-        <ul>
-          <li><b>CoCo Ichibanya</b> curry houses list a “Vegetarian Curry” made without animal ingredients; there is one at almost every expressway exit town and they open until 23:00.</li>
-          <li><b>Mos Burger</b> Green Burger is plant-based; ask for it without the sauce if you are strict.</li>
-          <li><b>Convenience stores</b>: ume, kombu and natto-maki onigiri, inari-zushi, edamame, tofu, fruit cups, salted rice crackers. Egg sandwiches are vegetarian; tuna and “sea chicken” are not.</li>
-          <li><b>Michi-no-eki</b> roadside stations sell local tofu, pickles, mountain vegetables (sansai) and fresh fruit. Good picnic material for Kamikōchi and Ōdaigahara.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Near home, for dinner after a drive</h3>
-        <ul>
-          <li><b>Imakoko Kitchen Merrymomo</b>, 6-8-8 Nishinakajima. Macrobiotic set meals, open 7:30–21:00, closed Sundays and holidays. Ten minutes from Shin-Osaka; the closest proper vegetarian dinner to the flat.</li>
-          <li><b>Vegecafe+α</b>, 6-9-20 Nishinakajima. Vegetable plates and cake, 10:00–17:00, Wednesday to Sunday. Good for a pre-drive brunch, not dinner.</li>
-          <li><b>Paprika Shokudō Vegan</b>, Shinsaibashi. Soy karaage, pasta, big salads; open late.</li>
-          <li><b>Green Earth</b>, Honmachi. Osaka’s oldest vegetarian restaurant, cheap curry and sandwiches.</li>
-        </ul>
-        <h3 style="margin-top:18px">Book ahead for temple food</h3>
-        <p>Both plans stay within reach of shōjin ryōri, the Buddhist vegetarian cuisine: Kōyasan (Wakayama) and Enryaku-ji on Mount Hiei (Shiga) serve it at lunch. A ryokan in Hirayu will cook a meat-free dinner if you write “ベジタリアン料理希望” in the booking notes at least three days ahead.</p>
+    <div class="note" id="veg">
+      <div><h3>Eating vegetarian</h3><p class="n-sub">Rural Japan hides fish in the stock. These are the safety nets.</p></div>
+      <div class="n-body cols">
+        <div>
+          <p>Every lunch in the plans names a checked vegetarian kitchen. For everything in between, show this at the counter:</p>
+          <div class="phrase">私はベジタリアンです。肉・魚・魚のだし・かつおぶしは食べられません。卵と乳製品は大丈夫です。<small>“I am vegetarian. I cannot eat meat, fish, fish stock or bonito flakes. Egg and dairy are fine.” Drop the last sentence if you are vegan.</small></div>
+          <div class="phrase">これは肉や魚のだしが入っていますか？<small>“Does this contain meat or fish stock?” The answer you want is 入っていません, haitte imasen.</small></div>
+          <div class="h4">Chains that always work</div>
+          <ul style="margin-top:0">
+            <li><b>CoCo Ichibanya</b> lists a Vegetarian Curry made without animal ingredients, at almost every expressway exit town, open until 23:00.</li>
+            <li><b>Mos Burger</b> Green Burger is plant-based; skip the sauce if strict.</li>
+            <li><b>Convenience stores</b>: ume, kombu and natto-maki onigiri, inari-zushi, edamame, tofu, fruit. Egg sandwiches are vegetarian; tuna and “sea chicken” are not.</li>
+            <li><b>Michi-no-eki</b> roadside stations sell local tofu, pickles, mountain vegetables and fruit: picnic material for Kamikōchi and Ōdaigahara.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="h4" style="margin-top:0">Near home, after a drive</div>
+          <ul style="margin-top:0">
+            <li><b>Imakoko Kitchen Merrymomo</b>, 6-8-8 Nishinakajima. Macrobiotic set meals, 7:30–21:00, closed Sundays and holidays. The closest proper vegetarian dinner to the flat.</li>
+            <li><b>Vegecafe+α</b>, 6-9-20 Nishinakajima. Vegetable plates and cake, 10:00–17:00, Wednesday to Sunday. Pre-drive brunch.</li>
+            <li><b>Paprika Shokudō Vegan</b>, Shinsaibashi. Soy karaage, pasta, big salads, open late.</li>
+            <li><b>Green Earth</b>, Honmachi. Osaka’s oldest vegetarian restaurant; cheap curry and sandwiches.</li>
+          </ul>
+          <div class="h4">Temple food, booked ahead</div>
+          <p>Both plans stay within reach of shōjin ryōri, the Buddhist vegetarian cuisine: Kōyasan in Wakayama and Enryaku-ji on Mount Hiei serve it at lunch. A ryokan in Hirayu will cook a meat-free dinner if you write ベジタリアン料理希望 in the booking notes three days ahead.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section" id="extras">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Worth adding</h2>
-      <p class="sub">Nature stops within thirty minutes of your route that were not on the list. Each is folded into the plans above where the timing works.</p>
+    <div class="note" id="more">
+      <div><h3>Worth adding</h3><p class="n-sub">Nature within thirty minutes of the route that was not on the list.</p></div>
+      <div class="n-body"><div class="extras" id="extraCards"></div></div>
     </div>
-    <div class="extras" id="extraCards"></div>
-  </div>
-</section>
 
-<section class="section" id="september">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>September specifics</h2>
-    </div>
-    <div class="clusters">
-      <div class="cluster" style="--c:var(--sun)"><h3>Light</h3><p class="dist">Sunset 18:15 on 1 Sept, 17:50 by 30 Sept. Yuhigaura and That Bench are sunset stops; be parked forty minutes before.</p></div>
-      <div class="cluster" style="--c:var(--lake)"><h3>Weather</h3><p class="dist">Typhoon season. Check the JMA forecast two days out; if a typhoon is tracking toward Kansai, swap the Alps or coast day for Ōdaigahara’s shorter walk. Ōdaigahara is one of the wettest places in Japan, so go in the morning.</p></div>
-      <div class="cluster" style="--c:var(--cedar)"><h3>Temperature</h3><p class="dist">Osaka lowlands still 30 °C. Kamikōchi mornings 8–12 °C, Norikura summit 5 °C with wind. Pack a fleece, a rain shell and closed shoes even for the day trips.</p></div>
-      <div class="cluster" style="--c:var(--kokia)"><h3>Seasonal colour</h3><p class="dist">Hirugano’s 6,000 kochia bushes turn red from late September. Norikura’s alpine leaves start turning in the last week. Metasequoia is still green; it turns copper in November.</p></div>
+    <div class="note" id="season">
+      <div><h3>September</h3><p class="n-sub">Light, weather, temperature, colour.</p></div>
+      <div class="n-body season">
+        <div style="--c:var(--sunset)"><h4>Light</h4><p>Sunset 18:15 on the 1st, 17:50 by the 30th. Yuhigaura and That Bench are light-dependent; be parked forty minutes before.</p></div>
+        <div style="--c:var(--lake)"><h4>Weather</h4><p>Typhoon season. Check the JMA forecast two days out; if one is tracking toward Kansai, swap the coast or Alps day for Ōdaigahara’s short walk. Ōdaigahara itself is one of the wettest places in Japan: go in the morning.</p></div>
+        <div style="--c:var(--cedar)"><h4>Temperature</h4><p>Osaka still 30 °C. Kamikōchi mornings 8–12 °C, the Norikura summit 5 °C with wind. Fleece, rain shell, closed shoes, even for the day trips.</p></div>
+        <div style="--c:var(--granite)"><h4>Colour</h4><p>Hirugano’s 6,000 kochia bushes turn red from late September. Norikura’s alpine leaves begin in the last week. The Metasequoia avenue stays green until November.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1125,23 +463,22 @@ footer li{margin-bottom:4px}
     <div class="eyebrow">Sources checked while planning</div>
     <ul>
       <li>Kamikōchi car access, Akandana ¥600 parking and ¥2,800 return shuttle: Nōhi Bus and the Kamikōchi official site (2026 season 17 Apr–15 Nov).</li>
-      <li>Norikura Skyline 2026 season 15 May–31 Oct; Honokidaira free parking; ¥3,400 return bus: Nōhi Bus and Visit Gifu.</li>
+      <li>Norikura Skyline 2026 season 15 May–31 Oct, Honokidaira free parking, ¥3,400 return bus: Nōhi Bus and Visit Gifu.</li>
       <li>Hirugano Picnic Garden kochia and Bokka-no-Sato free parking: TABITABI Gujō.</li>
-      <li>That Bench location and roadside spaces: Hikone local guides (biwako-outdoor.com, 4travel).</li>
+      <li>That Bench location and roadside spaces: Hikone local guides.</li>
       <li>Ōdaigahara trails and free visitor-centre parking: Official Nara Travel Guide.</li>
-      <li>Tenkawa village parking lots and Dorogawa fees: Tenkawa village tourism office.</li>
-      <li>Amanohashidate, Kasamatsu and Yuhigaura parking: Amanohashidate Tourist Information, Visit Kyotango, Kyoto tourism.</li>
-      <li>Shirahige Shrine 30-car lot and Makino Pic-Land free parking: Biwako Hotel and JeePe guides.</li>
-      <li>Vegetarian places: HappyCow, Vegewel, Tabelog, Tripadvisor reviews for Cafe Mustache, vegan cafe CLOUD8, Zen Vegan Cafe, Merrymomo, Vegecafe+α.</li>
-      <li>Rental desks and prices: Toyota Rent a Car, Times Car Rental, ORIX, NICONICO, Kayak and Tabirai listings, Japan National Tourism Organization driving guide.</li>
+      <li>Tenkawa village parking and Dorogawa fees: Tenkawa village tourism office.</li>
+      <li>Amanohashidate, Kasamatsu and Yuhigaura parking: Amanohashidate Tourist Information, Visit Kyotango.</li>
+      <li>Shirahige Shrine lot and Makino Pic-Land parking: Biwako Hotel and JeePe guides.</li>
+      <li>Vegetarian kitchens: HappyCow, Vegewel, Tabelog and Tripadvisor listings for Cafe Mustache, vegan cafe CLOUD8, Zen Vegan Cafe, Merrymomo, Vegecafe+α.</li>
+      <li>Rental desks and prices: Toyota Rent a Car, Times, ORIX, NICONICO, Kayak and Tabirai listings; JNTO driving guide.</li>
+      <li>Coastline and lake geometry: Natural Earth via the geo-maps 1 km dataset.</li>
     </ul>
-    <p style="margin-top:14px">Drive times assume dry roads and no holiday traffic; add 20 percent on weekends. Prices are September 2026 estimates and are marked ≈ where they were not confirmed on an official page.</p>
+    <p style="margin-top:14px">Drive times assume dry roads and no holiday traffic; add 20 percent on weekends. Prices are September 2026 estimates.</p>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-/* ---------------- data ---------------- */
 const HOME = {name:'Home · Hōshin 5-chōme', lat:34.7462, lng:135.5396};
 
 // The ten saved places, grouped into driving clusters
@@ -1296,157 +633,271 @@ const EXTRAS = [
   {name:'Gujō Hachiman', where:'Gifu · Plan A detour', text:'Castle town of canals and clear waterways 25 minutes below Hirugano. Worth an hour if you reach Hirugano early.'},
 ];
 
-/* ---------------- render ---------------- */
+
+const MAPDATA = {"W": 1000, "H": 888, "BB": {"w": 133.6, "e": 138.7, "s": 33.3, "n": 37}, "land": "M628.63 509.28L632.16 515.52L629.22 518.64L628.63 509.28ZM630.39 468.24L633.53 468.24L635.10 472.80L629.61 473.52L630.39 468.24ZM624.51 658.08L617.65 655.20L624.51 653.04L629.80 656.88L633.14 654.96L633.33 658.08L637.25 654.24L639.41 657.12L636.86 660.72L624.51 658.08ZM193.92 670.80L200.20 669.60L199.41 664.32L204.71 662.64L200.78 675.36L193.92 670.80ZM261.18 610.32L253.92 619.44L253.73 635.52L263.33 648.24L265.10 655.92L244.31 664.56L234.71 672.72L221.37 674.64L221.57 670.32L215.69 666.72L220.20 658.80L207.45 662.16L210.98 658.56L206.86 649.20L213.14 640.56L217.06 642.96L221.57 640.80L234.90 612.24L243.53 606.96L252.35 592.56L261.76 588.24L275.10 573.84L279.61 581.76L261.18 610.32ZM199.41 664.08L194.31 668.64L197.25 659.52L199.41 664.08ZM21.57 624.24L25.69 630.96L19.61 635.52L16.47 633.12L21.57 624.24ZM36.67 624.96L38.04 627.12L30.39 631.20L30.00 624.24L36.67 624.96ZM9.80 655.68L3.33 657.84L4.71 651.12L6.86 654.48L10.98 652.56L9.80 655.68ZM639.80 595.44L647.25 590.88L647.84 595.44L636.47 598.08L639.80 595.44ZM326.47 614.88L319.22 620.88L319.41 616.56L313.92 617.28L321.96 610.80L324.51 612.00L320.20 616.32L326.47 614.88ZM115.10 603.36L109.02 598.80L112.16 593.04L115.10 596.16L125.29 592.80L130.20 587.28L134.12 588.96L142.94 584.64L150.39 585.36L145.88 589.20L149.41 590.16L144.71 616.08L141.18 610.08L133.53 613.44L134.12 609.36L140.59 609.60L136.47 604.80L130.98 607.68L127.65 618.24L123.92 620.40L124.12 605.52L115.10 603.36ZM115.10 603.36L110.39 609.12L106.08 607.20L109.22 601.68L115.10 603.36ZM95.49 601.20L99.02 603.12L95.10 609.60L85.49 604.56L95.49 601.20ZM71.57 606.00L80.78 611.76L73.73 612.24L71.57 606.00ZM14.51 625.92L12.94 628.08L10.00 621.84L14.90 621.60L14.51 625.92ZM359.80 565.68L359.41 570.24L354.90 569.76L355.29 567.12L352.35 569.04L353.33 566.40L359.80 565.68ZM180.98 556.56L185.49 556.80L184.71 562.08L178.04 557.52L180.98 556.56ZM329.02 552.48L331.57 556.32L324.31 557.28L323.92 553.68L329.02 552.48ZM315.10 557.52L317.65 556.08L322.55 563.76L314.51 562.56L315.10 557.52ZM137.06 550.08L133.73 550.32L132.75 546.72L137.06 544.80L146.47 549.84L137.06 550.08ZM172.55 560.88L175.69 559.68L176.47 565.44L169.61 566.16L169.22 560.88L172.55 560.88ZM1000.00 0.00L1000.00 445.45L999.22 445.20L999.61 447.84L988.43 452.40L971.76 455.76L965.49 469.68L959.02 472.80L961.37 483.36L961.57 476.40L967.25 476.40L964.51 483.12L932.55 500.64L928.24 511.68L926.27 510.48L929.02 521.04L921.96 533.04L919.41 532.56L922.75 533.28L907.25 545.52L901.37 559.44L900.98 567.12L905.49 573.84L908.63 574.56L907.25 577.20L857.45 560.40L843.53 559.92L824.51 564.96L780.00 556.80L754.12 559.44L694.51 578.40L670.20 581.04L680.59 561.12L690.00 567.84L694.51 565.44L692.16 563.04L695.69 563.52L692.16 562.56L710.59 557.76L714.90 550.56L718.04 553.20L718.04 548.16L722.55 544.56L725.69 545.28L725.69 552.96L722.35 557.28L726.86 557.28L732.16 550.56L727.84 552.48L727.25 546.48L733.73 547.20L732.35 550.32L735.88 545.52L729.41 544.08L729.61 534.96L732.75 533.04L727.25 533.04L726.08 529.68L730.20 530.88L725.10 525.36L715.88 526.80L709.02 522.48L707.84 527.28L704.31 525.36L701.57 536.16L700.00 530.88L687.65 530.16L683.73 534.00L681.57 531.12L672.94 534.00L666.08 524.16L656.67 521.52L663.53 505.68L662.94 490.32L659.61 510.00L655.69 508.56L654.90 513.36L652.55 512.40L649.80 534.72L659.80 543.84L662.35 551.52L652.94 551.28L639.02 542.88L635.29 536.40L640.59 518.64L635.10 507.84L633.92 510.24L631.76 507.84L631.57 488.16L636.67 477.84L641.76 476.88L637.65 476.16L640.98 469.92L646.08 470.16L642.94 468.48L645.10 458.88L640.59 457.68L638.43 466.32L633.92 464.64L633.33 468.00L626.86 467.76L627.45 473.04L623.14 470.88L627.06 477.12L615.69 472.08L599.41 480.00L602.94 479.52L600.20 481.68L603.53 483.12L600.59 486.48L598.24 481.68L594.90 492.24L601.37 495.12L597.06 495.84L593.33 511.68L574.71 541.20L573.53 556.32L579.80 558.96L577.06 560.88L577.25 570.72L573.92 572.64L594.12 576.48L601.57 586.08L622.55 597.84L629.41 598.08L630.39 603.60L633.92 598.56L636.47 605.52L642.55 606.24L640.00 609.36L644.12 612.00L642.35 617.04L646.47 611.04L651.96 613.44L649.61 629.76L644.71 625.68L643.14 628.80L640.98 626.64L642.55 630.96L638.82 632.64L636.67 630.48L633.92 633.36L629.80 631.68L632.55 635.28L636.67 631.20L637.65 634.56L640.00 632.40L640.59 637.68L648.82 632.40L642.75 639.84L647.06 653.76L641.18 654.48L640.98 657.12L638.24 652.56L633.92 655.20L634.12 649.92L640.39 650.64L632.75 647.76L636.86 644.64L628.43 646.08L629.02 641.28L625.88 645.84L629.80 648.24L627.25 650.40L623.14 649.92L623.14 644.40L620.00 644.16L618.04 648.24L620.39 649.92L612.16 647.04L605.29 651.84L606.67 643.44L609.61 643.92L610.20 640.56L611.18 642.72L613.14 637.68L609.22 639.36L609.41 636.24L606.27 636.48L604.51 642.24L606.08 637.20L600.39 636.96L602.55 642.24L595.49 645.84L603.33 644.16L598.04 649.68L600.00 650.64L589.22 658.08L585.49 658.32L583.92 655.20L586.27 654.72L582.55 654.00L587.45 652.56L586.47 649.20L580.39 654.00L578.24 652.08L578.04 660.00L576.67 653.28L573.73 657.84L574.71 654.48L569.80 653.04L572.35 662.40L568.82 657.84L566.86 659.52L569.61 661.68L565.69 662.40L570.20 665.04L564.90 667.20L561.57 664.56L561.96 658.32L556.86 660.72L559.80 661.68L559.22 667.20L548.82 671.28L547.06 667.44L541.96 674.64L539.02 673.20L539.80 669.12L533.73 672.96L537.06 672.96L536.27 676.56L530.20 676.80L527.25 682.32L525.10 681.36L526.27 691.68L532.55 692.40L529.02 699.12L527.45 696.72L522.94 700.32L524.31 695.52L519.61 697.44L523.14 689.04L515.29 696.00L517.06 699.12L510.00 701.76L520.20 705.12L518.63 710.88L525.69 714.48L518.04 716.64L524.12 718.80L520.98 720.48L523.92 726.72L517.25 727.44L520.00 723.60L512.16 720.00L512.75 724.08L508.24 726.96L510.39 728.88L514.12 726.24L515.88 732.96L513.14 732.72L512.35 736.56L510.00 733.20L506.27 734.64L509.61 739.20L505.88 740.88L500.00 736.56L499.80 744.72L496.86 744.24L496.27 747.60L493.92 744.24L489.22 749.04L474.12 784.80L465.10 798.48L467.84 802.80L458.24 805.68L461.57 808.32L461.57 810.72L460.59 808.80L460.00 811.92L458.04 811.68L456.08 814.80L457.65 817.68L459.61 815.04L459.80 818.16L463.14 817.20L462.75 820.32L455.69 821.52L449.02 826.80L455.69 825.84L446.67 833.04L431.18 840.24L427.65 848.64L430.78 849.36L430.98 853.20L425.49 852.72L424.12 856.08L421.57 852.00L426.67 849.36L424.71 844.32L413.53 845.28L411.96 841.44L404.51 842.40L398.04 837.84L390.39 838.32L390.59 840.48L386.27 835.92L374.51 833.76L370.20 827.76L361.96 828.24L350.98 817.68L351.18 805.68L339.22 799.20L341.96 796.56L340.39 793.20L348.63 796.08L352.94 786.72L343.73 786.00L344.51 782.16L338.63 781.92L336.08 775.44L320.59 772.32L320.59 768.24L310.98 763.20L302.16 747.60L296.67 745.68L285.88 748.80L286.08 742.80L290.78 741.60L287.25 737.52L297.65 729.60L290.00 730.56L291.37 727.68L287.84 725.52L303.53 718.80L301.37 715.92L308.24 713.28L301.18 704.40L289.80 702.24L295.29 700.32L293.14 697.92L297.25 691.20L303.14 693.36L299.22 687.12L307.84 688.08L315.88 684.24L310.59 684.48L312.75 682.32L309.80 675.12L309.80 679.44L307.06 675.12L301.96 674.88L300.39 668.88L303.92 673.20L302.94 665.52L296.08 665.52L294.12 663.36L300.59 664.80L293.53 658.08L286.67 656.88L288.24 648.24L294.71 643.20L301.96 643.68L317.25 637.20L343.92 611.76L346.27 604.56L348.24 606.24L346.47 595.92L348.63 592.32L349.80 595.44L354.90 586.80L353.33 576.00L357.06 583.20L358.04 578.40L363.14 584.40L362.75 579.84L365.88 580.32L362.55 579.12L364.90 577.20L358.04 577.68L357.65 574.80L362.16 574.56L357.45 571.44L360.98 569.76L362.16 572.40L363.33 569.04L356.86 561.60L355.69 563.52L356.47 554.88L354.12 552.48L348.24 557.52L353.14 552.24L347.25 556.56L340.59 545.52L319.22 552.00L321.18 553.68L317.06 553.44L318.63 551.76L314.71 553.92L317.25 554.40L314.12 557.04L311.76 555.60L310.39 564.24L283.53 570.00L278.24 565.68L272.35 564.96L270.98 566.40L268.04 565.20L269.22 565.44L260.39 558.72L257.06 558.48L244.51 546.96L244.12 548.40L244.12 546.48L239.61 544.56L243.92 546.48L242.55 550.32L240.59 550.56L241.57 552.48L237.06 547.68L239.41 545.04L234.71 544.80L224.51 535.44L212.94 533.28L206.47 536.88L209.80 532.80L205.88 534.96L207.06 530.88L205.10 535.92L201.76 536.64L204.71 532.08L200.59 531.84L200.78 535.44L197.06 533.04L190.20 538.08L181.76 532.08L171.37 538.80L169.61 525.84L169.41 536.64L166.86 539.04L167.65 535.68L163.33 536.16L163.53 540.72L158.63 545.76L151.76 544.56L148.82 537.84L149.80 542.16L141.57 546.72L135.69 542.88L126.27 548.40L114.90 541.68L113.53 544.08L118.63 545.52L116.67 547.92L120.39 548.16L117.06 550.08L124.71 548.40L126.47 552.48L120.20 555.36L122.16 556.56L119.61 560.16L115.69 559.92L115.88 563.52L111.96 563.28L112.55 568.56L115.10 568.56L111.76 572.64L104.71 571.92L105.49 576.00L101.96 578.64L90.20 579.60L90.78 573.84L87.84 576.48L86.86 573.84L77.65 572.64L67.84 576.24L70.39 579.84L84.12 576.24L87.65 581.76L84.71 587.76L78.63 589.20L79.02 597.12L74.31 592.08L70.39 594.48L71.57 601.20L66.27 604.56L65.69 611.76L45.10 605.76L40.78 610.08L43.53 616.80L36.67 615.36L27.45 594.00L26.47 600.24L23.33 600.96L26.86 602.16L27.45 607.20L20.39 602.88L20.59 593.52L15.49 594.00L17.84 597.12L13.73 598.32L13.53 590.16L9.61 599.04L0.00 601.39L0.00 606.15L0.39 606.48L0.00 606.61L0.00 353.95L30.59 360.00L63.73 357.60L77.84 354.24L80.00 350.88L85.10 355.68L114.51 349.92L116.86 352.08L116.08 348.72L131.18 345.84L136.08 338.64L144.71 337.44L145.10 334.08L148.82 336.00L151.18 332.40L163.33 331.20L164.51 327.36L167.06 329.04L184.31 319.20L188.04 323.76L195.88 321.84L200.20 326.64L208.63 319.92L208.43 324.48L213.33 320.40L216.67 323.28L218.82 319.92L225.29 321.60L228.43 318.00L230.20 321.84L235.10 318.96L242.94 322.56L243.33 325.92L245.49 321.60L250.78 321.36L255.29 324.96L252.55 329.28L256.86 328.08L252.75 333.12L256.67 334.80L260.59 328.08L255.10 324.24L267.06 321.36L271.76 313.68L279.80 314.40L291.18 306.00L290.59 302.88L315.10 296.64L318.43 293.04L334.71 312.24L333.92 320.88L330.78 317.76L326.86 319.92L311.37 345.84L312.55 340.32L304.71 346.80L310.78 345.60L314.12 351.12L314.51 345.60L324.31 336.00L323.73 342.96L328.43 345.60L321.96 345.60L321.76 350.64L331.18 356.16L335.49 357.12L337.84 353.76L339.61 356.16L336.67 371.76L342.55 366.00L342.55 361.20L348.82 362.16L347.45 365.52L350.20 366.00L353.33 361.20L351.76 355.92L349.02 359.52L341.96 359.04L341.37 348.00L358.24 344.16L359.61 338.16L365.10 335.04L363.14 343.68L370.00 346.08L366.47 352.80L373.33 354.48L372.35 347.04L375.69 347.76L375.88 361.44L387.25 361.68L404.12 348.48L405.69 354.00L398.24 354.72L400.39 358.32L397.45 362.64L388.43 362.40L401.57 365.28L404.51 361.44L411.96 361.20L415.49 363.84L424.51 351.84L419.41 351.36L415.29 355.20L415.10 350.16L409.61 348.96L414.71 343.20L421.57 343.92L422.94 349.68L425.49 349.44L424.71 346.32L430.98 354.00L438.04 351.36L431.57 342.96L439.02 344.88L442.35 336.00L437.65 335.28L439.02 330.96L434.31 325.92L440.39 327.60L444.71 334.08L452.35 330.00L453.53 333.84L456.86 333.36L460.78 327.84L466.27 329.28L467.84 325.92L463.33 322.32L465.88 312.48L464.90 309.12L461.96 311.28L461.57 306.72L473.92 296.64L479.22 310.80L475.69 316.80L479.61 322.08L484.71 321.36L483.33 316.80L487.45 315.84L490.20 293.28L484.51 282.24L469.22 266.88L470.00 255.60L462.94 242.40L472.75 231.84L476.08 216.96L488.63 203.52L492.75 190.80L491.76 198.24L496.08 193.92L494.71 180.00L503.14 179.76L512.55 174.24L529.22 155.52L538.24 152.40L551.76 139.92L589.61 90.72L610.39 55.44L620.39 27.36L620.78 19.68L617.45 16.80L621.57 0.96L620.25 0.00L676.86 0.00L677.84 7.68L663.92 29.28L664.71 34.80L680.20 49.68L688.82 52.56L684.90 55.20L693.33 59.28L690.59 52.80L702.35 58.32L710.98 56.16L710.39 59.76L711.57 55.92L731.76 57.12L743.14 46.80L748.63 30.72L747.06 24.48L752.16 16.56L801.90 0.00ZM0.00 710.82L5.49 707.28L9.61 673.68L0.00 664.99L0.00 659.16L4.12 663.36L14.31 660.72L14.51 666.72L26.86 656.88L25.69 653.04L33.73 651.36L32.94 646.80L34.90 650.64L39.02 648.24L37.06 646.08L44.51 643.20L42.94 635.28L47.25 633.36L44.90 637.92L49.80 633.36L50.59 636.96L44.90 640.80L49.41 643.20L53.92 641.04L56.86 634.08L58.82 636.00L57.84 628.08L62.94 630.72L64.71 626.40L66.86 630.24L70.39 629.52L70.00 632.40L73.73 630.48L82.35 636.48L88.63 633.12L90.20 636.48L92.35 632.40L95.69 638.16L96.67 627.60L102.16 636.00L101.76 624.72L105.10 624.00L110.59 628.32L110.59 641.52L115.69 640.56L114.31 635.28L119.61 636.96L119.80 631.44L124.31 639.12L127.45 635.52L130.59 639.36L126.67 646.32L129.02 651.60L138.63 653.28L145.69 659.52L152.55 657.12L163.53 670.08L177.65 665.76L190.98 667.20L189.61 663.84L194.12 662.88L192.35 671.52L200.78 676.56L204.31 676.80L199.02 685.68L196.47 684.96L201.18 687.12L196.67 694.56L195.10 692.64L195.69 695.76L197.65 695.28L194.71 704.64L196.67 707.76L191.76 706.08L195.10 710.64L190.20 710.16L195.29 711.60L193.92 717.36L197.25 721.92L200.39 722.64L201.18 717.84L203.92 718.32L216.86 737.76L210.78 748.80L203.33 750.48L201.37 754.32L205.29 751.92L203.92 757.44L219.61 757.20L211.76 760.80L225.49 759.84L204.12 772.56L200.00 771.12L196.47 776.64L192.55 774.72L189.61 784.08L186.86 781.92L179.80 791.76L165.10 800.64L157.25 801.60L150.00 808.32L154.51 811.20L149.80 818.64L143.53 820.08L149.80 820.80L139.61 821.52L138.24 825.12L141.18 826.80L135.69 829.92L119.41 864.96L115.47 888.00L99.88 888.00L98.43 881.28L85.69 870.96L84.51 861.12L69.41 853.20L65.29 842.88L32.75 836.16L29.22 831.36L23.73 830.40L0.00 835.36ZM431.76 846.48L443.73 846.72L437.45 852.24L430.98 848.88L431.76 846.48Z", "lakes": "M647.06 208.56L653.73 211.68L659.61 220.80L650.20 215.52L647.06 208.56ZM877.65 223.92L884.90 223.92L880.39 232.56L871.76 232.56L877.65 223.92ZM499.02 360.96L507.25 360.96L510.00 369.36L507.25 378.00L515.69 378.00L515.69 382.56L507.25 382.56L507.25 388.08L519.02 386.64L526.08 395.28L520.00 399.60L519.41 412.32L507.25 423.36L498.63 423.84L490.00 433.20L481.37 434.88L481.37 442.56L485.69 446.88L472.75 443.76L464.12 450.24L461.96 446.88L458.63 464.16L451.57 472.80L455.49 472.80L455.49 479.28L446.86 477.84L441.96 472.80L446.86 468.96L446.86 464.16L455.49 464.16L455.49 460.56L446.86 460.56L446.86 455.52L455.49 452.88L458.24 438.24L453.73 438.24L455.49 432.96L464.12 423.36L464.12 418.32L472.75 415.92L472.75 409.68L481.37 406.08L485.49 399.60L477.25 386.64L479.61 382.32L475.88 372.00L481.37 374.16L495.88 360.96L498.63 373.20L502.75 369.36L499.02 360.96ZM771.57 533.28L774.31 531.60L774.31 540.00L776.67 533.28L774.31 526.80L794.12 533.28L786.67 533.28L786.67 541.92L791.57 541.92L791.57 536.88L793.14 541.92L782.94 547.68L782.94 550.80L789.22 550.80L782.94 557.28L774.31 557.28L778.63 546.24L768.24 547.92L771.57 533.28ZM336.67 568.08L350.59 568.08L350.59 576.72L336.67 576.72L336.67 568.08Z"};
+
+/* ---------------- helpers ---------------- */
 const $ = s => document.querySelector(s);
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
 const fmt = m => { const h = Math.floor(m/60), mm = m%60; return h ? `${h} h${mm ? ' ' + String(mm).padStart(2,'0') : ''}` : `${mm} min`; };
-const clock = (start, add) => { const [h,m] = start.split(':').map(Number); let t = h*60+m+add; return `${String(Math.floor(t/60)%24).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`; };
+const clock = (start, add) => { const [h,m] = start.split(':').map(Number); const t = h*60+m+add; return `${String(Math.floor(t/60)%24).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`; };
+const ROMAN = ['I','II','III'];
+const REGION_COLOR = {nara:'#2f6b4f', tango:'#d97a3a', biwa:'#3a7ca5', alps:'#9a4f6a'};
+const DAY_COLORS = {alps:['#3a7ca5','#2f6b4f','#9a4f6a'], kansai:['#2f6b4f','#d97a3a','#3a7ca5']};
+const SCENE_FOR = {alps:['biwa','alps','alps2'], kansai:['nara','tango','biwa']};
 
-// saved chips
-SAVED.forEach(s => {
-  const c = CLUSTERS[s.cl];
-  $('#savedChips').appendChild(el('span','chip',`<span class="dot" style="--c:${c.c}"></span>${s.name}<span class="star">★</span>`));
+function rng(seed){ let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function mix(c1, c2, t){ const a = hex(c1), b = hex(c2); return `rgb(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)})`; }
+function hex(c){ c = c.replace('#',''); return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)]; }
+
+/* ---------------- generative landscapes ---------------- */
+const SCENES = {
+  hero:  {sky:['#1d2140','#5c4a72','#c98a72','#f2c79b'], sun:{x:.68,y:.60,r:.055,c:'#ffe9c4'}, horizon:.60, ridges:7, jag:.85, far:'#7a6a8f', near:'#151626', stars:true, road:true, seed:7},
+  alps:  {sky:['#243055','#7c6288','#e3a37a'], sun:{x:.74,y:.62,r:.05,c:'#ffe3bd'}, horizon:.62, ridges:6, jag:.9, far:'#8a7799', near:'#1a1b2f', stars:true, seed:11},
+  alps2: {sky:['#a9c1d6','#e6eef3','#f9f3ea'], sun:{x:.2,y:.22,r:.045,c:'#ffffff'}, horizon:.58, ridges:6, jag:.95, far:'#9fb0c4', near:'#2d3a4d', seed:23},
+  nara:  {sky:['#c6d9d0','#e8efe9','#f3f5ef'], horizon:.5, ridges:7, jag:.2, far:'#8fb0a2', near:'#173a2c', mist:true, trees:true, seed:3},
+  tango: {sky:['#33304f','#b8544c','#f0a35d','#fbd6a0'], sun:{x:.5,y:.665,r:.05,c:'#fff3d0'}, horizon:.67, ridges:2, jag:.3, far:'#6b4b5c', near:'#2b1f2e', water:true, pines:true, seed:5},
+  biwa:  {sky:['#8fb3c9','#d7e5ec','#eef3f4'], sun:{x:.82,y:.26,r:.04,c:'#ffffff'}, horizon:.6, ridges:4, jag:.35, far:'#93a9b8', near:'#2f4a5b', water:true, torii:true, seed:9},
+};
+function paintScene(canvas, key, opts={}){
+  const cfg = SCENES[key]; const r = rng(cfg.seed + (opts.seedShift||0));
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  const W = canvas.clientWidth || 800, H = canvas.clientHeight || 400;
+  canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+  const g = canvas.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
+  // sky
+  const sky = g.createLinearGradient(0,0,0,H*cfg.horizon*1.15);
+  cfg.sky.forEach((c,i)=>sky.addColorStop(i/(cfg.sky.length-1), c));
+  g.fillStyle = sky; g.fillRect(0,0,W,H);
+  // stars
+  if (cfg.stars){ for (let i=0;i<90;i++){ const x=r()*W, y=r()*H*cfg.horizon*.55; g.fillStyle=`rgba(255,255,255,${.15+r()*.5})`; g.fillRect(x,y,r()<.15?1.6:1,1); } }
+  // sun
+  if (cfg.sun){ const sx=cfg.sun.x*W, sy=cfg.sun.y*H, sr=cfg.sun.r*Math.min(W,H)*1.4;
+    const glow=g.createRadialGradient(sx,sy,0,sx,sy,sr*6); glow.addColorStop(0,cfg.sun.c+'cc'); glow.addColorStop(.25,cfg.sun.c+'33'); glow.addColorStop(1,cfg.sun.c+'00'); g.fillStyle=glow; g.fillRect(0,0,W,H);
+    g.fillStyle=cfg.sun.c; g.beginPath(); g.arc(sx,sy,sr,0,Math.PI*2); g.fill(); }
+  // ridges
+  const n = cfg.ridges, hy = H*cfg.horizon;
+  const ridge = (t, seedOff) => {
+    const rr = rng(cfg.seed*31 + seedOff);
+    const k = 3 + Math.floor(rr()*3), comps = [];
+    for (let i=0;i<k;i++) comps.push({f: (0.6+rr()*1.2)*(i+1)*1.7, a: (1/(i+1))*(0.5+rr()*.5), p: rr()*Math.PI*2});
+    return x => { let y=0; for (const c of comps){ const s = Math.sin(x/W*Math.PI*c.f + c.p); y += c.a * (cfg.jag>.5 ? (1-Math.abs(s))*1.4-0.7 : s); } return y; };
+  };
+  for (let i=0;i<n;i++){
+    const t = i/Math.max(1,n-1);
+    const base = hy + t*t*H*(cfg.water?.02:.30) - (1-t)*H*.02;
+    const amp = H*(0.03 + t*0.11) * (cfg.jag>.5 ? 1.25 : 1);
+    const f = ridge(t, i*7);
+    g.beginPath(); g.moveTo(0,H);
+    for (let x=0;x<=W;x+=3) g.lineTo(x, base - Math.max(-amp*.6, f(x + i*137)*amp) - (cfg.jag>.5 ? Math.abs(Math.sin(x*.05+i))*t*4 : 0));
+    g.lineTo(W,H); g.closePath();
+    g.fillStyle = mix(cfg.far, cfg.near, Math.pow(t,1.15)); g.fill();
+    if (cfg.mist && i<n-1){ const mg=g.createLinearGradient(0,base-amp*.2,0,base+H*.08); mg.addColorStop(0,'rgba(240,245,242,0)'); mg.addColorStop(.5,'rgba(240,245,242,.55)'); mg.addColorStop(1,'rgba(240,245,242,0)'); g.fillStyle=mg; g.fillRect(0,base-amp*.2,W,H*.1+amp*.2); }
+  }
+  // water
+  if (cfg.water){
+    const wy = hy + H*.02;
+    const wg = g.createLinearGradient(0,wy,0,H); const rev=[...cfg.sky].reverse(); rev.forEach((c,i)=>wg.addColorStop(i/(rev.length-1), c)); g.fillStyle=wg; g.fillRect(0,wy,W,H-wy);
+    g.fillStyle='rgba(0,0,0,.18)'; g.fillRect(0,wy,W,H-wy);
+    if (cfg.sun){ const sx=cfg.sun.x*W; for (let i=0;i<140;i++){ const y=wy+r()*(H-wy); const spread=(y-wy)/(H-wy); const len=6+r()*40*(0.3+spread); const x=sx+(r()-.5)*W*(0.05+spread*.35); g.fillStyle=cfg.sun.c+(r()<.5?'55':'99'); g.fillRect(x-len/2,y,len,1.2); } }
+    for (let i=0;i<60;i++){ const y=wy+r()*(H-wy); g.fillStyle='rgba(255,255,255,.12)'; g.fillRect(r()*W,y,20+r()*80,1); }
+  }
+  // foreground: cedar trees
+  if (cfg.trees){ const rows=[[H*.98,H*.30,'#0f2a20',.9],[H*1.0,H*.42,'#0a1f17',1]]; for (const [baseY,maxH,col] of rows){ g.fillStyle=col; let x=-20; while(x<W+40){ const h=maxH*(.45+r()*.55), w=h*(.28+r()*.12); g.beginPath(); g.moveTo(x,baseY); for (let s=0;s<6;s++){ const yy=baseY-h*(s+1)/6, ww=w*(1-(s+1)/6.6); g.lineTo(x-ww,yy+h*.06); g.lineTo(x-ww*.35,yy); } g.lineTo(x,baseY-h*1.02); for (let s=5;s>=0;s--){ const yy=baseY-h*(s+1)/6, ww=w*(1-(s+1)/6.6); g.lineTo(x+ww*.35,yy); g.lineTo(x+ww,yy+h*.06); } g.closePath(); g.fill(); x+=w*(0.9+r()*.9); } } }
+  // pines on a low headland (Tango)
+  if (cfg.pines){ g.fillStyle='#1a1420'; const by=H*.985; g.fillRect(0,by-H*.02,W*.55,H*.05); let x=W*.02; while(x<W*.5){ const h=H*(.05+r()*.06); g.beginPath(); g.ellipse(x,by-h*.9,h*.55,h*.35,0,0,Math.PI*2); g.fill(); g.fillRect(x-1.2,by-h*.9,2.4,h*.9); x+=h*.9+r()*30; } }
+  // torii standing in water (Biwa)
+  if (cfg.torii){ const tx=W*.74, ty=H*.58, s=Math.min(W,H)*.32; g.fillStyle='#8e2f27';
+    const pw=s*.055, pil=[tx-s*.32, tx+s*.32]; pil.forEach(px=>g.fillRect(px-pw/2,ty-s*.62,pw,s*.62+H*.06));
+    g.fillRect(tx-s*.36,ty-s*.42,s*.72,s*.05);
+    g.beginPath(); g.moveTo(tx-s*.5,ty-s*.62); g.quadraticCurveTo(tx,ty-s*.75,tx+s*.5,ty-s*.62); g.lineTo(tx+s*.48,ty-s*.55); g.quadraticCurveTo(tx,ty-s*.66,tx-s*.48,ty-s*.55); g.closePath(); g.fill();
+    g.fillRect(tx-pw*.45,ty-s*.55,pw*.9,s*.14);
+    g.globalAlpha=.25; pil.forEach(px=>g.fillRect(px-pw/2,ty+H*.06,pw,s*.25)); g.globalAlpha=1; }
+  // road (hero)
+  if (cfg.road){
+    const vx=W*.56, vy=hy+H*.03; const lx0=W*.05, rx0=W*.98;
+    g.fillStyle='#1b1a24'; g.beginPath(); g.moveTo(lx0,H); g.quadraticCurveTo(W*.30,H*.86,vx,vy); g.quadraticCurveTo(W*.62,H*.86,rx0,H); g.closePath(); g.fill();
+    g.fillStyle='rgba(255,255,255,.55)'; g.beginPath(); g.moveTo(lx0+W*.03,H); g.quadraticCurveTo(W*.31,H*.86,vx,vy); g.quadraticCurveTo(W*.31,H*.865,lx0+W*.045,H); g.closePath(); g.fill();
+    g.beginPath(); g.moveTo(rx0-W*.03,H); g.quadraticCurveTo(W*.62,H*.86,vx,vy); g.quadraticCurveTo(W*.62,H*.865,rx0-W*.045,H); g.closePath(); g.fill();
+    const mid = t => { const p0=[W*.52,H], p1=[W*.46,H*.85], p2=[vx,vy]; const u=1-t; return [u*u*p0[0]+2*u*t*p1[0]+t*t*p2[0], u*u*p0[1]+2*u*t*p1[1]+t*t*p2[1]]; };
+    g.fillStyle='rgba(255,226,180,.85)'; for (let t=0;t<.96;t+=.055){ const a=mid(t), b=mid(t+.02*(1-t)+.006); const w=(1-t)*9+.6; g.beginPath(); g.moveTo(a[0]-w/2,a[1]); g.lineTo(a[0]+w/2,a[1]); g.lineTo(b[0]+w*.35,b[1]); g.lineTo(b[0]-w*.35,b[1]); g.closePath(); g.fill(); }
+  }
+  // grain
+  g.fillStyle='rgba(0,0,0,.035)'; for (let i=0;i<W*H/900;i++){ g.fillRect(r()*W, r()*H, 1, 1); }
+}
+const painted = [];
+function scene(canvas, key){ painted.push([canvas,key]); paintScene(canvas,key); }
+let rsT; window.addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(()=>painted.forEach(([c,k])=>{ if (c.isConnected) paintScene(c,k); }), 120); });
+
+/* ---------------- regions ---------------- */
+Object.entries(CLUSTERS).forEach(([k,c]) => {
+  const d = el('div','region'); d.style.setProperty('--c', REGION_COLOR[k]);
+  d.innerHTML = `<span class="sw"></span><div><h3>${c.name}</h3><p>${c.verdict}</p><div class="places">${c.places.map(p=>`<span>${p}</span>`).join('')}</div></div><div class="dist">${c.dist.replace(' · ','<br>')}</div>`;
+  $('#regions').appendChild(d);
 });
-// clusters
-Object.values(CLUSTERS).forEach(c => {
-  const d = el('div','cluster'); d.style.setProperty('--c', c.c);
-  d.innerHTML = `<h3>${c.name}</h3><p class="dist">${c.dist}</p><ul>${c.places.map(p=>`<li>${p}</li>`).join('')}</ul><p class="verdict">${c.verdict}</p>`;
-  $('#clusters').appendChild(d);
-});
-// extras
 EXTRAS.forEach(x => $('#extraCards').appendChild(el('div','extra',`<div class="where">${x.where}</div><h4>${x.name}</h4><p>${x.text}</p>`)));
 
+/* ---------------- atlas ---------------- */
+const NS = 'http://www.w3.org/2000/svg';
+const svgEl = (t, attrs={}) => { const e = document.createElementNS(NS, t); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+const {W:MW, H:MH, BB} = MAPDATA;
+const proj = (lat,lng) => [ (lng-BB.w)/(BB.e-BB.w)*MW, (BB.n-lat)/(BB.n-BB.s)*MH ];
+const ASPECT = 0.62;
+let DEFAULT_VIEW = [40, 100, 930, 930*ASPECT];
+let svg, gRoutes, gPins, view = DEFAULT_VIEW.slice(), animT;
+function buildMap(){
+  svg = svgEl('svg', {viewBox: view.join(' '), role:'img', 'aria-label':'Atlas of the route from Osaka'});
+  svg.appendChild(svgEl('rect', {class:'m-sea', x:-2000, y:-2000, width:5000, height:5000}));
+  const grid = svgEl('g'); for (let lon=Math.ceil(BB.w); lon<=BB.e; lon++){ const [x] = proj(BB.s,lon); grid.appendChild(svgEl('line',{class:'m-grid',x1:x,y1:0,x2:x,y2:MH})); } for (let lat=Math.ceil(BB.s); lat<=BB.n; lat++){ const [,y] = proj(lat,BB.w); grid.appendChild(svgEl('line',{class:'m-grid',x1:0,y1:y,x2:MW,y2:y})); } svg.appendChild(grid);
+  svg.appendChild(svgEl('path', {class:'m-land', d: MAPDATA.land}));
+  svg.appendChild(svgEl('path', {class:'m-lake', d: MAPDATA.lakes}));
+  const labels = [
+    ['Sea of Japan', 35.95, 134.6, 'sea'], ['Pacific Ocean', 34.32, 137.25, 'sea'], ['Ise Bay', 34.72, 136.78, ''],
+    ['Lake Biwa', 35.38, 136.17, ''], ['Northern Alps', 36.45, 137.72, ''], ['Kii Peninsula', 33.95, 135.75, ''], ['Hida Highlands', 35.85, 137.12, ''], ['Tango Peninsula', 35.78, 135.05, ''],
+  ];
+  labels.forEach(([t,lat,lng,cls]) => { const [x,y] = proj(lat,lng); const e = svgEl('text',{class:'m-lbl '+cls, x, y, 'text-anchor':'middle'}); e.textContent = t; svg.appendChild(e); });
+  const cities = [['Ōsaka',34.69,135.50,'end'],['Kyōto',35.01,135.76,'start'],['Nara',34.68,135.83,'start'],['Nagoya',35.17,136.90,'start'],['Takayama',36.14,137.25,'start'],['Kanazawa',36.56,136.65,'end'],['Wakayama',34.23,135.17,'end'],['Fukui',36.06,136.22,'end'],['Matsumoto',36.24,137.97,'start']];
+  cities.forEach(([t,lat,lng,anc]) => { const [x,y] = proj(lat,lng); svg.appendChild(svgEl('circle',{class:'m-city',cx:x,cy:y,r:2.2})); const e = svgEl('text',{class:'m-citylbl', x: x + (anc==='start'?6:-6), y: y+3.5, 'text-anchor':anc}); e.textContent = t; svg.appendChild(e); });
+  // scale bar: 50 km at lat 35 ≈ 0.548° lon
+  const [sx0,sy] = proj(34.36, 133.9), [sx1] = proj(34.36, 133.9 + 50/(111.32*Math.cos(35*Math.PI/180)));
+  svg.appendChild(svgEl('line',{class:'m-scale',x1:sx0,y1:sy,x2:sx1,y2:sy})); svg.appendChild(svgEl('line',{class:'m-scale',x1:sx0,y1:sy-4,x2:sx0,y2:sy+4})); svg.appendChild(svgEl('line',{class:'m-scale',x1:sx1,y1:sy-4,x2:sx1,y2:sy+4}));
+  const sl = svgEl('text',{class:'m-scalelbl',x:(sx0+sx1)/2,y:sy-7,'text-anchor':'middle'}); sl.textContent='50 km'; svg.appendChild(sl);
+  gRoutes = svgEl('g'); gPins = svgEl('g'); svg.appendChild(gRoutes); svg.appendChild(gPins);
+  $('#mapHost').appendChild(svg);
+}
+function smooth(pts){ if (pts.length<3) return 'M'+pts.map(p=>p.join(' ')).join('L'); let d=`M${pts[0][0]} ${pts[0][1]}`; for (let i=0;i<pts.length-1;i++){ const p0=pts[Math.max(0,i-1)], p1=pts[i], p2=pts[i+1], p3=pts[Math.min(pts.length-1,i+2)]; const c1=[p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6], c2=[p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6]; d+=`C${c1[0]} ${c1[1]} ${c2[0]} ${c2[1]} ${p2[0]} ${p2[1]}`; } return d; }
+function setView(target, ms=700){
+  cancelAnimationFrame(animT); const from = view.slice(); const t0 = performance.now();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  svg.classList.toggle('zoomed', target[2] < 420);
+  const step = now => { const k = reduce ? 1 : Math.min(1,(now-t0)/ms); const e = 1-Math.pow(1-k,3); view = from.map((v,i)=>v+(target[i]-v)*e); svg.setAttribute('viewBox', view.join(' ')); if (k<1) animT = requestAnimationFrame(step); };
+  animT = requestAnimationFrame(step);
+}
+function viewFor(points, pad=1.35){ let minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9; points.forEach(([x,y])=>{minx=Math.min(minx,x);maxx=Math.max(maxx,x);miny=Math.min(miny,y);maxy=Math.max(maxy,y);}); let w=Math.max(120,(maxx-minx)*pad), h=w*ASPECT; if ((maxy-miny)*pad>h){ h=(maxy-miny)*pad; w=h/ASPECT; } const cx=(minx+maxx)/2, cy=(miny+maxy)/2; return [cx-w/2, cy-h/2, w, h]; }
+const pinsByKey = {};
+const LABEL_POS = {'Hirayu Waterfall':[-8,14,'end'],'Mount Norikura':[7,15,'start'],'Kamikōchi':[8,-5,'start'],'Imafuku Falls':[8,13,'start'],'Amanohashidate':[8,-5,'start'],'Mitarai Valley':[-8,4,'end'],'Ōdaigahara':[8,11,'start'],'That Bench':[8,11,'start'],'Hōshin · home':[-8,4,'end'],'Hirugano Plateau':[8,4,'start'],'Yuhigaura Beach':[-8,4,'end']};
+function addPin(x, y, cls, label, key, popup, minor=false){
+  const g = svgEl('g'); const ring = svgEl('circle',{class:'m-ring',cx:x,cy:y,r:6}); g.appendChild(ring);
+  const c = svgEl('circle',{class:'m-pin '+cls, cx:x, cy:y, r: cls.includes('star')?5.2: cls.includes('home')?4.5:3.6}); c.style.setProperty('--c', 'var(--ink-3)'); g.appendChild(c);
+  if (label){ const [dx,dy,anc] = LABEL_POS[label] || [8,3.5,'start']; const t = svgEl('text',{class:'m-pinlbl'+(minor?' minor':''), x:x+dx, y:y+dy, 'text-anchor':anc}); t.textContent = label; g.appendChild(t); }
+  if (popup) { const title = svgEl('title'); title.textContent = popup; c.appendChild(title); }
+  if (key){ pinsByKey[key] = {g, ring, c}; c.addEventListener('click', ()=>{ const card = document.getElementById('stop-'+key); if (card) card.scrollIntoView({behavior:'smooth', block:'center'}); highlight(key); }); }
+  gPins.appendChild(g);
+}
+function highlight(key){ Object.values(pinsByKey).forEach(p=>{p.ring.classList.remove('on'); p.c.classList.remove('active');}); const p = pinsByKey[key]; if (p){ p.ring.classList.add('on'); p.c.classList.add('active'); } }
+let currentPlan = null, dayViews = [];
+function computeDefaultView(){ const pts=[proj(HOME.lat,HOME.lng)]; Object.values(PLANS).forEach(pl=>pl.days.forEach(d=>d.items.forEach(it=>{ if(it.kind==='stop'&&it.saved) pts.push(proj(it.lat,it.lng)); }))); DEFAULT_VIEW = viewFor(pts, 1.22); view = DEFAULT_VIEW.slice(); }
+function drawOverview(){
+  gRoutes.innerHTML = ''; gPins.innerHTML = ''; for (const k in pinsByKey) delete pinsByKey[k];
+  const [hx,hy] = proj(HOME.lat, HOME.lng); addPin(hx,hy,'home','Hōshin · home','', 'Home base');
+  // saved places from both plans (dedupe by name)
+  const seen = new Set();
+  Object.values(PLANS).forEach(plan => plan.days.forEach(day => day.items.forEach(it => { if (it.kind==='stop' && it.saved && !seen.has(it.name)){ seen.add(it.name); const [x,y]=proj(it.lat,it.lng); addPin(x,y,'star', it.name.replace(/ ·.*/,''), '', it.name); } })));
+  $('#atlasKey').innerHTML = `<span><i class="star"></i>saved place</span><span><i class="home"></i>home</span>`;
+  $('#atlasCaption').textContent = 'All ten saved places. Kamikōchi to Ōdaigahara is 380 km as the crow flies.';
+  buildControls([]);
+}
+function drawPlan(key){
+  const plan = PLANS[key]; gRoutes.innerHTML = ''; gPins.innerHTML = ''; for (const k in pinsByKey) delete pinsByKey[k];
+  dayViews = []; const all = [];
+  const [hx,hy] = proj(HOME.lat, HOME.lng); all.push([hx,hy]);
+  plan.days.forEach((day, di) => {
+    const c = DAY_COLORS[key][di]; const pts = [];
+    if (!(key==='alps' && di>0)) pts.push([hx,hy]);
+    day.items.forEach((it, idx) => { if (it.kind==='stop' && it.lat){ const p = proj(it.lat,it.lng); if (it.kind2!=='logistics' || idx===0) pts.push(p); all.push(p); } });
+    const last = day.items[day.items.length-1];
+    if ((last.kind==='drive' && !(key==='alps' && di<2)) || (key==='alps' && di===2)) pts.push([hx,hy]);
+    if (pts.length>1){ const d = smooth(pts); gRoutes.appendChild(svgEl('path',{class:'m-route-halo', d})); const r = svgEl('path',{class:'m-route', d}); r.style.setProperty('--c', c); gRoutes.appendChild(r); }
+    dayViews.push(viewFor(pts.length? pts : [[hx,hy]]));
+  });
+  addPin(hx,hy,'home','Hōshin · home','', 'Home base');
+  plan.days.forEach((day, di) => day.items.forEach((it, idx) => {
+    if (it.kind!=='stop' || !it.lat) return; const [x,y] = proj(it.lat,it.lng); const k = `${key}-${day.n}-${idx}`;
+    const cls = it.saved ? 'star' : it.kind2==='logistics' ? 'ext' : ''; const label = it.saved ? it.name.replace(/ ·.*/,'') : (it.kind2==='logistics' ? '' : (it.short||it.name).replace(/^(Early lunch|Lunch|Dinner): /,''));
+    addPin(x,y,cls,label,k, `${it.name} · Day ${day.n}`, !it.saved); if (!it.saved && cls==='') pinsByKey[k].c.style.setProperty('--c', DAY_COLORS[key][di]);
+  }));
+  $('#atlasKey').innerHTML = plan.days.map((d,i)=>`<span><i style="--c:${DAY_COLORS[key][i]}"></i>Day ${ROMAN[i]}</span>`).join('') + `<span><i class="star"></i>saved</span><span><i class="ext"></i>logistics</span>`;
+  $('#atlasCaption').textContent = `${plan.title.replace(/^Plan [AB] · /,'')}: ${plan.km.toLocaleString()} km over three days.`;
+  buildControls(plan.days);
+  setView(DEFAULT_VIEW);
+}
+function buildControls(days){
+  const c = $('#atlasControls'); c.innerHTML = '';
+  const mk = (label, v, pressed) => { const b = el('button', null, label); b.setAttribute('aria-pressed', String(!!pressed)); b.onclick = () => { setView(v); [...c.children].forEach(x=>x.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true'); }; c.appendChild(b); };
+  mk('Whole route', DEFAULT_VIEW, true); days.forEach((d,i)=>mk(`Day ${ROMAN[i]}`, dayViews[i]));
+}
+
+/* ---------------- plan cards ---------------- */
+Object.entries(PLANS).forEach(([key, plan], i) => {
+  const b = el('button','plan-card'); b.dataset.plan = key; b.setAttribute('aria-pressed','false');
+  b.innerHTML = `<canvas aria-hidden="true"></canvas><span class="chosen">Selected</span><div class="pc-body">
+      <div class="pc-top"><span class="pc-letter">Plan ${'AB'[i]}</span><span class="eyebrow">${plan.lodging==='none'?'Home every night':'2 nights · Hirayu Onsen'}</span></div>
+      <h3>${plan.title.replace(/^Plan [AB] · /,'')}</h3>
+      <p class="pc-tag">${plan.tagline.split('. ').slice(0,2).join('. ')}.</p>
+      <div class="pc-stats"><div><b>${plan.covers} of 10</b>saved places</div><div><b>${plan.km.toLocaleString()} km</b>distance</div><div><b>${plan.drive}</b>driving</div><div><b>${plan.tolls}</b>tolls</div></div>
+    </div>`;
+  b.onclick = () => selectPlan(key, true);
+  $('#plans').appendChild(b);
+  scene(b.querySelector('canvas'), key==='alps' ? 'alps' : 'tango');
+});
+
+/* ---------------- chapters ---------------- */
 const ICONS = {
-  what:'<svg viewBox="0 0 24 24"><path d="M3 20l6-14 4 8 3-4 5 10z"/></svg>',
   park:'<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>',
   veg:'<svg viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg>',
   tip:'<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg>',
 };
 
-let map, layerGroup, markersByKey = {};
-function initMap(){
-  if (!window.L) return;
-  map = L.map('map', {scrollWheelZoom:false, zoomSnap:.5});
-  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:18, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
-  let errs = 0, oks = 0;
-  tiles.on('tileerror', () => { errs++; if (errs > 3 && oks === 0) $('#tilesBlocked').style.display = 'block'; });
-  tiles.on('tileload', () => { oks++; });
-  tiles.addTo(map);
-  layerGroup = L.layerGroup().addTo(map);
-  map.on('click', () => map.scrollWheelZoom.enable());
-}
-function pin(kind){ return L.divIcon({className:'', html:`<div class="${kind}"></div>`, iconSize: kind==='pin-saved'?[18,18]:[12,12], iconAnchor: kind==='pin-saved'?[9,18]:[6,6], popupAnchor:[0,-12]}); }
-
-function renderPlan(key){
-  const plan = PLANS[key];
-  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.plan === key)));
-  // head
-  $('#planHead').innerHTML = `<div class="eyebrow">${key==='alps'?'Recommended for the saved list':'Recommended if you want to sleep at home'}</div>
-    <h2>${plan.title}</h2><p class="tag">${plan.tagline}</p>
-    <div class="stats">
-      <div class="stat"><div class="eyebrow">Saved places</div><div class="v">${plan.covers}<small>/ 10</small></div><div class="d">covered by this plan</div></div>
-      <div class="stat"><div class="eyebrow">Distance</div><div class="v">${plan.km.toLocaleString()}<small>km</small></div><div class="d">over three days</div></div>
-      <div class="stat"><div class="eyebrow">Behind the wheel</div><div class="v">${plan.drive}</div><div class="d">total, without stops</div></div>
-      <div class="stat"><div class="eyebrow">Tolls</div><div class="v">${plan.tolls}</div><div class="d">with ETC card</div></div>
-      <div class="stat"><div class="eyebrow">Nights away</div><div class="v">${plan.lodging}</div><div class="d">${key==='alps'?'Hirayu Onsen ryokan':'back at Hōshin nightly'}</div></div>
-    </div>`;
-  // budget
-  $('#budget').innerHTML = `<div class="card"><div class="eyebrow">${plan.title}</div>${plan.budget.map((r,i)=>`<div class="rowb ${i===plan.budget.length-1?'total':''}"><span>${r[0]}</span><span class="mono">${r[1]}</span></div>`).join('')}</div>
-    <div class="card"><div class="eyebrow">Toll-saving notes</div><ul style="margin-top:8px;padding-left:18px;display:grid;gap:6px;font-size:.9rem;color:var(--ink-2)">
-      <li>ETC gets 30 percent off on weekends and holidays and 30 percent off 0:00–4:00 on weekdays. The Silver Week discount is suspended.</li>
-      <li>The Chūbu-Jūkan Expressway between Takayama and Hida-Kiyomi, and the Kyoto-Jūkan section around Kameoka, are toll-free.</li>
-      <li>Route 169 to Ōdaigahara and Route 309 to Tenkawa are ordinary roads; the only Nara toll is the Minami-Hanna Road.</li>
-      <li>The Central Nippon Expressway Pass for foreign drivers was discontinued in 2026, so there is no flat-rate pass for the Alps route; the ETC discounts above are what remain.</li>
-    </ul></div>`;
-  // days
-  const daysEl = $('#days'); daysEl.innerHTML = '';
-  if (layerGroup) layerGroup.clearLayers(); markersByKey = {};
-  const bounds = [];
-  if (map){
-    L.marker([HOME.lat, HOME.lng], {icon: pin('pin-home')}).bindPopup(`<b>${HOME.name}</b><span class="pp">Start and end of every day</span>`).addTo(layerGroup);
-    bounds.push([HOME.lat, HOME.lng]);
-  }
+function renderChapters(key){
+  const plan = PLANS[key]; const host = $('#chapters'); host.innerHTML = '';
   plan.days.forEach((day, di) => {
-    const d = el('section','day'); d.style.setProperty('--c', day.c); d.id = `${key}-day-${day.n}`;
-    const totalMin = day.items.reduce((a,i)=>a+(i.min||i.dur||0),0);
-    d.innerHTML = `<div class="day-head">
-        <div class="day-num"><small>Day</small>${day.n}</div>
-        <div class="day-title"><h3>${day.title}</h3><p>${day.sub}</p></div>
-        <div class="day-meta"><span><b>${day.km} km</b> · ${day.driveTime} driving</span><span>Leave <b>${day.start}</b> · back <b>${clock(day.start,totalMin)}</b></span></div>
-      </div>
+    const c = DAY_COLORS[key][di]; const total = day.items.reduce((a,i)=>a+(i.min||i.dur||0),0);
+    const ch = el('article','chapter'); ch.style.setProperty('--c', c); ch.id = `${key}-day-${day.n}`;
+    ch.innerHTML = `<div class="band"><canvas aria-hidden="true"></canvas><div class="veil"></div><div class="bt"><div class="roman">Day<b>${ROMAN[di]}</b></div><h3>${day.title}</h3><p>${day.sub}</p></div></div>
+      <div class="specs"><div>Distance<b>${day.km} km</b></div><div>Driving<b>${day.driveTime}</b></div><div>Leave<b>${day.start}</b></div><div>${key==='alps'&&di<2?'Day ends':'Home'}<b>${clock(day.start,total)}</b></div><div>Stops<b>${day.items.filter(i=>i.kind==='stop'&&i.kind2!=='logistics').length}</b></div></div>
       <div class="signs">${day.signs.map(s=>`<span class="sign ${s.local?'local':''} ${s.bus?'bus':''}"><span class="rt">${s.rt}</span>${s.t}</span>`).join('')}</div>
-      <div class="ribbon-wrap"><div class="ribbon" role="list" aria-label="Day ${day.n} timeline"></div><div class="ribbon-scale"><span>${day.start}</span><span>${clock(day.start, Math.round(totalMin/2))}</span><span>${clock(day.start,totalMin)}</span></div></div>
-      <div class="stops"></div>`;
-    const ribbon = d.querySelector('.ribbon'), stops = d.querySelector('.stops');
-    let t = 0;
-    const pts = [[HOME.lat, HOME.lng]];
-    if (key==='alps' && di>0) pts.length = 0; // days 2-3 start in Hirayu, not at home
+      <div class="route"><ol class="rail"></ol></div>`;
+    const rail = ch.querySelector('.rail'); let t = 0;
     day.items.forEach((it, idx) => {
       const mins = it.min || it.dur || 0;
-      const w = Math.max(mins/totalMin*100, mins? 1.2 : 0);
-      if (it.kind === 'drive' || it.kind === 'bus'){
-        const seg = el('div', it.kind==='drive'?'seg-d':'seg-b', w>7 ? (it.kind==='drive'?'🚗 ':'🚌 ') + fmt(mins) : ''); seg.style.width = w+'%'; seg.title = `${it.label} · ${fmt(mins)}`; ribbon.appendChild(seg);
-        const leg = el('div','leg',`<div class="t">${fmt(mins)}</div><div class="l"><span>${it.kind==='bus'?'Bus · ':''}${it.label}${it.km?` · ${it.km} km`:''}</span>${it.toll?`<span class="toll">${it.toll}</span>`:''}${it.fare?`<span class="toll">${it.fare}</span>`:''}</div>`);
-        stops.appendChild(leg);
+      if (it.kind==='drive' || it.kind==='bus'){
+        rail.appendChild(el('li','leg',`<span class="t">${fmt(mins)}</span><span class="k"></span><span class="l"><span>${it.kind==='bus'?'Bus · ':''}${it.label}${it.km?` · ${it.km} km`:''}</span>${it.toll?`<span class="toll">${it.toll}</span>`:''}${it.fare?`<span class="toll">${it.fare}</span>`:''}</span>`));
       } else {
-        const stopKey = `${key}-${day.n}-${idx}`;
-        if (mins){ const seg = el('div','seg-s', w>6 ? (it.short||it.name) : ''); seg.style.width = w+'%'; seg.title = `${it.name} · ${fmt(mins)}`; seg.setAttribute('role','listitem'); seg.onclick = () => focusStop(stopKey, true); ribbon.appendChild(seg); }
-        const tag = it.saved ? '<span class="tag-saved">★ saved</span>' : it.kind2==='logistics' ? '' : it.opt ? '<span class="tag-opt">optional</span><span class="tag-extra">added</span>' : '<span class="tag-extra">added</span>';
-        const s = el('article','stop'); s.id = 'stop-'+stopKey;
-        s.innerHTML = `<div class="time">${clock(day.start,t)}${mins?`<small>${fmt(mins)}</small>`:''}</div>
-          <div class="body">
-            <h4>${it.name} <span class="jp">${it.jp||''}</span> ${tag}</h4>
+        const k = `${key}-${day.n}-${idx}`;
+        const li = el('li', 'node' + (it.saved?' saved':'') + (it.kind2==='logistics'?' logi':'')); li.id = 'stop-'+k;
+        const tag = it.saved ? '<span class="tag s">★ from your list</span>' : it.kind2==='logistics' ? '' : (it.opt ? '<span class="tag o">optional</span>' : '<span class="tag a">added</span>');
+        li.innerHTML = `<time>${clock(day.start,t)}${mins?`<small>${fmt(mins)}</small>`:''}</time><span class="k"></span>
+          <div><h4>${it.name}${it.jp?` <span class="jp">${it.jp}</span>`:''}${tag}</h4>
             <p class="what">${it.what}</p>
-            <div class="facts">
-              ${it.park?`<div class="fact park">${ICONS.park}<div><b>Parking.</b> ${it.park}</div></div>`:''}
-              ${it.veg?`<div class="fact veg">${ICONS.veg}<div><b>Vegetarian.</b> ${it.veg}</div></div>`:''}
-              ${it.tip?`<div class="fact tip">${ICONS.tip}<div><b>Tip.</b> ${it.tip}</div></div>`:''}
-            </div>
-            <div class="links">
-              <a class="btn" href="${G(it.q||it.name)}" target="_blank" rel="noopener">Navigate ↗</a>
-              <button class="btn map" type="button" data-key="${stopKey}">Show on map</button>
-            </div>
+            <div class="facts">${it.park?`<div class="fact park">${ICONS.park}<div><b>Parking.</b> ${it.park}</div></div>`:''}${it.veg?`<div class="fact veg">${ICONS.veg}<div><b>Vegetarian.</b> ${it.veg}</div></div>`:''}${it.tip?`<div class="fact tip">${ICONS.tip}<div><b>Tip.</b> ${it.tip}</div></div>`:''}</div>
+            <div class="links"><a href="${G(it.q||it.name)}" target="_blank" rel="noopener">Navigate in Google Maps ↗</a>${it.lat?`<button type="button" data-k="${k}">Show on the atlas</button>`:''}</div>
           </div>`;
-        s.querySelector('button.map').onclick = () => focusStop(stopKey, false);
-        stops.appendChild(s);
-        if (map && it.lat){
-          const m = L.marker([it.lat, it.lng], {icon: pin(it.saved?'pin-saved':'pin-extra')})
-            .bindPopup(`<b>${it.name}</b><span class="pp">Day ${day.n} · ${clock(day.start,t)}${mins?' · '+fmt(mins):''}</span><br><a href="${G(it.q||it.name)}" target="_blank" rel="noopener">Open in Google Maps ↗</a>`)
-            .bindTooltip(it.name, {permanent: !!it.saved, direction:'right', offset:[8,0], className:'pin-lbl', opacity: .95});
-          m.on('click', () => { const card = document.getElementById('stop-'+stopKey); if (card){ card.scrollIntoView({behavior:'smooth', block:'center'}); } });
-          m.addTo(layerGroup); markersByKey[stopKey] = m; bounds.push([it.lat, it.lng]);
-          if (it.kind2 !== 'logistics' || idx === 0) pts.push([it.lat, it.lng]);
-        }
+        const btn = li.querySelector('button'); if (btn) btn.onclick = () => { const [x,y] = proj(it.lat,it.lng); setView([x-60,y-60*ASPECT,120,120*ASPECT]); highlight(k); $('#atlas').scrollIntoView({behavior:'smooth', block:'start'}); [...$('#atlasControls').children].forEach(x=>x.setAttribute('aria-pressed','false')); };
+        rail.appendChild(li);
       }
       t += mins;
     });
-    // route line for the day
-    if (map){
-      const last = day.items[day.items.length-1];
-      if (last.kind === 'drive' && !(key==='alps' && di<2)) pts.push([HOME.lat, HOME.lng]);
-      if (key==='alps' && di===2) pts.push([HOME.lat, HOME.lng]);
-      if (pts.length > 1){
-        L.polyline(pts, {color: day.c, weight: 4, opacity: .55, dashArray: '2 8', lineCap:'round'}).addTo(layerGroup);
-        L.polyline(pts, {color: day.c, weight: 2.5, opacity: .9}).addTo(layerGroup);
-      }
-    }
-    daysEl.appendChild(d);
+    host.appendChild(ch);
+    scene(ch.querySelector('canvas'), SCENE_FOR[key][di]);
   });
-  // legend
-  $('#legend').innerHTML = plan.days.map(d=>`<span><i class="sw" style="--c:${d.c}"></i>Day ${d.n}</span>`).join('') + '<span><i class="pin"></i>saved place</span><span><i class="pin pin-x"></i>added stop</span>';
-  $('#mapCount').textContent = `${Object.keys(markersByKey).length} stops`;
-  if (map && bounds.length) map.fitBounds(bounds, {padding:[30,30]});
+  // ledger
+  $('#ledgerTitle').textContent = `${plan.title.replace(/^Plan [AB] · /,'')} · estimate for two`;
+  $('#ledger').innerHTML = plan.budget.map((r,i)=>`<div class="r ${i===plan.budget.length-1?'total':''}"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('');
 }
-function focusStop(stopKey, scrollCard){
-  const m = markersByKey[stopKey];
-  if (m && map){ map.flyTo(m.getLatLng(), Math.max(map.getZoom(), 11), {duration:.8}); setTimeout(()=>m.openPopup(), 850); }
-  if (scrollCard){ const card = document.getElementById('stop-'+stopKey); if (card) card.scrollIntoView({behavior:'smooth', block:'center'}); }
-  if (window.innerWidth < 1060) $('#map').scrollIntoView({behavior:'smooth', block:'start'});
+function selectPlan(key, scroll){
+  currentPlan = key;
+  document.querySelectorAll('.plan-card').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.plan===key)));
+  renderChapters(key); drawPlan(key); history.replaceState(null,'','#'+key);
+  if (scroll) $('#chapters').scrollIntoView({behavior:'smooth', block:'start'});
 }
-document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { renderPlan(b.dataset.plan); history.replaceState(null,'','#'+b.dataset.plan); }));
 
-initMap();
-renderPlan(location.hash === '#kansai' ? 'kansai' : 'alps');
+/* ---------------- boot ---------------- */
+scene($('#heroCanvas'), 'hero');
+computeDefaultView();
+buildMap();
+selectPlan(location.hash==='#kansai' ? 'kansai' : 'alps', false);
+// gentle parallax on the hero
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches){ const hc = $('#heroCanvas'); addEventListener('scroll', () => { const y = Math.min(window.scrollY, 900); hc.style.transform = `translateY(${y*.25}px)`; }, {passive:true}); }
 </script>
 </body>
 </html>
